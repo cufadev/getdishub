@@ -50,6 +50,7 @@ export function CartasHechas() {
         <div className="reveal flex flex-wrap justify-center gap-16">
           <Celular k="olazabal" />
           <Celular k="pesto" />
+          <Celular k="lugo" />
         </div>
       </div>
     </section>

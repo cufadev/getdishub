@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta LUGO — Panadería y repostería congelada</title>
+<meta name="description" content="Carta de LUGO: laminados, panes, cookies, budines, alfajores, brownies y tortas congelados listos para hornear.">
+<!-- Versión provisoria: sacar el noindex cuando se publique en su dirección definitiva -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#CC1717">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23CC1717'/%3E%3Ctext x='32' y='46' font-family='Arial Black,Arial' font-weight='900' font-size='40' text-anchor='middle' fill='%23F4E9CE'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<script>
+/* sin JS no hay preloader ni animaciones: todo queda visible */
+(function(){
+  var d=document.documentElement; d.classList.add("js");
+  var rm=matchMedia("(prefers-reduced-motion: reduce)").matches, visto=false;
+  try{ visto=sessionStorage.getItem("lugo-pre")==="1"; }catch(e){}
+  if(rm||visto) d.classList.add("pre-hecho");
+})();
+</script>
+<style>
+@font-face{font-family:"Helvena";src:local("Helvena Regular"),url("assets/fonts/Helvena-Regular.otf") format("opentype");font-weight:400;font-display:swap}
+@font-face{font-family:"Helvena";src:local("Helvena Bold"),url("assets/fonts/Helvena-Bold.otf") format("opentype");font-weight:700;font-display:swap}
+:root{
+  --rojo:#CC1717; --manteca:#F4E9CE; --azul:#1B2E6B;
+  --azul-suave:rgba(27,46,107,.82);
+  --linea:rgba(27,46,107,.14);
+  --gutter:clamp(16px,5vw,40px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--manteca);color:var(--azul);font-family:"Helvena","Inter",system-ui,sans-serif;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--azul);color:var(--manteca);padding:10px 14px;z-index:100}
+.skip:focus{left:8px}
+
+/* ── cabecera ── */
+.hero{background:var(--rojo);color:var(--manteca);padding:clamp(28px,7vw,56px) var(--gutter) clamp(24px,5vw,40px)}
+.hero-in{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:flex-end}
+.logo{width:min(64vw,280px);color:var(--manteca)}
+.logo svg{display:block;width:100%;height:auto}
+.tagline{font-size:12px;letter-spacing:.14em;text-transform:uppercase;line-height:1.8;color:rgba(244,233,206,.92)}
+
+/* ── navegación de secciones ── */
+.nav{position:sticky;top:0;z-index:20;background:var(--manteca);border-bottom:1px solid var(--linea)}
+.nav ul{list-style:none;display:flex;gap:4px;max-width:960px;margin:0 auto;padding:6px var(--gutter);overflow-x:auto;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a{display:flex;align-items:center;min-height:44px;padding:0 14px;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;border-radius:999px;color:var(--azul);transition:background-color .15s,color .15s}
+.nav a:hover{background:rgba(204,23,23,.1)}
+.nav a[aria-current="true"]{background:var(--rojo);color:var(--manteca)}
+
+/* ── carta ── */
+main{max-width:960px;margin:0 auto;padding:8px var(--gutter) 48px}
+.sec{padding-top:36px;scroll-margin-top:60px}
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:6px}
+.sec-head h2{font-size:clamp(22px,5vw,28px);color:var(--rojo);line-height:1.1}
+.sec-head i{flex:1;height:1px;background:var(--rojo);opacity:.3}
+.sec-nota{font-size:14px;color:var(--azul-suave);margin-bottom:6px}
+.grid{list-style:none;display:grid;grid-template-columns:1fr}
+.item{padding:14px 0;border-bottom:1px solid var(--linea)}
+.item-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.item h3{font-size:16px;font-weight:700;line-height:1.25}
+.precio{color:var(--rojo);font-weight:700;font-size:16px;white-space:nowrap}
+.precio small{font-size:12px;font-weight:700}
+.desc{font-size:14px;color:var(--azul-suave);margin-top:3px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;list-style:none}
+.tag{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:rgba(27,46,107,.1);color:var(--azul)}
+.tag.cal{background:rgba(204,23,23,.12);color:#9c1010}
+.sin-precios .precio{display:none}
+@media (min-width:720px){
+  .grid{grid-template-columns:1fr 1fr;column-gap:0}
+  .item{padding:14px 28px 14px 0}
+  .item:nth-child(even){padding:14px 0 14px 28px;border-left:1px solid var(--linea)}
+}
+
+/* ── info del local ── */
+.info{max-width:960px;margin:0 auto;padding:0 var(--gutter) 40px}
+.info-in{display:flex;flex-wrap:wrap;gap:10px}
+.info-in:empty{display:none}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:2px solid var(--azul);border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;color:var(--azul);transition:background-color .15s,color .15s}
+.btn:hover{background:var(--azul);color:var(--manteca)}
+.horarios{font-size:14px;color:var(--azul-suave);margin-top:12px;white-space:pre-line}
+
+/* ── pie ── */
+footer{background:var(--azul);color:var(--manteca);padding:28px var(--gutter)}
+.foot-in{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:center}
+.foot-nota{font-size:13px;opacity:.92}
+.foot-logo{width:96px;color:var(--manteca)}
+.foot-logo svg{display:block;width:100%;height:auto}
+.firma{display:block;max-width:960px;margin:20px auto 0;font-family:"Bebas Neue",Impact,sans-serif;font-size:18px;letter-spacing:.06em;color:#ff4e01;text-decoration:none}
+
+/* ── la abuela ── */
+.hero{position:relative;overflow:hidden}
+.hero-in{position:relative}
+.abuela{position:absolute;right:max(var(--gutter),calc((100vw - 960px)/2 + 8px));top:clamp(10px,2.5vw,22px);width:clamp(84px,22vw,140px);height:auto;pointer-events:none;will-change:transform}
+.hero-txt{position:relative;z-index:1}
+.tagline{max-width:62%}
+@media (min-width:720px){.tagline{max-width:none}.hero-in{padding-right:clamp(90px,16vw,170px)}}
+.logo{width:min(52vw,280px)}
+
+/* ── preloader con el logo ── */
+.pre{position:fixed;inset:0;z-index:1000;background:var(--rojo);display:flex;align-items:center;justify-content:center;transition:transform .8s cubic-bezier(.76,0,.24,1)}
+.pre.out{transform:translateY(-100%)}
+.pre-logo{width:min(62vw,300px);color:var(--manteca)}
+.pre-logo svg{display:block;width:100%;height:auto;overflow:visible}
+.pre-logo path{transform-box:fill-box;transform-origin:50% 100%;animation:letra .75s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*110ms + 120ms)}
+@keyframes letra{from{opacity:0;transform:translateY(55%) scaleY(.7)}to{opacity:1;transform:none}}
+.pre-hecho .pre{display:none}
+html.pre-activo,html.pre-activo body{overflow:hidden}
+
+/* ── transiciones de entrada ── */
+.js .hero .logo,.js .hero .tagline,.js .hero .abuela{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.js .hero .tagline{transition-delay:.12s}
+.js .hero .abuela{transform:translateY(40px);transition-delay:.2s,.2s}
+.js.listo .hero .logo,.js.listo .hero .tagline,.js.listo .hero .abuela{opacity:1;transform:none}
+.js .rev{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .6s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms)}
+.js .rev.vis{opacity:1;transform:none}
+.nav a{transition:background-color .2s,color .2s,transform .2s}
+.nav a:active{transform:scale(.96)}
+.item{transition:background-color .2s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}*{transition:none!important;animation:none!important}
+  .js .hero .logo,.js .hero .tagline,.js .hero .abuela,.js .rev{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div class="pre" id="pre" aria-hidden="true"><div class="pre-logo"><svg viewBox="0 0 8000 2393" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><rect x="0" y="0" width="8000" height="2392.861" style="fill:none;"/><g><path d="M1625.57,1826.574l0,320.009c0,58.941 -49.638,108.579 -111.678,108.579l-1277.392,0c-62.04,0 -111.678,-49.638 -111.678,-108.579l0,-1883.107c0,-62.045 49.638,-111.684 111.678,-111.684l552.215,0c62.045,0 111.678,49.638 111.678,111.684l0,1451.408l613.498,0c62.04,0 111.678,49.638 111.678,111.689" style="fill:currentColor;fill-rule:nonzero;"/><path d="M1671.041,1591.269l0,-1327.792c0,-62.045 49.638,-111.684 108.579,-111.684l278.32,0c58.941,0 108.579,49.638 108.579,111.684l0,1103.502c0,56.477 64.039,178.43 291.13,178.43c178.43,0 281.203,-121.953 281.203,-178.43l0,-1103.502c0,-62.045 49.638,-111.684 108.59,-111.684l555.309,0c58.946,0 108.579,49.638 108.579,111.684l0,1327.792c0,366.074 -294.721,663.893 -663.888,663.893l-512.509,0c-366.074,0 -663.893,-297.82 -663.893,-663.893" style="fill:currentColor;fill-rule:nonzero;"/><path d="M5495.644,954.919l-460.462,0c-45.932,0 -83.174,37.237 -83.174,83.174l0,88.533c0,45.937 37.237,83.174 83.174,83.174l39.231,0c-69.282,157.693 -266.388,201.156 -360.091,201.156c-124.085,0 -220.257,-108.579 -204.746,-235.769c12.412,-80.661 74.463,-148.915 152.014,-170.63c23.273,-6.469 45.479,-8.623 66.597,-7.137c57.074,4.005 112.352,-20.422 143.557,-68.381l304.531,-468.041c54.234,-83.357 20.273,-196.731 -71.933,-233.979c-138.624,-56.002 -290.743,-83.395 -452.055,-72.497c-558.419,31.023 -998.945,508.78 -989.642,1067.193c9.308,570.825 328.627,1033.072 1006.463,1033.072c389.302,0 470.405,-235.774 470.405,-235.774l0,111.689c0,68.249 55.842,124.085 124.085,124.085l241.044,0c59.725,0 108.585,-48.865 108.585,-108.585l-0.392,-1074.131c-0.022,-64.708 -52.483,-117.152 -117.191,-117.152" style="fill:currentColor;fill-rule:nonzero;"/><path d="M7071.331,1604.955c0,108.844 -124.588,197.084 -278.276,197.084c-153.694,0 -278.281,-88.24 -278.281,-197.084l0,-777.389c0,-108.85 124.588,-197.084 278.281,-197.084c153.688,0 278.276,88.234 278.276,197.084l0,777.389Zm-278.281,-1530.246c-597.539,0 -1083.229,506.112 -1083.229,1128.769c0,622.657 485.69,1128.769 1083.229,1128.769c597.534,0 1083.24,-506.112 1083.24,-1128.769c0,-622.657 -485.707,-1128.769 -1083.24,-1128.769" style="fill:currentColor;fill-rule:nonzero;"/></g></svg></div></div>
+<noscript><style>.pre{display:none}</style></noscript>
+<a class="skip" href="#carta">Saltar a la carta</a>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-txt">
+      <div class="logo" role="img" aria-label="LUGO"><svg viewBox="0 0 8000 2393" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><rect x="0" y="0" width="8000" height="2392.861" style="fill:none;"/><g><path d="M1625.57,1826.574l0,320.009c0,58.941 -49.638,108.579 -111.678,108.579l-1277.392,0c-62.04,0 -111.678,-49.638 -111.678,-108.579l0,-1883.107c0,-62.045 49.638,-111.684 111.678,-111.684l552.215,0c62.045,0 111.678,49.638 111.678,111.684l0,1451.408l613.498,0c62.04,0 111.678,49.638 111.678,111.689" style="fill:currentColor;fill-rule:nonzero;"/><path d="M1671.041,1591.269l0,-1327.792c0,-62.045 49.638,-111.684 108.579,-111.684l278.32,0c58.941,0 108.579,49.638 108.579,111.684l0,1103.502c0,56.477 64.039,178.43 291.13,178.43c178.43,0 281.203,-121.953 281.203,-178.43l0,-1103.502c0,-62.045 49.638,-111.684 108.59,-111.684l555.309,0c58.946,0 108.579,49.638 108.579,111.684l0,1327.792c0,366.074 -294.721,663.893 -663.888,663.893l-512.509,0c-366.074,0 -663.893,-297.82 -663.893,-663.893" style="fill:currentColor;fill-rule:nonzero;"/><path d="M5495.644,954.919l-460.462,0c-45.932,0 -83.174,37.237 -83.174,83.174l0,88.533c0,45.937 37.237,83.174 83.174,83.174l39.231,0c-69.282,157.693 -266.388,201.156 -360.091,201.156c-124.085,0 -220.257,-108.579 -204.746,-235.769c12.412,-80.661 74.463,-148.915 152.014,-170.63c23.273,-6.469 45.479,-8.623 66.597,-7.137c57.074,4.005 112.352,-20.422 143.557,-68.381l304.531,-468.041c54.234,-83.357 20.273,-196.731 -71.933,-233.979c-138.624,-56.002 -290.743,-83.395 -452.055,-72.497c-558.419,31.023 -998.945,508.78 -989.642,1067.193c9.308,570.825 328.627,1033.072 1006.463,1033.072c389.302,0 470.405,-235.774 470.405,-235.774l0,111.689c0,68.249 55.842,124.085 124.085,124.085l241.044,0c59.725,0 108.585,-48.865 108.585,-108.585l-0.392,-1074.131c-0.022,-64.708 -52.483,-117.152 -117.191,-117.152" style="fill:currentColor;fill-rule:nonzero;"/><path d="M7071.331,1604.955c0,108.844 -124.588,197.084 -278.276,197.084c-153.694,0 -278.281,-88.24 -278.281,-197.084l0,-777.389c0,-108.85 124.588,-197.084 278.281,-197.084c153.688,0 278.276,88.234 278.276,197.084l0,777.389Zm-278.281,-1530.246c-597.539,0 -1083.229,506.112 -1083.229,1128.769c0,622.657 485.69,1128.769 1083.229,1128.769c597.534,0 1083.24,-506.112 1083.24,-1128.769c0,-622.657 -485.707,-1128.769 -1083.24,-1128.769" style="fill:currentColor;fill-rule:nonzero;"/></g></svg></div>
+      <p class="tagline" id="tagline"></p>
+    </div>
+    <img class="abuela" id="abuela" src="assets/abuela-crema.svg" alt="" width="150" height="331">
+  </div>
+</header>
+
+<nav class="nav" aria-label="Secciones de la carta"><ul id="nav"></ul></nav>
+
+<main id="carta" aria-live="polite"></main>
+
+<section class="info" aria-label="Datos del local">
+  <div class="info-in" id="info"></div>
+  <p class="horarios" id="horarios"></p>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <p class="foot-nota" id="nota"></p>
+    <div class="foot-logo" aria-hidden="true"><svg viewBox="0 0 8000 2393" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><rect x="0" y="0" width="8000" height="2392.861" style="fill:none;"/><g><path d="M1625.57,1826.574l0,320.009c0,58.941 -49.638,108.579 -111.678,108.579l-1277.392,0c-62.04,0 -111.678,-49.638 -111.678,-108.579l0,-1883.107c0,-62.045 49.638,-111.684 111.678,-111.684l552.215,0c62.045,0 111.678,49.638 111.678,111.684l0,1451.408l613.498,0c62.04,0 111.678,49.638 111.678,111.689" style="fill:currentColor;fill-rule:nonzero;"/><path d="M1671.041,1591.269l0,-1327.792c0,-62.045 49.638,-111.684 108.579,-111.684l278.32,0c58.941,0 108.579,49.638 108.579,111.684l0,1103.502c0,56.477 64.039,178.43 291.13,178.43c178.43,0 281.203,-121.953 281.203,-178.43l0,-1103.502c0,-62.045 49.638,-111.684 108.59,-111.684l555.309,0c58.946,0 108.579,49.638 108.579,111.684l0,1327.792c0,366.074 -294.721,663.893 -663.888,663.893l-512.509,0c-366.074,0 -663.893,-297.82 -663.893,-663.893" style="fill:currentColor;fill-rule:nonzero;"/><path d="M5495.644,954.919l-460.462,0c-45.932,0 -83.174,37.237 -83.174,83.174l0,88.533c0,45.937 37.237,83.174 83.174,83.174l39.231,0c-69.282,157.693 -266.388,201.156 -360.091,201.156c-124.085,0 -220.257,-108.579 -204.746,-235.769c12.412,-80.661 74.463,-148.915 152.014,-170.63c23.273,-6.469 45.479,-8.623 66.597,-7.137c57.074,4.005 112.352,-20.422 143.557,-68.381l304.531,-468.041c54.234,-83.357 20.273,-196.731 -71.933,-233.979c-138.624,-56.002 -290.743,-83.395 -452.055,-72.497c-558.419,31.023 -998.945,508.78 -989.642,1067.193c9.308,570.825 328.627,1033.072 1006.463,1033.072c389.302,0 470.405,-235.774 470.405,-235.774l0,111.689c0,68.249 55.842,124.085 124.085,124.085l241.044,0c59.725,0 108.585,-48.865 108.585,-108.585l-0.392,-1074.131c-0.022,-64.708 -52.483,-117.152 -117.191,-117.152" style="fill:currentColor;fill-rule:nonzero;"/><path d="M7071.331,1604.955c0,108.844 -124.588,197.084 -278.276,197.084c-153.694,0 -278.281,-88.24 -278.281,-197.084l0,-777.389c0,-108.85 124.588,-197.084 278.281,-197.084c153.688,0 278.276,88.234 278.276,197.084l0,777.389Zm-278.281,-1530.246c-597.539,0 -1083.229,506.112 -1083.229,1128.769c0,622.657 485.69,1128.769 1083.229,1128.769c597.534,0 1083.24,-506.112 1083.24,-1128.769c0,-622.657 -485.707,-1128.769 -1083.24,-1128.769" style="fill:currentColor;fill-rule:nonzero;"/></g></svg></div>
+  </div>
+  <a class="firma" href="https://cufadev.xyz" target="_blank" rel="noopener">desarrollado con 🧉 por cufa en Argentina</a>
+</footer>
+
+<script>
+/* ──────────────────────────────────────────────────────────────
+   Carta LUGO — administrada desde una planilla de Google.
+   1. Importá carta-lugo.xlsx a Google Sheets.
+   2. Compartila: "Cualquier persona con el enlace: Lector".
+   3. Pegá el ID (lo que va entre /d/ y /edit) en SHEET_ID.
+   Si SHEET_ID está vacío, o Google no responde, se usa la última
+   versión guardada en el celular o el RESPALDO de abajo.
+   ────────────────────────────────────────────────────────────── */
+const SHEET_ID = "";
+const RESPALDO = {"config": {"nombre": "LUGO", "tagline": "Panadería & Repostería|Productos congelados listos para hornear", "nota_pie": "Todos los productos se entregan congelados · Conservar a −18 °C", "mostrar_precios": "SI", "instagram": "", "whatsapp": "", "direccion": "", "mapa": "", "horarios": ""}, "secciones": [{"seccion_id": "laminados", "titulo": "Laminados", "nota": ""}, {"seccion_id": "panaderia", "titulo": "Panadería", "nota": ""}, {"seccion_id": "cookies", "titulo": "Cookies", "nota": ""}, {"seccion_id": "budines", "titulo": "Budines", "nota": ""}, {"seccion_id": "alfajores", "titulo": "Alfajores", "nota": ""}, {"seccion_id": "brownies", "titulo": "Brownies", "nota": ""}, {"seccion_id": "tortas", "titulo": "Tortas", "nota": ""}], "items": [{"seccion_id": "laminados", "nombre": "Medialunas de manteca", "descripcion": "Masa laminada tradicional de manteca", "precio": 900, "unidad": "c/u", "peso": "100 g", "horno": "180 °C", "tiempo": "10–12 min", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Croissant", "descripcion": "Masa hojaldrada de manteca", "precio": 2000, "unidad": "c/u", "peso": "100 g", "horno": "180 °C", "tiempo": "10–12 min", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Pan de chocolate", "descripcion": "Masa de croissant rellena de barra de chocolate semiamargo", "precio": 2500, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Fosforitos", "descripcion": "Clásicos hojaldrados de manteca, livianos y crocantes", "precio": 900, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Hojaldre y dulce de leche", "descripcion": "Masa hojaldrada rellena de dulce de leche", "precio": "", "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Roll de canela", "descripcion": "Masa suave enrollada con canela y azúcar", "precio": 1700, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Roll de queso", "descripcion": "Masa enrollada rellena de queso", "precio": 2500, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Vigilante", "descripcion": "Factura clásica de masa hojaldrada de manteca", "precio": 1500, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Factura de manteca", "descripcion": "Factura tradicional de masa de manteca", "precio": 1500, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Danesa", "descripcion": "Masa laminada de manteca al estilo danés", "precio": 1500, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "laminados", "nombre": "Chipa", "descripcion": "Bollito de queso, ideal para hornear y comer caliente", "precio": 2000, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "panaderia", "nombre": "Pan de campo", "descripcion": "Masa semi integral", "precio": 4500, "unidad": "c/u", "peso": "700 g aprox.", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "panaderia", "nombre": "Ciabatta", "descripcion": "Pan italiano de miga abierta y corteza crocante", "precio": 850, "unidad": "c/u", "peso": "200 g aprox.", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "panaderia", "nombre": "Baguette", "descripcion": "Masa semi integral", "precio": 1300, "unidad": "c/u", "peso": "150 g aprox.", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "panaderia", "nombre": "Pan lactal integral", "descripcion": "Pan de molde de miga suave con harina integral", "precio": 4500, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "panaderia", "nombre": "Pan lactal", "descripcion": "Pan de molde de miga suave, ideal para tostadas y sándwiches", "precio": 4500, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "panaderia", "nombre": "Pan lactal con semillas", "descripcion": "Pan de molde de miga suave con mezcla de semillas", "precio": 4500, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "panaderia", "nombre": "Pan brioche", "descripcion": "Pan enriquecido con manteca, de miga tierna y sabor suave", "precio": 7000, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "panaderia", "nombre": "Pan 100% centeno", "descripcion": "Pan de centeno de miga densa y sabor intenso", "precio": 8000, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "cookies", "nombre": "Limón rellena", "descripcion": "Masa sabor limón rellena de frosting de limón", "precio": 1600, "unidad": "c/u", "peso": "120 g", "horno": "170 °C", "tiempo": "14–16 min", "disponible": "SI"}, {"seccion_id": "cookies", "nombre": "Pistacho y chocolate blanco (con relleno)", "descripcion": "Vainilla, pistachos tostados y chocolate blanco, rellena de pasta de pistacho", "precio": 4300, "unidad": "c/u", "peso": "120 g", "horno": "170 °C", "tiempo": "14–16 min", "disponible": "SI"}, {"seccion_id": "cookies", "nombre": "Pistacho y chocolate blanco (sin relleno)", "descripcion": "Vainilla con pistachos tostados y trozos de chocolate blanco", "precio": 2200, "unidad": "c/u", "peso": "120 g", "horno": "170 °C", "tiempo": "14–16 min", "disponible": "SI"}, {"seccion_id": "cookies", "nombre": "Red velvet", "descripcion": "Masa de cacao y vainilla roja, rellena de frosting de vainilla", "precio": 2750, "unidad": "c/u", "peso": "120 g", "horno": "170 °C", "tiempo": "14–16 min", "disponible": "SI"}, {"seccion_id": "cookies", "nombre": "3 chocolates", "descripcion": "Vainilla con trozos de semiamargo, con leche y blanco", "precio": 2500, "unidad": "c/u", "peso": "120 g", "horno": "170 °C", "tiempo": "14–16 min", "disponible": "SI"}, {"seccion_id": "cookies", "nombre": "Nutella", "descripcion": "Vainilla con chips de chocolate semiamargo, rellena de Nutella", "precio": 3250, "unidad": "c/u", "peso": "120 g", "horno": "170 °C", "tiempo": "14–16 min", "disponible": "SI"}, {"seccion_id": "cookies", "nombre": "Avena y pasas", "descripcion": "Masa de avena con pasas de uva", "precio": 1900, "unidad": "c/u", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "cookies", "nombre": "Chocolate", "descripcion": "Masa de cacao con pedazos de chocolate semiamargo", "precio": 2500, "unidad": "c/u", "peso": "120 g", "horno": "170 °C", "tiempo": "14–16 min", "disponible": "SI"}, {"seccion_id": "budines", "nombre": "Chocolate", "descripcion": "Budín húmedo de chocolate", "precio": 21000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "budines", "nombre": "Limón y amapolas", "descripcion": "Budín de limón con semillas de amapola", "precio": 19000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "budines", "nombre": "Banana, nuez y chocolate", "descripcion": "Budín de banana con nueces y chocolate", "precio": 22000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "budines", "nombre": "Manzana", "descripcion": "Budín de manzana", "precio": 22000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "budines", "nombre": "Carrot cake", "descripcion": "Budín de zanahoria especiado", "precio": 22000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "budines", "nombre": "Centeno y zanahoria", "descripcion": "Budín de harina de centeno y zanahoria", "precio": 24000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "budines", "nombre": "Banana integral", "descripcion": "Budín de banana con harina integral", "precio": 24000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "alfajores", "nombre": "Nuez y dulce de leche", "descripcion": "Alfajor relleno de dulce de leche con nuez", "precio": 4000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "alfajores", "nombre": "Almendra y dulce de leche", "descripcion": "Alfajor relleno de dulce de leche con almendra", "precio": 4000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "alfajores", "nombre": "Nuez y ganache de chocolate con leche", "descripcion": "Alfajor con nuez y ganache de chocolate con leche", "precio": 4500, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "alfajores", "nombre": "Almendra y ganache de chocolate semi amargo", "descripcion": "Alfajor con almendra y ganache de chocolate semi amargo", "precio": 4500, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "alfajores", "nombre": "Maicena", "descripcion": "Tapas de maicena rellenas de dulce de leche", "precio": 3900, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "alfajores", "nombre": "Sablée y dulce de leche", "descripcion": "Tapas sablée rellenas de dulce de leche", "precio": 3900, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "alfajores", "nombre": "Pistacho y chocolate blanco", "descripcion": "Alfajor con pistacho y chocolate blanco", "precio": 4000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "alfajores", "nombre": "Frutos rojos", "descripcion": "Alfajor con relleno de frutos rojos", "precio": 4000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "brownies", "nombre": "Chocolate semi amargo", "descripcion": "Brownie húmedo de chocolate semi amargo", "precio": 2400, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "brownies", "nombre": "Chocolate blanco", "descripcion": "Brownie de chocolate blanco", "precio": 2400, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "brownies", "nombre": "Brownie de centeno", "descripcion": "Brownie con harina de centeno", "precio": 7500, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "tortas", "nombre": "Cheesecake frutos rojos", "descripcion": "Cheesecake cremoso con salsa de frutos rojos", "precio": 35000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "tortas", "nombre": "Cheesecake pistachos", "descripcion": "Cheesecake cremoso con pistachos", "precio": 45000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "tortas", "nombre": "Key lime pie", "descripcion": "Tarta de lima con base de galleta", "precio": 35000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}, {"seccion_id": "tortas", "nombre": "Vasca", "descripcion": "Torta vasca de queso, cremosa y con costra tostada", "precio": 30000, "unidad": "", "peso": "", "horno": "", "tiempo": "", "disponible": "SI"}]};
+
+const $ = (id) => document.getElementById(id);
+const esc = (t) => String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const peso = (n) => "$" + Number(n).toLocaleString("es-AR");
+
+/* ── CSV (formato gviz) ── */
+function parseCSV(text) {
+  const rows = []; let row = [], cur = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) {
+      if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c;
+    } else if (c === '"') q = true;
+    else if (c === ",") { row.push(cur); cur = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && text[i + 1] === "\n") i++; row.push(cur); rows.push(row); row = []; cur = ""; }
+    else cur += c;
+  }
+  if (cur !== "" || row.length) { row.push(cur); rows.push(row); }
+  return rows.filter((r) => r.some((c) => c.trim() !== ""));
+}
+function tabla(csv) {
+  const [cab, ...datos] = parseCSV(csv);
+  const k = cab.map((h) => h.trim().toLowerCase());
+  return datos.map((f) => Object.fromEntries(k.map((h, i) => [h, (f[i] ?? "").trim()])));
+}
+function numero(v) {
+  if (v === "" || v == null) return "";
+  let s = String(v).replace(/[^\d.,]/g, "");
+  if (s.includes(",")) s = s.replace(/\./g, "").replace(",", ".");
+  else if ((s.match(/\./g) || []).length > 0 && /\.\d{3}$/.test(s)) s = s.replace(/\./g, "");
+  const n = parseFloat(s);
+  return isNaN(n) ? "" : n;
+}
+
+/* ── planilla → modelo ── */
+const urlHoja = (n) => `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(n)}`;
+const CLAVE_CACHE = "lugo-carta:" + SHEET_ID;
+const leerCache = () => { try { return JSON.parse(localStorage.getItem(CLAVE_CACHE)); } catch { return null; } };
+const guardarCache = (d) => { try { localStorage.setItem(CLAVE_CACHE, JSON.stringify(d)); } catch {} };
+
+async function traer(nombre) {
+  const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 7000);
+  try {
+    const r = await fetch(urlHoja(nombre), { signal: ctrl.signal });
+    if (!r.ok) throw new Error(r.status);
+    return tabla(await r.text());
+  } finally { clearTimeout(t); }
+}
+async function desdePlanilla() {
+  const [carta, secs, conf] = await Promise.all([traer("Carta"), traer("Secciones"), traer("Config")]);
+  const config = Object.fromEntries(conf.map((r) => [r.clave, r.valor]));
+  const secciones = secs.filter((s) => s.seccion_id).map((s) => ({ seccion_id: s.seccion_id, titulo: s.titulo || s.seccion_id, nota: s.nota || "" }));
+  const items = carta.filter((r) => r.nombre && r.seccion_id).map((r) => ({
+    seccion_id: r.seccion_id, nombre: r.nombre, descripcion: r.descripcion || "",
+    precio: numero(r.precio), unidad: r.unidad || "", peso: r.peso || "", horno: r.horno || "", tiempo: r.tiempo || "",
+    disponible: (r.disponible || "SI").toUpperCase(),
+  }));
+  if (!secciones.length || !items.length) throw new Error("planilla vacía");
+  return { config, secciones, items };
+}
+
+/* ── dibujo ── */
+function dibujar(d) {
+  const c = d.config || {};
+  document.title = `Carta ${c.nombre || "LUGO"} — Panadería y repostería congelada`;
+  $("tagline").innerHTML = (c.tagline || "").split("|").map(esc).join("<br>");
+  $("nota").textContent = c.nota_pie || "";
+  document.body.classList.toggle("sin-precios", String(c.mostrar_precios || "SI").toUpperCase() === "NO");
+
+  const visibles = d.items.filter((i) => i.disponible !== "NO");
+  const secs = d.secciones.map((s) => ({ ...s, items: visibles.filter((i) => i.seccion_id === s.seccion_id) })).filter((s) => s.items.length);
+
+  $("nav").innerHTML = secs.map((s) => `<li><a href="#s-${esc(s.seccion_id)}" data-id="s-${esc(s.seccion_id)}">${esc(s.titulo)}</a></li>`).join("");
+  $("carta").innerHTML = secs.map((s) => `
+    <section class="sec" id="s-${esc(s.seccion_id)}" aria-labelledby="h-${esc(s.seccion_id)}">
+      <div class="sec-head"><h2 id="h-${esc(s.seccion_id)}">${esc(s.titulo)}</h2><i></i></div>
+      ${s.nota ? `<p class="sec-nota">${esc(s.nota)}</p>` : ""}
+      <ul class="grid">${s.items.map((i) => `
+        <li class="item">
+          <div class="item-head">
+            <h3>${esc(i.nombre)}</h3>
+            ${i.precio !== "" ? `<span class="precio">${peso(i.precio)}${i.unidad ? ` <small>${esc(i.unidad)}</small>` : ""}</span>` : ""}
+          </div>
+          ${i.descripcion ? `<p class="desc">${esc(i.descripcion)}</p>` : ""}
+          ${(i.peso || i.horno || i.tiempo) ? `<ul class="tags">${[i.peso && `<li class="tag">${esc(i.peso)}</li>`, i.horno && `<li class="tag cal">${esc(i.horno)}</li>`, i.tiempo && `<li class="tag cal">${esc(i.tiempo)}</li>`].filter(Boolean).join("")}</ul>` : ""}
+        </li>`).join("")}</ul>
+    </section>`).join("");
+
+  // info del local: solo aparece lo que está cargado
+  const ig = (c.instagram || "").replace(/^@/, "").trim();
+  const wa = (c.whatsapp || "").replace(/\D/g, "");
+  const mapa = c.mapa || (c.direccion ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(c.direccion) : "");
+  $("info").innerHTML = [
+    ig && `<a class="btn" href="https://instagram.com/${encodeURIComponent(ig)}" target="_blank" rel="noopener">Instagram @${esc(ig)}</a>`,
+    wa && `<a class="btn" href="https://wa.me/${wa}" target="_blank" rel="noopener">Escribinos por WhatsApp</a>`,
+    mapa && `<a class="btn" href="${esc(mapa)}" target="_blank" rel="noopener">Cómo llegar</a>`,
+  ].filter(Boolean).join("");
+  $("horarios").textContent = c.horarios || "";
+
+  espiar();
+  revelar();
+}
+
+/* ── scroll-spy ── */
+let obs;
+function espiar() {
+  if (obs) obs.disconnect();
+  if (!("IntersectionObserver" in window)) return;
+  const links = [...document.querySelectorAll("#nav a")];
+  obs = new IntersectionObserver((es) => {
+    es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      links.forEach((a) => a.removeAttribute("aria-current"));
+      const a = links.find((x) => x.dataset.id === e.target.id);
+      if (a) { a.setAttribute("aria-current", "true"); a.scrollIntoView({ block: "nearest", inline: "center" }); }
+    });
+  }, { rootMargin: "-80px 0px -55% 0px" });
+  if (!links.some((a) => a.hasAttribute("aria-current")) && links[0]) links[0].setAttribute("aria-current", "true");
+  document.querySelectorAll(".sec").forEach((s) => obs.observe(s));
+}
+
+/* ── preloader, entrada y revelado ── */
+const SIN_MOVIMIENTO = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let revObs;
+function revelar() {
+  if (revObs) revObs.disconnect();
+  const els = [...document.querySelectorAll(".sec-head,.sec-nota,.item")];
+  if (SIN_MOVIMIENTO || !("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("vis")); return; }
+  // escalonado dentro de cada sección (máx. 6 pasos)
+  document.querySelectorAll(".sec").forEach((sec) => {
+    sec.querySelectorAll(".sec-head,.sec-nota,.item").forEach((e, i) => { e.classList.add("rev"); e.style.setProperty("--d", Math.min(i, 6) * 45 + "ms"); });
+  });
+  revObs = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("vis"); revObs.unobserve(e.target); } }),
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+  els.forEach((e) => revObs.observe(e));
+}
+
+function entrar() { document.documentElement.classList.add("listo"); }
+(function preloader() {
+  const html = document.documentElement, pre = $("pre");
+  if (!pre || html.classList.contains("pre-hecho")) { entrar(); return; }
+  html.classList.add("pre-activo");
+  pre.querySelectorAll("path").forEach((p, i) => p.style.setProperty("--i", i));
+  const cerrar = () => {
+    try { sessionStorage.setItem("lugo-pre", "1"); } catch {}
+    pre.classList.add("out");
+    entrar();
+    setTimeout(() => { html.classList.remove("pre-activo"); pre.remove(); }, 900);
+  };
+  const minimo = new Promise((r) => setTimeout(r, 1300));
+  const fuentes = (document.fonts && document.fonts.ready) || Promise.resolve();
+  Promise.race([Promise.all([minimo, fuentes]), new Promise((r) => setTimeout(r, 2800))]).then(cerrar);
+})();
+
+/* ── parallax suave de la abuela ── */
+(function parallax() {
+  const a = $("abuela"); if (!a || SIN_MOVIMIENTO) return;
+  let t = false;
+  addEventListener("scroll", () => {
+    if (t) return; t = true;
+    requestAnimationFrame(() => { const y = Math.min(scrollY, 400); a.style.translate = `0 ${y * 0.18}px`; t = false; });
+  }, { passive: true });
+})();
+
+/* ── arranque: caché o respaldo al instante, planilla en segundo plano ── */
+(async function () {
+  dibujar((SHEET_ID && leerCache()) || RESPALDO);
+  if (!SHEET_ID) return;
+  try { const d = await desdePlanilla(); guardarCache(d); dibujar(d); } catch (e) { /* queda lo que ya se ve */ }
+})();
+</script>
+</body>
+</html>
