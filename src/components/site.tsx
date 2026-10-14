@@ -552,6 +552,16 @@ export function Footer({ home = true }: { home?: boolean }) {
             Buenos Aires, Argentina<br />
             hola@getdishub.app
           </p>
+          <p className="font-mono-tech text-xs uppercase mt-3">
+            <a
+              href="https://www.instagram.com/dishubapp/"
+              target="_blank"
+              rel="noopener me"
+              className="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors"
+            >
+              Instagram @dishubapp
+            </a>
+          </p>
         </div>
         <div>
           <div className="font-mono-tech text-xs uppercase tracking-widest text-[var(--color-text)] mb-4">Productos</div>

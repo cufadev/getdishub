@@ -40,6 +40,7 @@ const schemaOrganization = {
   "description": "Hub digital para locales gastronómicos: carta digital, QR, pedidos por WhatsApp y mesas conectadas.",
   "areaServed": { "@type": "Country", "name": "Argentina" },
   "email": "hola@getdishub.app",
+  "sameAs": ["https://www.instagram.com/dishubapp/"],
 };
 
 const schemaWebSite = {
