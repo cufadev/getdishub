@@ -4,7 +4,7 @@ export type EjemploKey = "olazabal" | "pesto";
 
 export const EJEMPLOS: Record<EjemploKey, { nombre: string; tipo: string; nota: string; url: string }> = {
   olazabal: { nombre: "Olazábal", tipo: "Café", nota: "Carta con la marca del local", url: "/ejemplos/olazabal/index.html" },
-  pesto: { nombre: "PESTO", tipo: "Pizzería y empanadería", nota: "Carta con pedido por WhatsApp", url: "/ejemplos/pesto/index.html" },
+  pesto: { nombre: "PESTO", tipo: "Empanadas artesanales y pizzas napolitanas", nota: "Chivilcoy · Top 10 Mundial de la Empanada 2026", url: "/ejemplos/pesto/index.html" },
 };
 
 export type Rubro = {

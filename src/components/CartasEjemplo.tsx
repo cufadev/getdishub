@@ -22,7 +22,8 @@ function Celular({ k }: { k: EjemploKey }) {
         />
       </div>
       <h3 className="font-display font-bold uppercase tracking-wide mt-6">{e.nombre}</h3>
-      <p className="font-sans text-sm text-(--color-muted) text-center mt-1 max-w-[280px]">{e.tipo} · {e.nota}</p>
+      <p className="font-sans text-sm text-(--color-text) text-center mt-1 max-w-[280px]">{e.tipo}</p>
+      <p className="font-sans text-sm text-(--color-muted) text-center max-w-[280px]">{e.nota}</p>
       <a
         href={e.url}
         target="_blank"
