@@ -6,6 +6,7 @@ import { Nav, Footer, BrutalBtn, WhatsAppFloatButton, useReveal, Preloader } fro
 // CasosReales: componente en pausa (ver Index() más abajo), falta terminar los casos.
 // import { CasosReales } from "@/components/CasosReales";
 import { FaqHome, FAQ_HOME_ITEMS } from "@/components/FaqHome";
+import { CartasHechas } from "@/components/CartasEjemplo";
 import { track } from "@/lib/analytics";
 import { waLink, type PlanKey } from "@/lib/whatsapp";
 
@@ -303,14 +304,22 @@ function Hero() {
 }
 
 /* ---------- hub ---------- */
-const HUB_MODULES: Array<[string, string, boolean]> = [
-  ["Carta digital", "Tu carta con tu marca, editable desde una planilla de Google.", true],
-  ["QR por mesa y mostrador", "Un QR que siempre lleva a la carta actualizada.", true],
-  ["Pedido por WhatsApp", "El cliente arma el pedido y te llega ordenado, sin comisiones.", true],
-  ["Mesa Conectada (NFC + QR)", "Apoyan el teléfono en la mesa y tienen carta, WiFi y reseñas del local.", false],
-  ["Llamar al mozo y pedir la cuenta", "Desde la mesa, sin levantar la mano.", false],
-  ["Reservas online", "Confirmación automática, sin perderlas en el hilo de WhatsApp.", false],
-  ["Pagos desde la mesa", "Mercado Pago o Stripe, sin esperar al mozo.", false],
+type HubEstado = "hoy" | "desarrollo" | "proximo";
+const HUB_ESTADO: Record<HubEstado, string> = {
+  hoy: "Disponible hoy",
+  desarrollo: "En desarrollo",
+  proximo: "Próximamente",
+};
+
+const HUB_MODULES: Array<[string, string, HubEstado]> = [
+  ["Carta digital", "Tu carta con tu marca, editable desde una planilla de Google.", "hoy"],
+  ["QR por mesa y mostrador", "Un QR que siempre lleva a la carta actualizada.", "hoy"],
+  ["Pedido por WhatsApp", "El cliente arma el pedido y te llega ordenado, sin comisiones.", "hoy"],
+  ["Tarjeta de fidelización", "Una tarjeta en el Wallet del celular para que tus clientes vuelvan, con campañas solo a quienes aceptan.", "desarrollo"],
+  ["Mesa Conectada (NFC + QR)", "Apoyan el teléfono en la mesa y tienen carta, WiFi y reseñas del local.", "proximo"],
+  ["Llamar al mozo y pedir la cuenta", "Desde la mesa, sin levantar la mano.", "proximo"],
+  ["Reservas online", "Confirmación automática, sin perderlas en el hilo de WhatsApp.", "proximo"],
+  ["Pagos desde la mesa", "Mercado Pago o Stripe, sin esperar al mozo.", "proximo"],
 ];
 
 function Hub() {
@@ -325,13 +334,16 @@ function Hub() {
           Empezás por lo que necesitás hoy y sumás módulos cuando quieras, sin rehacer nada.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {HUB_MODULES.map(([t, d, on]) => (
+          {HUB_MODULES.map(([t, d, estado]) => {
+            const on = estado === "hoy";
+            const dev = estado === "desarrollo";
+            return (
             <div
               key={t}
               className="reveal p-6 flex flex-col"
               style={{
                 background: "var(--color-surface)",
-                border: on ? "2px solid var(--color-accent)" : "2px dashed var(--color-border)",
+                border: on ? "2px solid var(--color-accent)" : dev ? "2px dashed var(--color-accent)" : "2px dashed var(--color-border)",
                 boxShadow: on ? "5px 5px 0 var(--color-accent-shadow)" : "none",
               }}
             >
@@ -339,14 +351,17 @@ function Hub() {
                 className="self-start font-mono-tech text-[11px] uppercase tracking-widest px-2 py-1 mb-4"
                 style={on
                   ? { background: "var(--color-accent)", color: "var(--color-bg)" }
-                  : { border: "1px solid var(--color-border)", color: "var(--color-muted)" }}
+                  : dev
+                    ? { border: "1px solid var(--color-accent)", color: "var(--color-accent)" }
+                    : { border: "1px solid var(--color-border)", color: "var(--color-muted)" }}
               >
-                {on ? "Disponible hoy" : "Próximamente"}
+                {HUB_ESTADO[estado]}
               </span>
               <h3 className="font-display font-bold uppercase tracking-wide text-[var(--color-text)] mb-2">{t}</h3>
               <p className="font-sans text-sm text-[var(--color-muted)] leading-relaxed">{d}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
         <div className="reveal mt-12 text-center">
           <BrutalBtn variant="primary" href="#planes">Ver planes <ArrowRight size={16} /></BrutalBtn>
@@ -1305,6 +1320,7 @@ function Index() {
       <Nav />
       <Hero />
       <Hub />
+      <CartasHechas />
       <PainSection />
       <Como />
       <Planes />

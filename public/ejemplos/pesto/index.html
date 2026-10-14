@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PESTO · Pizzas & Empanadas — Carta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800;900&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F2EEE5">
+<link rel="stylesheet" href="css/styles.css">
+<script>
+  /* el preload se muestra una sola vez por visita */
+  try { if(sessionStorage.getItem("pesto-visto")) document.documentElement.classList.add("sin-preload"); } catch(e){}
+</script>
+</head>
+<body>
+
+<div class="preload" id="preload">
+  <span class="preload-name" role="img" aria-label="PESTO">
+    <span class="ch" aria-hidden="true" style="--i:0"><i>P</i></span><span class="ch" aria-hidden="true" style="--i:1"><i>E</i></span><span class="ch" aria-hidden="true" style="--i:2"><i>S</i></span><span class="ch" aria-hidden="true" style="--i:3"><i>T</i></span><span class="ch" aria-hidden="true" style="--i:4"><i>O</i></span>
+  </span>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Chivilcoy · Buenos Aires</div>
+    <h1 class="brand">PESTO</h1>
+    <div class="brand-sub">Pizzas &amp; Empanadas</div>
+  </header>
+
+  <aside class="especiales" id="especiales" aria-label="Especiales" hidden></aside>
+
+  <nav id="tabsNav" aria-label="Categorías"></nav>
+
+  <div id="sections"></div>
+
+  <footer>
+    <div class="stamp">Hechas una por una, 100% artesanales.</div>
+    <div class="foot-actions">
+      <a class="foot-btn" id="mapBtn" href="https://www.google.com/maps/search/?api=1&amp;query=Suipacha%20111%2C%20Chivilcoy%2C%20Argentina" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <span>Cómo llegar</span>
+      </a>
+      <a class="foot-btn" id="igBtn" href="https://instagram.com/pesto.chivilcoy" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+        <span class="btn-txt">@pesto.chivilcoy</span>
+      </a>
+    </div>
+    <p class="foot-addr" id="mapAddr">Suipacha 111, Chivilcoy</p>
+  </footer>
+
+  <div class="credit">Hecho con 🧉 en Buenos Aires por <a href="https://cufadev.xyz" target="_blank" rel="noopener">CUFA.</a></div>
+</div>
+
+<div class="cart-bar" id="cartBar">
+  <div class="cart-bar-inner" id="cartBarBtn" role="button" tabindex="0" aria-label="Ver pedido">
+    <span class="cart-count" id="cartCount">0</span>
+    <span class="cart-label">Ver pedido</span>
+    <span class="cart-total" id="cartTotal">$0</span>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Tu pedido">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <div class="sheet-title">Tu pedido</div>
+      <button class="sheet-close" id="sheetClose">Cerrar ✕</button>
+    </div>
+    <div class="sheet-sub">Retiro / Envío a coordinar</div>
+    <div id="sheetLines"></div>
+    <button class="clear-btn" id="clearBtn" type="button">Vaciar pedido</button>
+    <div class="totals">
+      <span class="t-label">Total</span>
+      <span class="t-value" id="sheetTotal">$0</span>
+    </div>
+    <div class="hint" id="hint">Tu pedido llega armado por WhatsApp. Sin apps ni comisiones.</div>
+    <button class="wa-btn" id="waBtn">
+      <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.33 4.95L2 22l5.3-1.39c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm0 18.05c-1.48 0-2.94-.4-4.2-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.1 8.1 0 0 1-1.24-4.31c0-4.47 3.64-8.1 8.24-8.1 4.47 0 8.1 3.63 8.1 8.1s-3.63 8.2-8.1 8.2zm4.44-6.07c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.11-.5.11-.11.24-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.42.06-.65.3-.22.24-.85.83-.85 2.02s.87 2.35 1 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.05.14-1.16-.06-.1-.22-.16-.46-.28z"/></svg>
+      Pedir por WhatsApp
+    </button>
+  </div>
+</div>
+
+<script src="js/menu-data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

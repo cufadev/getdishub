@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Olazábal — Menú</title>
+<meta name="description" content="Menú de Olazábal café: café, desayunos, platitos, sandwiches, panadería, pastelería y bebidas.">
+<meta name="theme-color" content="#440C1C">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="icon" href="assets/hombre.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bordo:#440C1C;
+  --vino:#601225;
+  --crema:#F2F1D6;
+  --verde:#0A372D;
+  --gutter:clamp(1.25rem,5vw,2.75rem);
+  --nav-h:3.5rem;
+  --font:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --titulo:"Neuething Sans","Archivo",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bordo);color:var(--crema);
+  font-family:var(--font);font-size:1rem;line-height:1.4;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,h4,p,ul{margin:0}
+ul{padding:0;list-style:none}
+
+/* Neuething Sans (fuente de marca, licencia aparte): si el archivo está en assets/fonts/ se usa sola; si no, cae a Archivo */
+@font-face{font-family:"Neuething Sans";font-weight:700 900;font-display:swap;
+  src:local("Neuething Sans Bold"),local("NeuethingSans-Bold"),url("assets/fonts/NeuethingSans-Bold.woff2") format("woff2")}
+/* títulos: minúscula, negrita, como en la carta impresa */
+.titulo{font-family:var(--titulo);font-stretch:112%;font-weight:800;text-transform:none;letter-spacing:-.01em}
+/* tipografía de marca: grotesca ultra expandida (nombres de ítems, botones, chips) */
+.wide{font-stretch:125%;font-weight:900;text-transform:uppercase;letter-spacing:.01em}
+
+/* ---------- estructura (mobile first) ---------- */
+.app{display:block}
+.cover{display:contents}
+
+
+
+/* tapa */
+.tapa{
+  background:var(--vino);color:var(--crema);
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  text-align:center;overflow:hidden;
+  padding:calc(2rem + env(safe-area-inset-top)) 0 calc(1.5rem + env(safe-area-inset-bottom));
+}
+.tapa__logo{width:min(94vw,68svh);height:auto;margin-top:clamp(.5rem,3svh,2rem)}
+.tapa__man{
+  position:relative;aspect-ratio:1;flex:0 1 auto;min-height:0;
+  width:min(72vw,26rem,38svh);
+}
+.tapa__man img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.tapa__man img.oculto{opacity:0}
+.tapa__pie{display:flex;flex-direction:column;align-items:center;gap:.9rem;padding-inline:var(--gutter)}
+.tapa__tag{
+  font-stretch:125%;font-weight:700;text-transform:uppercase;
+  font-size:.7rem;letter-spacing:.18em;opacity:.9;
+}
+.tapa__cta{
+  display:inline-flex;align-items:center;gap:.6rem;min-height:2.75rem;padding:0 1.4rem;
+  color:var(--vino);background:var(--crema);text-decoration:none;border-radius:999px;
+  font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:.75rem;letter-spacing:.08em;
+}
+.tapa__cta:focus-visible{outline:2px solid var(--crema);outline-offset:3px}
+.tapa__cta svg{width:.9rem;height:.9rem;animation:bajar 1.8s ease-in-out infinite}
+@keyframes bajar{50%{transform:translateY(.25rem)}}
+@media (prefers-reduced-motion:reduce){.tapa__cta svg{animation:none}}
+/* entrada suave: la tapa espera a que logo, bigotudo y tipografía estén listos y aparece escalonada */
+.tapa h1,.tapa__man,.tapa__pie > *{
+  transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1);
+}
+.tapa__man{transition-delay:.12s}
+.tapa__pie > :nth-child(1){transition-delay:.28s}
+.tapa__pie > :nth-child(2){transition-delay:.36s}
+.tapa__pie > :nth-child(3){transition-delay:.46s}
+html.js:not(.listo) .tapa h1,
+html.js:not(.listo) .tapa__man,
+html.js:not(.listo) .tapa__pie > *{opacity:0;transform:translateY(14px)}
+@media (prefers-reduced-motion:reduce){
+  .tapa h1,.tapa__man,.tapa__pie > *{transition:opacity .35s ease;transition-delay:0s!important}
+  html.js:not(.listo) .tapa h1,html.js:not(.listo) .tapa__man,html.js:not(.listo) .tapa__pie > *{transform:none}
+}
+.cover__logo{display:none}
+.cover__man{display:none}
+
+/* navegación */
+.nav{
+  position:sticky;top:0;z-index:10;
+  background:var(--bordo);
+  border-bottom:1px solid rgb(242 241 214 / .18);
+  padding-top:env(safe-area-inset-top);
+}
+.nav__list{
+  display:flex;gap:.5rem;overflow-x:auto;
+  padding:.65rem var(--gutter);
+  scrollbar-width:none;scroll-snap-type:x proximity;
+}
+.nav__list::-webkit-scrollbar{display:none}
+.nav__link{
+  flex:none;scroll-snap-align:center;white-space:nowrap;
+  text-decoration:none;color:var(--crema);
+  font-stretch:125%;font-weight:800;text-transform:uppercase;
+  font-size:.72rem;letter-spacing:.06em;
+  padding:.6rem .95rem;min-height:2.5rem;display:inline-flex;align-items:center;
+  border:1.5px solid rgb(242 241 214 / .35);border-radius:999px;
+  transition:background-color .2s,color .2s,border-color .2s;
+}
+.nav__link[aria-current="true"]{background:var(--crema);color:var(--bordo);border-color:var(--crema)}
+.nav__link:focus-visible{outline:2px solid var(--crema);outline-offset:2px}
+
+.cover__foot{display:none}
+
+/* paneles */
+.panel{padding:2.75rem var(--gutter) 3rem}
+.panel--cafe{background:var(--crema);color:var(--bordo)}
+.panel--salado{background:var(--verde);color:var(--crema)}
+.panel--dulce{background:var(--vino);color:var(--crema)}
+
+.panel__head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;
+  margin-bottom:.5rem;
+}
+.panel__title{font-size:clamp(2.8rem,13vw,5.5rem);line-height:.9}
+.panel__art{width:clamp(4.5rem,22vw,8rem);flex:none}
+/* reveal suave del encabezado de cada panel, una sola vez; sin JS o con "reducir movimiento" se ve siempre */
+html.js .panel__head{transition:opacity .6s cubic-bezier(.2,.6,.2,1),transform .6s cubic-bezier(.2,.6,.2,1)}
+html.js .panel__head:not(.visto){opacity:0;transform:translateY(16px)}
+@media (prefers-reduced-motion:reduce){html.js .panel__head{transition:none}html.js .panel__head:not(.visto){opacity:1;transform:none}}
+
+.sec{scroll-margin-top:calc(var(--nav-h) + .5rem);padding-top:1.75rem}
+.sec__title{
+  font-size:clamp(1.5rem,6.6vw,2rem);line-height:1.05;
+  padding-bottom:.65rem;margin-bottom:.1rem;
+  border-bottom:2px solid currentColor;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.sec__title img{width:2.6rem;flex:none}
+/* sección con el mismo nombre que el panel: el título no se repite a la vista, pero queda para lectores de pantalla */
+.sec--eco{position:relative;padding-top:.5rem}
+.sec--eco > .sec__title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0;margin:0}
+.sec__note{font-size:.82rem;opacity:.85;padding-top:.7rem}
+
+/* ítems */
+.items{display:grid;grid-template-columns:1fr}
+.item{
+  display:grid;grid-template-columns:1fr auto;column-gap:1rem;row-gap:.2rem;
+  padding:.95rem 0;
+  border-bottom:1px solid color-mix(in srgb,currentColor 20%,transparent);
+}
+.item__name{
+  font-stretch:125%;font-weight:800;text-transform:uppercase;
+  font-size:.82rem;letter-spacing:.02em;line-height:1.25;
+}
+.item__price{
+  font-stretch:112%;font-weight:700;font-size:.92rem;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+  grid-column:2;grid-row:1;
+}
+.item__desc{grid-column:1 / -1;font-size:.88rem;line-height:1.4;opacity:.88;max-width:46ch}
+.item__desc em{font-style:normal;font-weight:700}
+
+/* lista compacta (panadería, pastelería, bebidas) */
+.items--simple .item{
+  grid-template-columns:auto 1fr auto;align-items:baseline;
+  padding:.8rem 0;column-gap:.6rem;
+}
+.items--simple .item__name{font-size:.78rem}
+.items--simple .item::before{ /* guías punteadas */
+  content:"";grid-column:2;grid-row:1;align-self:end;
+  border-bottom:1.5px dotted color-mix(in srgb,currentColor 45%,transparent);
+  margin-bottom:.3em;
+}
+.items--simple .item__price{grid-column:3}
+
+.sin-precios .items--simple .item{grid-template-columns:1fr}
+.sin-precios .items--simple .item::before{display:none}
+.sin-precios .item{padding:.8rem 0}
+.sin-precios .item__desc{margin-top:.05rem}
+.extra{
+  margin-top:1rem;font-size:.82rem;font-style:italic;opacity:.9;
+}
+
+/* pie */
+.foot{
+  background:var(--bordo);color:var(--crema);text-align:center;
+  padding:2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+}
+.foot img{width:min(60vw,15rem)}
+.foot p{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-stretch:112%;font-weight:600;opacity:.85}
+
+/* info del local */
+.info{display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%;max-width:26rem}
+.info:empty{display:none}
+.info__links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;width:100%}
+.info__links>:last-child:nth-child(odd){grid-column:1 / -1;justify-self:center;min-width:50%}
+.btn--dos{justify-content:flex-start;gap:.45rem;padding:.55rem .6rem .55rem .75rem;border-radius:1rem;text-align:left;text-transform:none;letter-spacing:0;min-height:3.4rem}
+.btn--dos .btn__txt{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.btn--dos small{font-stretch:100%;font-weight:600;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;transition:opacity .2s}
+.btn--dos .btn__txt>span{font-stretch:100%;font-weight:800;font-size:.76rem;text-transform:none;letter-spacing:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+div.btn--dos{cursor:default}div.btn--dos:hover{background:transparent;color:var(--crema)}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;min-height:2.75rem;padding:0 1.15rem;
+  border:1.5px solid rgb(242 241 214 / .45);border-radius:999px;background:transparent;color:var(--crema);
+  font:inherit;font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:.7rem;letter-spacing:.07em;
+  text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .2s,color .2s;
+}
+.btn:hover{background:var(--crema);color:var(--bordo)}
+.btn:focus-visible{outline:2px solid var(--crema);outline-offset:2px}
+.btn svg{width:1.1rem;height:1.1rem;flex:none}
+.btn--dos svg{width:1.2rem;height:1.2rem}
+.wifi{
+  width:100%;border:1.5px solid rgb(242 241 214 / .3);border-radius:1rem;padding:1rem 1.15rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left;
+}
+.wifi__lbl{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;font-stretch:125%;font-weight:700;opacity:.7}
+.wifi__red{font-stretch:112%;font-weight:800;font-size:1rem;margin-top:.15rem;word-break:break-word}
+.horarios{font-size:.82rem;line-height:1.5;text-align:center;opacity:.85;white-space:pre-line}
+.tapa__ig{color:inherit;font-stretch:112%;font-weight:600;font-size:.78rem;letter-spacing:.08em;opacity:.85;text-decoration:none}
+.tapa__ig:hover{opacity:1;text-decoration:underline}
+.tapa__ig:empty{display:none}
+
+@media (max-width:379px){.btn--dos svg{display:none}.btn--dos{padding:.55rem .75rem}}
+
+/* firma */
+.foot .firma-wrap{font-size:.58rem;letter-spacing:.1em;opacity:.7;text-transform:uppercase;margin-top:.25rem}
+.firma,.firma:hover,.firma:visited,.firma:focus,.firma:active{
+  font-family:"Bebas Neue",Impact,sans-serif;font-size:1.35em;letter-spacing:.06em;
+  color:#ff4e01;text-decoration:none;
+}
+
+/* Salado lleva el sol (el bigotudo ya está en la tapa y en el sidebar) */
+.panel--salado .panel__art{content:url("assets/sol-crema.svg")}
+/* Platitos sin iconito suelto (el sol a ese tamaño parecía un botón) */
+#platitos .sec__title img{display:none}
+
+/* ---------- tablet ---------- */
+@media (min-width:640px){
+  .nav__list{justify-content:center}
+}
+@media (min-width:720px){
+  .items{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:3rem}
+  .panel{padding-block:3.5rem 4rem}
+}
+
+/* ---------- desktop: portada fija a la izquierda como el impreso ---------- */
+@media (min-width:1080px){
+  .app{display:grid;grid-template-columns:minmax(21rem,28vw) 1fr;align-items:start}
+  .cover{
+    display:flex;flex-direction:column;
+    position:sticky;top:0;height:100vh;height:100dvh;
+    background:var(--bordo);overflow:hidden;
+  }
+  .cover__logo{display:block;width:100%;max-width:15rem;margin:0 auto;padding:2.5rem 2rem 0}
+  /* el bigotudo ocupa el lugar del logo en el sidebar (el nombre queda en la tapa y en el pie) */
+  .cover__man{
+    display:block;position:relative;flex:none;aspect-ratio:1;
+    width:min(14rem,26svh);margin:2rem auto 0;
+  }
+  .cover__man img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+  .cover__man img.oculto{opacity:0}
+  .cover__space{flex:1}
+  .nav{position:static;border:0;padding:0;background:transparent}
+  .nav__list{
+    flex-direction:column;overflow:visible;gap:.35rem;
+    padding:1.25rem 2rem;border-top:1px solid rgb(242 241 214 / .18);
+  }
+  .nav__link{border:0;border-radius:.4rem;padding:.5rem .75rem;min-height:0;justify-content:flex-start;font-size:.7rem}
+  .nav__link:hover{background:rgb(242 241 214 / .12)}
+  .nav__link[aria-current="true"]:hover{background:var(--crema)}
+  .nav__list{display:grid;grid-template-columns:1fr 1fr;scroll-snap-type:none}
+  .cover__foot{
+    display:block;padding:0 2rem 1.5rem;
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-stretch:112%;opacity:.7;text-align:center;
+  }
+  .sec{scroll-margin-top:1.5rem}
+  .foot{grid-column:2}
+  /* bloque de info (Instagram, WiFi, horarios, dirección) en el hueco del sidebar */
+  .cover__space{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem;
+    padding:1.25rem 2rem;min-height:0;overflow-y:auto;scrollbar-width:none;
+  }
+  .cover__space::-webkit-scrollbar{display:none}
+  .cover__space .info{max-width:17rem}
+  .cover__space .info__links{grid-template-columns:1fr}
+  .cover__space .info__links>:last-child:nth-child(odd){min-width:0;justify-self:stretch}
+  .cover__space .dir{
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-stretch:112%;font-weight:600;
+    opacity:.85;text-align:center;line-height:1.5;
+  }
+  .cover__foot{display:none} /* la dirección ya está en el bloque de arriba */
+  /* lectura en pantalla grande: un escalón arriba en nombres, descripciones y categorías */
+  .item__name{font-size:.9rem}
+  .items--simple .item__name{font-size:.86rem}
+  .item__desc{font-size:.97rem}
+  .nav__link{font-size:.78rem}
+  .sec__note{font-size:.9rem}
+}
+@media (min-width:1500px){
+  .items{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .panel{padding-inline:4rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .nav__link{transition:none}
+}
+</style>
+</head>
+<body>
+<header class="tapa" id="tapa">
+  <h1><img class="tapa__logo" src="assets/logo-crema.svg" alt="Olazábal" width="1600" height="800"></h1>
+  <div class="tapa__man" aria-hidden="true">
+    <img id="spr-solo" src="assets/hombre-crema.svg" alt="" width="1000" height="1000">
+    <img id="spr-cafe" class="oculto" src="assets/hombre-cafe-crema.svg" alt="" width="1000" height="1000">
+    <img id="spr-medialuna" class="oculto" src="assets/hombre-medialuna-crema.svg" alt="" width="1000" height="1000">
+  </div>
+  <div class="tapa__pie">
+    <p class="tapa__tag">Café · Buenos Aires</p>
+    <a class="tapa__ig" id="tapa-ig" href="https://www.instagram.com/olazabalcafe/" target="_blank" rel="noopener">@olazabalcafe</a>
+    <a class="tapa__cta" href="#menu">Ver la carta
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5l5-5"/></svg>
+    </a>
+  </div>
+</header>
+
+<div class="app">
+
+  <aside class="cover">
+    <div class="cover__man" aria-hidden="true">
+      <img src="assets/hombre-crema.svg" alt="" width="1000" height="1000">
+      <img class="oculto" src="assets/hombre-cafe-crema.svg" alt="" width="1000" height="1000">
+      <img class="oculto" src="assets/hombre-medialuna-crema.svg" alt="" width="1000" height="1000">
+    </div>
+    <div class="cover__space" id="cover-slot"></div>
+
+    <nav class="nav" aria-label="Secciones del menú">
+      <ul class="nav__list" id="nav"></ul>
+    </nav>
+    <p class="cover__foot">Gral. Félix Olazábal 725</p>
+  </aside>
+
+  <main id="menu"></main>
+
+  <footer class="foot">
+    <img src="assets/logo-crema.svg" alt="Olazábal" width="1600" height="800">
+    <div class="info" id="info"></div>
+    <p class="dir">Gral. Félix Olazábal 725 · Buenos Aires</p>
+    <p class="firma-wrap">desarrollado con 🧉 por <a class="firma" href="https://cufadev.xyz" target="_blank" rel="noopener">cufa</a> en Argentina</p>
+  </footer>
+</div>
+
+<script>
+/* ---------- datos ---------- */
+const MENU_RESPALDO = [
+  { id:"cafe", clase:"cafe", titulo:"Café", arte:"tazas", secciones:[
+    { id:"cafe-caliente", titulo:"Calientes", simple:false, items:[
+      ["Espresso","Shot de espresso puro, intenso y concentrado",5500],
+      ["Cortado","Espresso cortado con un toque de leche caliente",5800],
+      ["Americano","Espresso largo con agua caliente, suave y liviano",5500],
+      ["Flat White","Espresso con leche vaporizada en textura sedosa",5800],
+      ["Latte","Espresso con abundante leche vaporizada",6100],
+      ["Cappuccino","Espresso, leche vaporizada y espuma en partes iguales",5600],
+      ["Latte Vainilla","Nuestro latte con syrup de vainilla",7300],
+      ["Caramel Latte","Nuestro latte con syrup de caramelo",7300],
+      ["Mocha","Espresso, chocolate y leche vaporizada",7800],
+    ]},
+    { id:"cafe-frio", titulo:"Fríos", items:[
+      ["Latte Frío","Nuestro latte, servido con hielo",5800],
+      ["Latte Vainilla Frío","Latte helado con syrup de vainilla",7000],
+      ["Latte Caramel Frío","Latte helado con syrup de caramelo",7000],
+      ["Cappuccino Frío","Nuestro cappuccino, servido con hielo",5500],
+    ], extra:"*Opcional leche vegetal (+$1.500)" },
+  ]},
+  { id:"salado", clase:"salado", titulo:"Salado", arte:"sol", secciones:[
+    { id:"desayunos", titulo:"Desayunos", items:[
+      ["Huevos revueltos","Con panceta glaseada a la miel, tomate confitado y pan multicereal",14500],
+      ["Avo Toast","Palta, huevo a los 6 minutos, tomate confitado y pickles de cebolla sobre pan multicereal",15800],
+      ["Mbeju","Clásica torta de almidón y queso tybo, con huevo a la plancha, palta y pickles",15800],
+      ["Prensado de Chipa","Chipa casero prensado con jamón, queso y tomate",15900],
+      ["Prensado de Lomito","Lomo ahumado y cheddar prensados en pan brioche",17200],
+      ["Yogurt con Granola","Yogurt natural, granola, miel y mermelada de frutos rojos",12600],
+    ]},
+    { id:"platitos", titulo:"Platitos", items:[
+      ["Pechuguita Asada","Pechuga curada y asada con salsa asiática, puré de calabaza y cheddar gratinado",17000],
+      ["Hummus","Clásico hummus de garbanzos con aceite de oliva y especias, para untar",10800],
+      ["Nuestra Caesar","Lechuga fresca, pollo grillado, queso sardo, castañas de cajú y aderezo caesar casero. *Opcional pepino",18500],
+    ]},
+    { id:"sandwiches", titulo:"Sandwiches", nota:"Salen en pan multicereal.", items:[
+      ["Pastrón","Pastrón, queso danbo, sweet relish y pepinos agridulces caseros",17300],
+      ["Tuna Sandwich","Atún, queso untable, palta, cebolla morada y lechuga",15800],
+      ["Jamón Crudo","Jamón crudo, queso danbo, tomate y rúcula con pesto casero",18100],
+      ["Sandwich de Pollo","Pollo grillado, queso danbo, tomate, lechuga y sweet relish",16700],
+      ["Tostado Clásico","Jamón cocido y queso danbo tostados",12800],
+    ]},
+  ]},
+  { id:"dulce", clase:"dulce", titulo:"Dulce", arte:"torta", secciones:[
+    { id:"panaderia", titulo:"Panadería", simple:true, items:[
+      ["Medialuna XL",4000],["Croissant",5000],["Danesa",5400],["Pan de Chocolate",6100],["Chipa",4800],
+    ]},
+    { id:"pasteleria", titulo:"Pastelería", simple:true, items:[
+      ["Budín Carrot Cake",7500],["Budín de Limón",6400],["Budín Banana y Chips",8400],["Brownie",6000],
+      ["Cookie Chocolate",6700],["Cookie Chips",6700],["Alfajor de Almendras",7500],["Financier",6900],
+      ["Trenzado Cardamomo",9000],["Trenzado Canela",9000],["Dátil Pistacho",6900],["Dátil Avellanas",6900],["Dátil Maní",6900],
+    ]},
+    { id:"bebidas", titulo:"Bebidas", simple:true, items:[
+      ["Limonada Casera",6500],["Agua con/sin Gas",4200],["Coca Cola",3800],["Coca Cola Zero",3800],["Sprite",3800],["Sprite Zero",3800],
+    ]},
+  ]},
+];
+
+/* ---------- configuración ----------
+   Pegá acá el ID de la planilla de Google (el texto largo entre /d/ y /edit en la URL).
+   La planilla tiene que estar compartida como "Cualquier persona con el enlace: Lector".
+   Si queda vacío, o si Google no responde, se usa MENU_RESPALDO. */
+/* Mostrar precios en la carta. En false no se dibujan (los datos quedan en la planilla). */
+const MOSTRAR_PRECIOS = false;
+/* Datos del local. La pestaña Config de la planilla los pisa (claves: instagram, whatsapp, wifi_nombre, wifi_clave, horarios, mapa).
+   Lo que quede vacío no se muestra. */
+const INFO = {
+  instagram:"https://www.instagram.com/olazabalcafe/",
+  whatsapp:"",
+  wifi_nombre:"Olazabal", wifi_clave:"",
+  horarios:"Lunes a sábado · 8:00 — 20:00",
+  mapa:"",   /* opcional: link de Google Maps; si se carga, aparece el botón "Cómo llegar" */
+  /* Reseñas: hoy abre Olazábal en Google Maps. Con la ficha de Google Business creada, usar el link directo
+     https://search.google.com/local/writereview?placeid=PLACE_ID (se puede cargar en Config, clave "resena") */
+  resena:"https://www.google.com/maps/search/?api=1&query=Olaz%C3%A1bal%20caf%C3%A9%20Gral.%20F%C3%A9lix%20Olaz%C3%A1bal%20725%20Bella%20Vista%20Buenos%20Aires"
+};
+const ICONOS = {
+  ig:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>',
+  wa:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8L4 20z"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  wifi:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.6 16a5 5 0 0 1 6.8 0"/><circle cx="12" cy="19.3" r="1.1" fill="currentColor" stroke="none"/></svg>',
+  estrella:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z"/></svg>',
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>'
+};
+const SHEET_ID = "";
+
+/* ---------- utilidades ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const peso = n => "$" + n.toLocaleString("es-AR");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const COLOR_A_CLASE = { crema:"cafe", verde:"salado", vino:"dulce" };
+
+/* CSV con comillas y saltos de línea -> array de objetos {columna: valor} */
+function parseCSV(txt){
+  const filas = []; let fila = [], cel = "", q = false;
+  for (let i = 0; i < txt.length; i++){
+    const c = txt[i];
+    if (q){
+      if (c === '"'){ if (txt[i+1] === '"'){ cel += '"'; i++; } else q = false; }
+      else cel += c;
+    } else if (c === '"') q = true;
+    else if (c === ","){ fila.push(cel); cel = ""; }
+    else if (c === "\n" || c === "\r"){
+      if (c === "\r" && txt[i+1] === "\n") i++;
+      fila.push(cel); cel = ""; filas.push(fila); fila = [];
+    } else cel += c;
+  }
+  if (cel !== "" || fila.length){ fila.push(cel); filas.push(fila); }
+  const [cab, ...datos] = filas.filter(f => f.some(x => x.trim() !== ""));
+  const claves = cab.map(h => h.trim().toLowerCase());
+  return datos.map(f => Object.fromEntries(claves.map((k, i) => [k, (f[i] ?? "").trim()])));
+}
+
+/* tres tablas de la planilla -> estructura del menú */
+function armarMenu({ carta, secciones, config }){
+  const porSeccion = new Map();
+  carta.forEach(r => {
+    if (!r.nombre || r.disponible.toUpperCase() === "NO") return;
+    const precio = parseInt(r.precio.replace(/\D/g, ""), 10);
+    if (!porSeccion.has(r.seccion_id)) porSeccion.set(r.seccion_id, []);
+    porSeccion.get(r.seccion_id).push({ nombre:r.nombre, desc:r.descripcion, precio:isNaN(precio) ? 0 : precio });
+  });
+  const grupos = [];
+  secciones.forEach(r => {
+    if (!r.seccion_id) return;
+    const items = porSeccion.get(r.seccion_id) || [];
+    if (!items.length) return;                       // sección vacía: no se muestra
+    let g = grupos.find(x => x.titulo === r.grupo);
+    if (!g) grupos.push(g = { id:"g-" + grupos.length, clase:COLOR_A_CLASE[r.color_grupo] || "cafe", titulo:r.grupo, arte:r.ilustracion_grupo, secciones:[] });
+    g.secciones.push({ id:r.seccion_id, titulo:r.titulo, simple:r.estilo === "simple", arte:r.ilustracion_seccion, nota:r.nota, extra:r.pie, items });
+  });
+  const cfg = Object.fromEntries(config.map(r => [r.clave, r.valor]));
+  return { grupos, cfg };
+}
+
+/* el respaldo (arrays) usa la misma estructura */
+function respaldo(){
+  return { cfg:{}, grupos: MENU_RESPALDO.map(g => ({ ...g, secciones: g.secciones.map(s => ({
+    ...s, nota:s.nota || "", extra:s.extra || "",
+    items: s.items.map(it => s.simple ? { nombre:it[0], desc:"", precio:it[1] } : { nombre:it[0], desc:it[1], precio:it[2] })
+  })) })) };
+}
+
+/* ---------- render ---------- */
+function itemHTML(it, simple){
+  const precio = MOSTRAR_PRECIOS ? `<span class="item__price">${peso(it.precio)}</span>` : "";
+  if (simple) return `<li class="item"><span class="item__name">${esc(it.nombre)}</span>${precio}</li>`;
+  return `<li class="item"><h4 class="item__name">${esc(it.nombre)}</h4>${precio}${it.desc ? `<p class="item__desc">${esc(it.desc)}</p>` : ""}</li>`;
+}
+const arteHTML = (nombre, clase, cls="") => nombre
+  ? `<img ${cls ? `class="${cls}" ` : ""}src="assets/${esc(nombre)}${clase === "cafe" ? "" : "-crema"}.svg" alt="" width="1000" height="1000" onerror="this.remove()">` : "";
+
+const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
+function seccionHTML(s, clase, tituloGrupo){
+  const igual = norm(s.titulo) === norm(tituloGrupo);   // evita "Café" dos veces seguidas
+  return `
+  <section class="sec${igual ? " sec--eco" : ""}" id="${esc(s.id)}" aria-labelledby="${esc(s.id)}-t" data-sec>
+    <h3 class="sec__title titulo" id="${esc(s.id)}-t"><span>${esc(s.titulo)}</span>${arteHTML(s.arte, clase)}</h3>
+    ${s.nota ? `<p class="sec__note">${esc(s.nota)}</p>` : ""}
+    <ul class="items${s.simple ? " items--simple" : ""}">${s.items.map(i => itemHTML(i, s.simple)).join("")}</ul>
+    ${s.extra ? `<p class="extra">${esc(s.extra)}</p>` : ""}
+  </section>`;
+}
+
+function pintarInfo(cfg){
+  const d = { ...INFO };
+  Object.keys(INFO).forEach(k => cfg[k] && (d[k] = cfg[k]));
+  const ig = d.instagram.trim();
+  const igUser = ig ? "@" + ig.replace(/\/+$/, "").split("/").pop().replace(/^@/, "") : "";
+  const tapaIg = $("#tapa-ig");
+  tapaIg.textContent = igUser; if (ig) tapaIg.href = ig;
+  const wa = d.whatsapp.replace(/\D/g, "");
+  const wifiBtn = !d.wifi_nombre ? "" : d.wifi_clave
+    ? `<button type="button" class="btn btn--dos" data-copiar="${esc(d.wifi_clave)}" aria-live="polite">${ICONOS.wifi}<span class="btn__txt"><small>WiFi · ${esc(d.wifi_nombre)}</small><span class="btn__lbl">Copiar clave</span></span></button>`
+    : `<div class="btn btn--dos">${ICONOS.wifi}<span class="btn__txt"><small>WiFi</small><span>${esc(d.wifi_nombre)}</span></span></div>`;
+  const links = [
+    ig && `<a class="btn btn--dos" href="${esc(ig)}" target="_blank" rel="noopener">${ICONOS.ig}<span class="btn__txt"><small>Seguinos</small><span>${esc(igUser)}</span></span></a>`,
+    d.resena && `<a class="btn btn--dos" href="${esc(d.resena)}" target="_blank" rel="noopener">${ICONOS.estrella}<span class="btn__txt"><small>Reseñas</small><span>Dejanos tu reseña</span></span></a>`,
+    wifiBtn,
+    wa && `<a class="btn btn--dos" href="https://wa.me/${wa}" target="_blank" rel="noopener">${ICONOS.wa}<span class="btn__txt"><small>Escribinos</small><span>WhatsApp</span></span></a>`,
+    d.mapa && `<a class="btn btn--dos" href="${esc(d.mapa)}" target="_blank" rel="noopener">${ICONOS.pin}<span class="btn__txt"><small>Estamos en</small><span>Cómo llegar</span></span></a>`,
+  ].filter(Boolean).join("");
+  const hor = d.horarios ? `<div class="horarios">${esc(d.horarios)}</div>` : "";
+  $("#info").innerHTML = (links ? `<div class="info__links">${links}</div>` : "") + hor;
+}
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-copiar]"); if (!b) return;
+  const txt = b.dataset.copiar, lbl = $(".btn__lbl", b);
+  try { await navigator.clipboard.writeText(txt); }
+  catch { const t = document.createElement("textarea"); t.value = txt; document.body.append(t); t.select(); try { document.execCommand("copy"); } catch {} t.remove(); }
+  lbl.textContent = "¡Copiada!"; setTimeout(() => lbl.textContent = "Copiar clave", 1800);
+});
+
+let io = null, activo = null;
+
+/* reveal: el encabezado de cada panel entra una sola vez; si la carta se vuelve a pintar, los ya vistos no se ocultan */
+const panelesVistos = new Set();
+let ioPaneles = null;
+function revelarPaneles(){
+  const heads = document.querySelectorAll(".panel__head");
+  if (ioPaneles) ioPaneles.disconnect();
+  if (!("IntersectionObserver" in window)){ heads.forEach(h => h.classList.add("visto")); return; }
+  ioPaneles = new IntersectionObserver((entries, obs) => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add("visto");
+    panelesVistos.add(e.target.parentElement.id);
+    obs.unobserve(e.target);
+  }), { rootMargin:"0px 0px -10% 0px", threshold:.15 });
+  heads.forEach(h => panelesVistos.has(h.parentElement.id) ? h.classList.add("visto") : ioPaneles.observe(h));
+}
+
+function pintar({ grupos, cfg }){
+  document.body.classList.toggle("sin-precios", !MOSTRAR_PRECIOS);
+  /* textos y colores del local */
+  const rootStyle = document.documentElement.style;
+  [["color_tapa","--vino"],["color_oscuro","--bordo"],["color_claro","--crema"],["color_verde","--verde"]]
+    .forEach(([k, v]) => /^#[0-9a-f]{3,8}$/i.test(cfg[k] || "") && rootStyle.setProperty(v, cfg[k]));
+  if (cfg.nombre){ document.title = cfg.nombre + " — Menú"; document.querySelectorAll(".tapa__logo, .cover__logo, .foot img").forEach(i => i.alt = cfg.nombre); }
+  if (cfg.tagline) $(".tapa__tag").textContent = cfg.tagline;
+  if (cfg.direccion){ $(".cover__foot").textContent = cfg.direccion; $(".dir").textContent = cfg.direccion; }
+
+  pintarInfo(cfg);
+  $("#menu").innerHTML = grupos.map(g => `
+  <div class="panel panel--${g.clase}" id="${esc(g.id)}">
+    <div class="panel__head">
+      <h2 class="panel__title titulo">${esc(g.titulo)}</h2>
+      ${arteHTML(g.arte, g.clase, "panel__art")}
+    </div>
+    ${g.secciones.map(s => seccionHTML(s, g.clase, g.titulo)).join("")}
+  </div>`).join("");
+  revelarPaneles();
+
+  const secciones = grupos.flatMap(g => g.secciones);
+  $("#nav").innerHTML = secciones.map(s =>
+    `<li><a class="nav__link" href="#${esc(s.id)}" data-for="${esc(s.id)}">${esc(s.titulo)}</a></li>`).join("");
+
+  /* scroll-spy */
+  const links = new Map([...document.querySelectorAll(".nav__link")].map(a => [a.dataset.for, a]));
+  const lista = $("#nav");
+  const marcar = id => {
+    if (id === activo) return;
+    activo = id;
+    links.forEach((a, k) => a.setAttribute("aria-current", k === id ? "true" : "false"));
+    const a = links.get(id);
+    if (a && lista.scrollWidth > lista.clientWidth && lista.scrollHeight <= lista.clientHeight + 4)
+      lista.scrollTo({ left: a.offsetLeft - (lista.clientWidth - a.offsetWidth) / 2, behavior:"smooth" });
+  };
+  if (io) io.disconnect();
+  const visibles = new Set();
+  io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? visibles.add(e.target.id) : visibles.delete(e.target.id));
+    const primero = secciones.find(s => visibles.has(s.id));
+    if (primero) marcar(primero.id);
+  }, { rootMargin:"-30% 0px -60% 0px" });
+  document.querySelectorAll("[data-sec]").forEach(el => io.observe(el));
+  activo = null;
+  if (secciones.length) marcar(secciones[0].id);
+}
+
+/* ---------- entrada: se muestra la tapa recién cuando está todo listo (sin saltos de imagen ni de letra) ---------- */
+(function entrada(){
+  const html = document.documentElement;
+  let hecho = false;
+  const listo = () => { if (hecho) return; hecho = true; requestAnimationFrame(() => html.classList.add("listo")); };
+  const imgs = [...document.querySelectorAll(".tapa img")].map(i => i.decode ? i.decode().catch(() => {}) : Promise.resolve());
+  const fuentes = document.fonts && document.fonts.load
+    ? Promise.all(["600 1rem Archivo", "800 1rem Archivo"].map(f => document.fonts.load(f).catch(() => {})))
+    : Promise.resolve();
+  Promise.all([...imgs, fuentes]).then(listo);
+  setTimeout(listo, 1500);
+})();
+
+/* ---------- el bigotón: alterna sprites al azar, como en la web original ---------- */
+(function sprites(){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  /* cada grupo = [solo, ...variantes]; la tapa y el sidebar cambian a la vez */
+  const grupos = [...document.querySelectorAll(".tapa__man, .cover__man")].map(g => [...g.querySelectorAll("img")]);
+  const nVar = Math.min(...grupos.map(g => g.length - 1));
+  let ultimo = -1;
+  function mostrarAlAzar(){
+    let i; do { i = Math.floor(Math.random() * nVar); } while (nVar > 1 && i === ultimo);
+    ultimo = i;
+    grupos.forEach(g => { g[0].classList.add("oculto"); g[i + 1].classList.remove("oculto"); });
+    setTimeout(() => grupos.forEach(g => { g[i + 1].classList.add("oculto"); g[0].classList.remove("oculto"); }), 2200);
+  }
+  setTimeout(() => { mostrarAlAzar(); setInterval(() => { if (!document.hidden) mostrarAlAzar(); }, 5000); }, 3500);
+})();
+
+/* ---------- carga: caché/respaldo al instante, planilla en segundo plano ---------- */
+const urlHoja = nombre => `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(nombre)}`;
+const CLAVE_CACHE = "carta:" + SHEET_ID;
+const leerCache = () => { try { return JSON.parse(localStorage.getItem(CLAVE_CACHE)); } catch { return null; } };
+const guardarCache = d => { try { localStorage.setItem(CLAVE_CACHE, JSON.stringify(d)); } catch {} };
+
+async function cargarHojas(){
+  const [carta, secciones, config] = await Promise.all(["Carta","Secciones","Config"].map(async n => {
+    const r = await fetch(urlHoja(n), { cache:"no-store" });
+    if (!r.ok) throw new Error(n + " " + r.status);
+    return r.text();
+  }));
+  return { carta, secciones, config };
+}
+const aMenu = t => armarMenu({ carta:parseCSV(t.carta), secciones:parseCSV(t.secciones), config:parseCSV(t.config) });
+
+/* desktop: el bloque de info (Instagram, WiFi, horarios, dirección) pasa al hueco del sidebar; en mobile vuelve al pie */
+(function(){
+  const mq = matchMedia("(min-width:1080px)");
+  const slot = $("#cover-slot"), info = $("#info"), dir = $(".dir"), foot = $(".foot");
+  if (!slot || !info || !dir || !foot) return;
+  const ref = $(".firma-wrap", foot);
+  const ubicar = () => {
+    if (mq.matches) slot.append(info, dir);
+    else { foot.insertBefore(info, ref); foot.insertBefore(dir, ref); }
+  };
+  mq.addEventListener("change", ubicar);
+  ubicar();
+})();
+
+(async function iniciar(){
+  const cache = SHEET_ID && leerCache();
+  let menu;
+  try { menu = cache ? aMenu(cache) : null; } catch { menu = null; }
+  pintar(menu && menu.grupos.length ? menu : respaldo());
+  if (!SHEET_ID) return;
+  try {
+    const textos = await cargarHojas();
+    const nuevo = aMenu(textos);
+    if (!nuevo.grupos.length) throw new Error("planilla vacía");
+    if (JSON.stringify(textos) !== JSON.stringify(cache)){ guardarCache(textos); pintar(nuevo); }
+  } catch (e) { console.warn("Carta: no se pudo leer la planilla, se usa la versión guardada.", e); }
+})();
+</script>
+</body>
+</html>

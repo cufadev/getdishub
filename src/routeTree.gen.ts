@@ -9,45 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as MesaConectadaRouteImport } from './routes/mesa-conectada'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as DemoRouteImport } from './routes/demo'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as BienvenidaRouteImport } from './routes/bienvenida'
-import { Route as AgendarRouteImport } from './routes/agendar'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CartaSlugRouteImport } from './routes/carta.$slug'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AgendarRouteImport } from './routes/agendar'
+import { Route as BienvenidaRouteImport } from './routes/bienvenida'
+import { Route as CartaDigitalParaCafesRouteImport } from './routes/carta-digital-para-cafes'
+import { Route as CartaDigitalParaFoodTrucksRouteImport } from './routes/carta-digital-para-food-trucks'
+import { Route as CartaDigitalParaPizzeriasRouteImport } from './routes/carta-digital-para-pizzerias'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DemoRouteImport } from './routes/demo'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as MenuQrParaRestaurantesRouteImport } from './routes/menu-qr-para-restaurantes'
+import { Route as MesaConectadaRouteImport } from './routes/mesa-conectada'
 import { Route as AdminNuevoRouteImport } from './routes/admin_.nuevo'
+import { Route as CartaSlugRouteImport } from './routes/carta.$slug'
 
-const MesaConectadaRoute = MesaConectadaRouteImport.update({
-  id: '/mesa-conectada',
-  path: '/mesa-conectada',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoRoute = DemoRouteImport.update({
-  id: '/demo',
-  path: '/demo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BienvenidaRoute = BienvenidaRouteImport.update({
-  id: '/bienvenida',
-  path: '/bienvenida',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AgendarRoute = AgendarRouteImport.update({
-  id: '/agendar',
-  path: '/agendar',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -55,19 +34,66 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AgendarRoute = AgendarRouteImport.update({
+  id: '/agendar',
+  path: '/agendar',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CartaSlugRoute = CartaSlugRouteImport.update({
-  id: '/carta/$slug',
-  path: '/carta/$slug',
+const BienvenidaRoute = BienvenidaRouteImport.update({
+  id: '/bienvenida',
+  path: '/bienvenida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartaDigitalParaCafesRoute = CartaDigitalParaCafesRouteImport.update({
+  id: '/carta-digital-para-cafes',
+  path: '/carta-digital-para-cafes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartaDigitalParaFoodTrucksRoute =
+  CartaDigitalParaFoodTrucksRouteImport.update({
+    id: '/carta-digital-para-food-trucks',
+    path: '/carta-digital-para-food-trucks',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CartaDigitalParaPizzeriasRoute =
+  CartaDigitalParaPizzeriasRouteImport.update({
+    id: '/carta-digital-para-pizzerias',
+    path: '/carta-digital-para-pizzerias',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuQrParaRestaurantesRoute = MenuQrParaRestaurantesRouteImport.update({
+  id: '/menu-qr-para-restaurantes',
+  path: '/menu-qr-para-restaurantes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MesaConectadaRoute = MesaConectadaRouteImport.update({
+  id: '/mesa-conectada',
+  path: '/mesa-conectada',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminNuevoRoute = AdminNuevoRouteImport.update({
   id: '/admin_/nuevo',
   path: '/admin/nuevo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartaSlugRoute = CartaSlugRouteImport.update({
+  id: '/carta/$slug',
+  path: '/carta/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -76,9 +102,13 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/agendar': typeof AgendarRoute
   '/bienvenida': typeof BienvenidaRoute
+  '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
+  '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
+  '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
+  '/menu-qr-para-restaurantes': typeof MenuQrParaRestaurantesRoute
   '/mesa-conectada': typeof MesaConectadaRoute
   '/admin/nuevo': typeof AdminNuevoRoute
   '/carta/$slug': typeof CartaSlugRoute
@@ -88,9 +118,13 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/agendar': typeof AgendarRoute
   '/bienvenida': typeof BienvenidaRoute
+  '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
+  '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
+  '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
+  '/menu-qr-para-restaurantes': typeof MenuQrParaRestaurantesRoute
   '/mesa-conectada': typeof MesaConectadaRoute
   '/admin/nuevo': typeof AdminNuevoRoute
   '/carta/$slug': typeof CartaSlugRoute
@@ -101,9 +135,13 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/agendar': typeof AgendarRoute
   '/bienvenida': typeof BienvenidaRoute
+  '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
+  '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
+  '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
+  '/menu-qr-para-restaurantes': typeof MenuQrParaRestaurantesRoute
   '/mesa-conectada': typeof MesaConectadaRoute
   '/admin_/nuevo': typeof AdminNuevoRoute
   '/carta/$slug': typeof CartaSlugRoute
@@ -115,9 +153,13 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agendar'
     | '/bienvenida'
+    | '/carta-digital-para-cafes'
+    | '/carta-digital-para-food-trucks'
+    | '/carta-digital-para-pizzerias'
     | '/dashboard'
     | '/demo'
     | '/login'
+    | '/menu-qr-para-restaurantes'
     | '/mesa-conectada'
     | '/admin/nuevo'
     | '/carta/$slug'
@@ -127,9 +169,13 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agendar'
     | '/bienvenida'
+    | '/carta-digital-para-cafes'
+    | '/carta-digital-para-food-trucks'
+    | '/carta-digital-para-pizzerias'
     | '/dashboard'
     | '/demo'
     | '/login'
+    | '/menu-qr-para-restaurantes'
     | '/mesa-conectada'
     | '/admin/nuevo'
     | '/carta/$slug'
@@ -139,9 +185,13 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agendar'
     | '/bienvenida'
+    | '/carta-digital-para-cafes'
+    | '/carta-digital-para-food-trucks'
+    | '/carta-digital-para-pizzerias'
     | '/dashboard'
     | '/demo'
     | '/login'
+    | '/menu-qr-para-restaurantes'
     | '/mesa-conectada'
     | '/admin_/nuevo'
     | '/carta/$slug'
@@ -152,9 +202,13 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AgendarRoute: typeof AgendarRoute
   BienvenidaRoute: typeof BienvenidaRoute
+  CartaDigitalParaCafesRoute: typeof CartaDigitalParaCafesRoute
+  CartaDigitalParaFoodTrucksRoute: typeof CartaDigitalParaFoodTrucksRoute
+  CartaDigitalParaPizzeriasRoute: typeof CartaDigitalParaPizzeriasRoute
   DashboardRoute: typeof DashboardRoute
   DemoRoute: typeof DemoRoute
   LoginRoute: typeof LoginRoute
+  MenuQrParaRestaurantesRoute: typeof MenuQrParaRestaurantesRoute
   MesaConectadaRoute: typeof MesaConectadaRoute
   AdminNuevoRoute: typeof AdminNuevoRoute
   CartaSlugRoute: typeof CartaSlugRoute
@@ -162,46 +216,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/mesa-conectada': {
-      id: '/mesa-conectada'
-      path: '/mesa-conectada'
-      fullPath: '/mesa-conectada'
-      preLoaderRoute: typeof MesaConectadaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo': {
-      id: '/demo'
-      path: '/demo'
-      fullPath: '/demo'
-      preLoaderRoute: typeof DemoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bienvenida': {
-      id: '/bienvenida'
-      path: '/bienvenida'
-      fullPath: '/bienvenida'
-      preLoaderRoute: typeof BienvenidaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/agendar': {
-      id: '/agendar'
-      path: '/agendar'
-      fullPath: '/agendar'
-      preLoaderRoute: typeof AgendarRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -211,18 +230,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/agendar': {
+      id: '/agendar'
+      path: '/agendar'
+      fullPath: '/agendar'
+      preLoaderRoute: typeof AgendarRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/carta/$slug': {
-      id: '/carta/$slug'
-      path: '/carta/$slug'
-      fullPath: '/carta/$slug'
-      preLoaderRoute: typeof CartaSlugRouteImport
+    '/bienvenida': {
+      id: '/bienvenida'
+      path: '/bienvenida'
+      fullPath: '/bienvenida'
+      preLoaderRoute: typeof BienvenidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carta-digital-para-cafes': {
+      id: '/carta-digital-para-cafes'
+      path: '/carta-digital-para-cafes'
+      fullPath: '/carta-digital-para-cafes'
+      preLoaderRoute: typeof CartaDigitalParaCafesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carta-digital-para-food-trucks': {
+      id: '/carta-digital-para-food-trucks'
+      path: '/carta-digital-para-food-trucks'
+      fullPath: '/carta-digital-para-food-trucks'
+      preLoaderRoute: typeof CartaDigitalParaFoodTrucksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carta-digital-para-pizzerias': {
+      id: '/carta-digital-para-pizzerias'
+      path: '/carta-digital-para-pizzerias'
+      fullPath: '/carta-digital-para-pizzerias'
+      preLoaderRoute: typeof CartaDigitalParaPizzeriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu-qr-para-restaurantes': {
+      id: '/menu-qr-para-restaurantes'
+      path: '/menu-qr-para-restaurantes'
+      fullPath: '/menu-qr-para-restaurantes'
+      preLoaderRoute: typeof MenuQrParaRestaurantesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mesa-conectada': {
+      id: '/mesa-conectada'
+      path: '/mesa-conectada'
+      fullPath: '/mesa-conectada'
+      preLoaderRoute: typeof MesaConectadaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin_/nuevo': {
@@ -230,6 +305,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/nuevo'
       fullPath: '/admin/nuevo'
       preLoaderRoute: typeof AdminNuevoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carta/$slug': {
+      id: '/carta/$slug'
+      path: '/carta/$slug'
+      fullPath: '/carta/$slug'
+      preLoaderRoute: typeof CartaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -240,9 +322,13 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AgendarRoute: AgendarRoute,
   BienvenidaRoute: BienvenidaRoute,
+  CartaDigitalParaCafesRoute: CartaDigitalParaCafesRoute,
+  CartaDigitalParaFoodTrucksRoute: CartaDigitalParaFoodTrucksRoute,
+  CartaDigitalParaPizzeriasRoute: CartaDigitalParaPizzeriasRoute,
   DashboardRoute: DashboardRoute,
   DemoRoute: DemoRoute,
   LoginRoute: LoginRoute,
+  MenuQrParaRestaurantesRoute: MenuQrParaRestaurantesRoute,
   MesaConectadaRoute: MesaConectadaRoute,
   AdminNuevoRoute: AdminNuevoRoute,
   CartaSlugRoute: CartaSlugRoute,
