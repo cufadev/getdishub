@@ -1,0 +1,111 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-bg: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-surface2: #242424;
+  --color-accent: #E8743B;
+  --color-accent-shadow: #b85a2b;
+  --color-secondary: #8B5E3C;
+  --color-secondary-shadow: #5a3d28;
+  --color-text: #f5f0e8;
+  --color-muted: #6b6b6b;
+  --color-border: #2a2a2a;
+
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --color-primary: var(--color-accent);
+  --color-primary-foreground: var(--color-bg);
+  --color-border-default: var(--color-border);
+
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #E8743B #1a1a1a;
+  }
+  /* Compensa el header sticky (~80px) para que un anchor-scroll nunca deje
+     el contenido tapado detrás de él, en desktop y mobile. */
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #1a1a1a; }
+  ::-webkit-scrollbar-thumb { background: #E8743B; }
+  ::-webkit-scrollbar-thumb:hover { background: #b85a2b; }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+@utility font-mono-tech {
+  font-family: var(--font-mono);
+}
+
+@utility brutal-shadow {
+  box-shadow: 4px 4px 0 var(--color-accent-shadow);
+}
+@utility brutal-shadow-lg {
+  box-shadow: 6px 6px 0 var(--color-accent-shadow);
+}
+@utility brutal-shadow-secondary {
+  box-shadow: 6px 6px 0 var(--color-secondary-shadow);
+}
+@utility brutal-shadow-accent {
+  box-shadow: 4px 4px 0 var(--color-accent);
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-btn {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+@keyframes dot-wave {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+@keyframes float-word {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+@keyframes fade-slide-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-slide-in {
+  animation: fade-slide-in 0.35s ease-out both;
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.in-view {
+  animation: reveal-up 0.4s ease-out forwards;
+}

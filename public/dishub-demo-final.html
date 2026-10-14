@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Dishub — Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f0e8;--sur:#ffffff;--sur2:#ede8df;--bor:#e0dbd0;
+  --acc:#E8743B;--acc-sh:#b85a2b;--acc-dim:rgba(232,116,59,0.1);
+  --dark:#1a1410;--muted:#9a9080;--dim:#c5bfb3;
+  --green:#2d7a4f;--green-dim:rgba(45,122,79,0.1);
+  --abg:#0d0d0d;--as:#161618;--as2:#1e1e22;--ab:#2a2a2e;
+  --at:#f5f0e8;--am:#666672;
+}
+html,body{background:var(--abg);color:var(--dark);font-family:'Inter',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── LAYOUT ── */
+.app{display:flex;min-height:100vh}
+
+/* ── CLIENT SIDE ── */
+.cs{width:390px;min-height:100vh;background:var(--bg);border-right:1px solid var(--ab);display:flex;flex-direction:column;position:relative;flex-shrink:0}
+.cs-bar{position:sticky;top:0;background:rgba(13,13,13,0.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--ab);padding:7px 16px;display:flex;align-items:center;justify-content:space-between;z-index:50}
+.cs-bar-txt{font-family:'Space Mono',monospace;font-size:9px;font-weight:700;color:#555;letter-spacing:1px;text-transform:uppercase}
+.cs-dot{width:5px;height:5px;border-radius:50%;background:var(--acc);box-shadow:0 0 6px var(--acc);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.cv{display:none;flex-direction:column;flex:1}
+.cv.active{display:flex}
+
+/* ── HUB ── */
+.hub-hero{position:relative;height:180px;overflow:hidden;flex-shrink:0;background:linear-gradient(160deg,#2e1a0e 0%,#5c3018 40%,#8B4513 70%,#c4621a 100%)}
+.hero-lamps{position:absolute;inset:0}
+.lamp{position:absolute;top:0;display:flex;flex-direction:column;align-items:center}
+.lw{width:2px;background:#1a0e06}
+.ls{width:26px;height:12px;background:var(--acc);clip-path:polygon(10% 0%,90% 0%,100% 100%,0% 100%);box-shadow:0 4px 20px rgba(232,116,59,.5)}
+.lg{width:70px;height:50px;background:radial-gradient(ellipse,rgba(232,116,59,.2) 0%,transparent 70%);margin-top:-2px}
+.hero-tables{position:absolute;bottom:24px;left:0;right:0;display:flex;justify-content:space-around;align-items:flex-end}
+.ht{display:flex;flex-direction:column;align-items:center}
+.ht-top{height:7px;background:#5c3018;border-radius:1px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.ht-leg{width:3px;height:22px;background:#3d2010}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.55) 100%)}
+
+.hub-logo-wrap{display:flex;justify-content:center;margin-top:-32px;z-index:10;margin-bottom:12px;position:relative}
+.hub-logo{width:64px;height:64px;background:var(--sur);border-radius:50%;border:3px solid var(--sur);box-shadow:0 4px 16px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;color:var(--acc);letter-spacing:-1px}
+
+.hub-info{text-align:center;padding:0 24px 18px;border-bottom:1px solid var(--bor);margin-bottom:16px}
+.hub-name{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--dark);margin-bottom:2px}
+.hub-type{font-size:12px;color:var(--muted);margin-bottom:10px}
+.hub-mesa-pill{display:inline-flex;align-items:center;gap:6px;background:var(--dark);color:var(--bg);padding:4px 14px;border-radius:99px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.5px}
+
+/* Mesa cerrada */
+.hub-closed{text-align:center;padding:28px 24px;color:var(--muted)}
+.hub-closed-icon{font-size:40px;margin-bottom:12px}
+.hub-closed-title{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}
+.hub-closed-sub{font-size:12px}
+
+.hub-actions{padding:0 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.hab{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--sur);border:1.5px solid var(--bor);border-radius:16px;cursor:pointer;transition:all .2s;color:var(--dark);width:100%;text-align:left;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.hab:hover{border-color:var(--acc);box-shadow:0 4px 16px rgba(232,116,59,.15);transform:translateY(-1px)}
+.hab-icon{width:44px;height:44px;background:var(--acc-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.hab-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:2px}
+.hab-sub{font-size:12px;color:var(--muted)}
+.hab-arr{margin-left:auto;color:var(--dim);font-size:18px;flex-shrink:0}
+.hab:hover .hab-arr{color:var(--acc)}
+
+/* Badge cuenta en tiempo real */
+.bill-badge{background:var(--acc);color:white;border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px;font-family:'Space Mono',monospace;margin-left:6px;display:none}
+.bill-badge.show{display:inline}
+
+.hub-footer{padding:16px 24px 10px;border-top:1px solid var(--bor);margin-top:20px;display:flex;align-items:center;gap:12px}
+.hqr{width:36px;height:36px;border:1.5px solid var(--bor);border-radius:6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;padding:5px;flex-shrink:0}
+.qd{background:var(--dark);border-radius:1px}.qd.e{background:transparent}
+.hqr-url{font-size:10px;color:var(--muted);font-family:'Space Mono',monospace}
+.hqr-brand{font-size:10px;color:var(--dim);margin-top:2px}.hqr-brand span{color:var(--acc);font-weight:700}
+
+.admin-acc{margin:4px 20px 20px;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:transparent;border:1px dashed var(--dim);border-radius:10px;color:var(--muted);font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:all .15s;text-transform:uppercase;width:calc(100% - 40px)}
+.admin-acc:hover{border-color:var(--acc);border-style:solid;color:var(--acc);background:var(--acc-dim)}
+
+/* ── VIEW HEADER ── */
+.vh{padding:13px 20px;border-bottom:1px solid var(--bor);display:flex;align-items:center;gap:12px;background:var(--sur);flex-shrink:0;position:sticky;top:37px;z-index:20}
+.bk{width:36px;height:36px;border:1.5px solid var(--bor);border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0}
+.bk:hover{border-color:var(--acc);color:var(--acc)}
+.vh-t{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--dark)}
+.vh-s{font-size:11px;color:var(--muted)}
+
+.vb{padding:20px;overflow-y:auto;flex:1;background:var(--bg)}
+
+/* ── CARTA ── */
+.mcat-lbl{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:var(--acc);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--bor)}
+.mi{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--bor)}
+.mi:last-child{border-bottom:none}
+.me{font-size:24px;width:38px;text-align:center;flex-shrink:0}
+.mn{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:2px}
+.md{font-size:11px;color:var(--muted)}
+.mp{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:800;color:var(--acc);flex-shrink:0}
+.mcat{margin-bottom:20px}
+
+/* ── CUENTA ── */
+.bill-empty{text-align:center;padding:32px 20px;color:var(--muted)}
+.bill-empty-icon{font-size:36px;margin-bottom:10px}
+.bill-empty-txt{font-size:13px}
+
+.bill-card{background:var(--sur);border:1px solid var(--bor);border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.bi{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--bor);font-size:13px}
+.bi:last-child{border-bottom:none}
+.bq{width:24px;height:24px;background:var(--acc-dim);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--acc);flex-shrink:0;font-family:'Space Mono',monospace}
+.bn{flex:1;font-weight:500;color:var(--dark)}
+.bp{font-weight:700;color:var(--dark);font-family:'Space Grotesk',sans-serif}
+
+.bill-total-card{background:var(--dark);border-radius:16px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.btl{font-size:11px;color:rgba(245,240,232,.5);font-family:'Space Mono',monospace;margin-bottom:4px}
+.bta{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:800;letter-spacing:-1px;color:var(--bg)}
+.bill-notice{font-size:11px;color:var(--muted);text-align:center;margin-bottom:16px}
+
+/* ── PAY ── */
+.pay-card{background:var(--sur);border:1px solid var(--bor);border-radius:16px;padding:24px;text-align:center;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.pa{font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:800;letter-spacing:-2px;color:var(--dark);margin-bottom:4px}
+.ps{font-size:12px;color:var(--muted)}
+.pmt{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;font-family:'Space Mono',monospace}
+.pm{display:flex;align-items:center;gap:12px;background:var(--sur);border:1.5px solid var(--bor);border-radius:14px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:all .15s;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.pm:hover,.pm.sel{border-color:var(--acc);background:var(--acc-dim)}
+.pm-icon{font-size:20px}
+.pm-name{font-size:13px;font-weight:600;color:var(--dark);flex:1}
+.pm-sub{font-size:11px;color:var(--muted)}
+.pm-radio{width:18px;height:18px;border:1.5px solid var(--bor);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.pm.sel .pm-radio{background:var(--acc);border-color:var(--acc)}
+.pm-dot{width:7px;height:7px;background:white;border-radius:50%;display:none}
+.pm.sel .pm-dot{display:block}
+
+/* ── CONFIRM ── */
+.conf{padding:40px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;background:var(--bg)}
+.conf-icon{width:72px;height:72px;background:var(--green-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px;border:2px solid rgba(45,122,79,.2)}
+.conf-h{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:800;color:var(--dark);margin-bottom:4px;letter-spacing:-.5px}
+.conf-s{font-size:13px;color:var(--muted);margin-bottom:24px}
+.receipt{background:var(--sur);border:1px solid var(--bor);border-radius:16px;width:100%;overflow:hidden;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.rr{display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--bor);font-size:13px;color:var(--dark)}
+.rr:last-child{border-bottom:none;font-weight:700;font-size:15px}
+.rr span:first-child{color:var(--muted);font-weight:400}
+
+/* ── REVIEW ── */
+.rev-wrap{padding:24px 20px 32px;flex:1;background:var(--bg)}
+.rev-h{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;color:var(--dark);letter-spacing:-.3px;margin-bottom:4px}
+.rev-s{font-size:12px;color:var(--muted);margin-bottom:24px}
+.stars{display:flex;gap:8px;margin-bottom:6px}
+.star{font-size:34px;cursor:pointer;transition:transform .15s;filter:grayscale(1);opacity:.3}
+.star.on{filter:none;opacity:1;transform:scale(1.12)}
+.star-lbl{font-size:12px;color:var(--muted);margin-bottom:20px;min-height:16px}
+.rev-ta{width:100%;background:var(--sur);border:1.5px solid var(--bor);border-radius:12px;color:var(--dark);font-family:'Inter',sans-serif;font-size:13px;padding:14px;resize:none;height:100px;outline:none;margin-bottom:16px;transition:border-color .15s}
+.rev-ta:focus{border-color:var(--acc)}
+.rev-thanks{display:none;flex-direction:column;align-items:center;text-align:center;padding:40px 0}
+.rev-thanks.show{display:flex}
+.rte{font-size:52px;margin-bottom:16px}
+.rth{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:var(--dark);margin-bottom:8px}
+.rts{font-size:13px;color:var(--muted)}
+
+/* ── BOTONES ── */
+.cta{width:100%;padding:16px;background:var(--acc);color:white;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:800;border:none;border-radius:14px;cursor:pointer;letter-spacing:.2px;transition:all .18s;box-shadow:0 4px 14px rgba(232,116,59,.35)}
+.cta:hover{background:#d4682f;box-shadow:0 6px 20px rgba(232,116,59,.4);transform:translateY(-1px)}
+.cta:active{transform:translateY(0)}
+.cta:disabled{background:var(--dim);box-shadow:none;cursor:not-allowed;transform:none}
+.cta-gh{width:100%;padding:14px;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;border:1.5px solid var(--bor);border-radius:14px;cursor:pointer;margin-top:10px;transition:all .15s}
+.cta-gh:hover{border-color:var(--muted);color:var(--dark)}
+.powered{text-align:center;font-size:11px;color:var(--dim);margin-top:24px;padding-bottom:4px}
+.powered span{color:var(--acc);font-weight:700}
+
+/* ── PROCESSING ── */
+.proc{position:fixed;inset:0;background:rgba(245,240,232,.92);backdrop-filter:blur(8px);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;pointer-events:none;transition:opacity .2s}
+.proc.show{opacity:1;pointer-events:auto}
+.spinner{width:44px;height:44px;border:3px solid var(--bor);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.proc-txt{font-size:13px;color:var(--muted);font-family:'Space Mono',monospace}
+
+/* ══════════════════════════════
+   ADMIN SIDE
+══════════════════════════════ */
+.as{flex:1;min-height:100vh;display:flex;flex-direction:column;background:var(--abg);color:var(--at)}
+.atb{background:var(--as);border-bottom:1px solid var(--ab);padding:11px 28px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:40}
+.a-logo{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800}
+.a-logo span{color:var(--acc)}
+.a-pill{display:flex;align-items:center;gap:7px;background:var(--as2);border:1px solid var(--ab);padding:5px 12px;font-size:12px;font-weight:600;color:var(--at)}
+.a-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e}
+.a-user{font-family:'Space Mono',monospace;font-size:11px;color:var(--am)}
+
+.ab-body{display:flex;flex:1}
+
+.a-sidebar{width:190px;border-right:1px solid var(--ab);background:var(--as);padding:18px 12px;flex-shrink:0}
+.nav-sec{font-family:'Space Mono',monospace;font-size:9px;font-weight:700;color:var(--am);letter-spacing:1px;text-transform:uppercase;padding:0 8px;margin-bottom:5px;margin-top:16px}
+.nav-sec:first-child{margin-top:0}
+.nav-it{display:flex;align-items:center;gap:9px;padding:8px 10px;cursor:pointer;font-size:13px;font-weight:500;color:var(--am);transition:all .12s;border:1px solid transparent}
+.nav-it:hover{color:var(--at);background:var(--as2)}
+.nav-it.active{color:var(--acc);background:rgba(232,116,59,.1);border-color:rgba(232,116,59,.2)}
+
+.a-main{flex:1;padding:22px 26px;overflow-y:auto}
+.aph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
+.apt{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.3px;color:var(--at)}
+.aps{font-family:'Space Mono',monospace;font-size:11px;color:var(--am);margin-top:3px}
+
+.abtn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--acc);color:#0d0d0d;border:none;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;cursor:pointer;box-shadow:3px 3px 0 var(--acc-sh);transition:all .15s}
+.abtn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--acc-sh)}
+.abtn-gh{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;background:transparent;color:var(--am);border:1px solid var(--ab);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.abtn-gh:hover{border-color:var(--acc);color:var(--acc)}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.sc{background:var(--as);border:1px solid var(--ab);padding:15px}
+.sl{font-family:'Space Mono',monospace;font-size:9px;color:var(--am);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.sv{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;letter-spacing:-1px}
+.ss{font-size:11px;color:var(--am);margin-top:3px}
+
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.sec-t{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--at)}
+
+/* Tables grid admin */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:22px}
+.tc{background:var(--as);border:1.5px solid var(--ab);padding:15px;cursor:pointer;transition:all .15s;position:relative}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ab);transition:background .15s}
+.tc.occupied::before{background:#f59e0b}
+.tc.paid::before{background:#22c55e}
+.tc.paying::before{background:var(--acc);animation:payingPulse 1s infinite}
+@keyframes payingPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.tc:hover{border-color:var(--acc)}
+.tc:hover::before{background:var(--acc)}
+.t-num{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;letter-spacing:-1px;color:var(--at);margin-bottom:3px}
+.t-st{font-family:'Space Mono',monospace;font-size:10px;color:var(--am);margin-bottom:8px}
+.t-inf{font-size:11px;color:#555;margin-bottom:10px;min-height:14px}
+.t-acts{display:flex;gap:5px;flex-wrap:wrap}
+.tbtn{padding:4px 9px;font-size:11px;font-weight:600;font-family:'Space Grotesk',sans-serif;cursor:pointer;border:1px solid var(--ab);background:var(--as2);color:var(--am);transition:all .12s}
+.tbtn:hover{border-color:var(--acc);color:var(--acc)}
+.tbtn.g{background:rgba(34,197,94,.1);color:#22c55e;border-color:rgba(34,197,94,.25)}
+
+/* Add items panel */
+.add-items-panel{background:var(--as);border:1px solid var(--ab);margin-bottom:22px;overflow:hidden}
+.aip-header{background:var(--as2);border-bottom:1px solid var(--ab);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.aip-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--at)}
+.aip-mesa{font-family:'Space Mono',monospace;font-size:11px;color:var(--acc)}
+.aip-body{padding:14px 16px}
+.aip-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.aip-item{display:flex;align-items:center;gap:10px;background:var(--as2);border:1px solid var(--ab);padding:10px 12px;cursor:pointer;transition:all .15s}
+.aip-item:hover{border-color:var(--acc);background:rgba(232,116,59,.05)}
+.aip-emoji{font-size:18px;flex-shrink:0}
+.aip-name{font-size:12px;font-weight:600;color:var(--at);margin-bottom:1px}
+.aip-price{font-family:'Space Mono',monospace;font-size:11px;color:var(--acc)}
+.aip-add{display:flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--acc);color:#0d0d0d;font-weight:800;font-size:14px;margin-left:auto;flex-shrink:0;border:none;cursor:pointer;transition:all .15s}
+.aip-add:hover{background:#d4682f}
+.aip-live{background:var(--as2);border:1px solid var(--ab);border-radius:0;overflow:hidden}
+.aip-live-hd{padding:8px 12px;border-bottom:1px solid var(--ab);display:flex;align-items:center;gap:8px}
+.aip-live-dot{width:5px;height:5px;border-radius:50%;background:var(--acc);animation:blink 1.5s infinite}
+.aip-live-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--am);letter-spacing:.5px;text-transform:uppercase}
+.aip-live-total{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:800;color:var(--acc)}
+.aip-rows{max-height:120px;overflow-y:auto}
+.aip-row{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--ab);font-size:12px;color:var(--at);animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.aip-row:last-child{border-bottom:none}
+.aip-row-qty{font-family:'Space Mono',monospace;font-size:10px;color:var(--acc);width:20px;flex-shrink:0;font-weight:700}
+.aip-row-name{flex:1}
+.aip-row-price{font-family:'Space Grotesk',sans-serif;font-weight:700}
+.aip-empty{padding:12px;text-align:center;font-size:11px;color:var(--am);font-family:'Space Mono',monospace}
+
+/* Sessions */
+.dt{background:var(--as);border:1px solid var(--ab);overflow:hidden}
+.dt table{width:100%;border-collapse:collapse}
+.dt th{padding:9px 14px;text-align:left;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;color:var(--am);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--ab);background:var(--as2)}
+.dt td{padding:10px 14px;font-size:12px;border-bottom:1px solid var(--ab);color:var(--at);vertical-align:middle}
+.dt tr:last-child td{border-bottom:none}
+.dt tr:hover td{background:rgba(255,255,255,.02)}
+.badge{display:inline-flex;align-items:center;padding:2px 7px;font-size:9px;font-weight:700;font-family:'Space Mono',monospace;letter-spacing:.3px}
+.bg{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2)}
+.by{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2)}
+.br{background:rgba(232,116,59,.1);color:var(--acc);border:1px solid rgba(232,116,59,.2)}
+.dot-y{display:inline-block;width:5px;height:5px;border-radius:50%;background:#f59e0b;margin-right:4px}
+.dot-g{display:inline-block;width:5px;height:5px;border-radius:50%;background:#22c55e;margin-right:4px}
+
+/* ── MODALS ── */
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.mo.open{opacity:1;pointer-events:auto}
+.modal{background:var(--as);border:1px solid var(--ab);box-shadow:8px 8px 0 var(--acc-sh);padding:24px;width:320px;max-width:90vw;transform:scale(.95);transition:transform .2s}
+.mo.open .modal{transform:scale(1)}
+.modal-t{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:800;color:var(--at);margin-bottom:4px}
+.modal-s{font-family:'Space Mono',monospace;font-size:11px;color:var(--am);margin-bottom:18px}
+.fl{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--am);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;display:block}
+.fi{width:100%;background:var(--as2);border:1px solid var(--ab);color:var(--at);font-family:'Inter',sans-serif;font-size:13px;padding:9px 12px;outline:none;margin-bottom:14px;transition:border-color .15s}
+.fi:focus{border-color:var(--acc)}
+.ma{display:flex;gap:8px}
+
+/* ── SWITCHER ── */
+.dsw{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:rgba(13,13,13,.96);border:1px solid var(--ab);padding:7px 12px;z-index:400;display:flex;align-items:center;gap:10px;box-shadow:3px 3px 0 var(--acc-sh);backdrop-filter:blur(8px)}
+.dsl{font-family:'Space Mono',monospace;font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase}
+.dsbs{display:flex;gap:5px}
+.dsb{padding:4px 11px;font-size:11px;font-weight:700;font-family:'Space Mono',monospace;cursor:pointer;border:1px solid var(--ab);background:#1a1a1a;color:#555;transition:all .12s}
+.dsb:hover{border-color:var(--acc);color:var(--acc)}
+.dsb.active{background:var(--acc);border-color:var(--acc);color:#0d0d0d}
+
+@media(max-width:900px){.as{display:none}.cs{width:100%;border-right:none}.dsw{display:none}}
+</style>
+</head>
+<body>
+
+<!-- SWITCHER -->
+<div class="dsw">
+  <span class="dsl">Vista cliente</span>
+  <div class="dsbs">
+    <button class="dsb active" id="sw-hub"    onclick="setDemo('hub')">Hub</button>
+    <button class="dsb"        id="sw-menu"   onclick="setDemo('menu')">Carta</button>
+    <button class="dsb"        id="sw-bill"   onclick="setDemo('bill')">Cuenta</button>
+    <button class="dsb"        id="sw-pay"    onclick="setDemo('pay')">Pago</button>
+    <button class="dsb"        id="sw-review" onclick="setDemo('review')">Reseña</button>
+  </div>
+</div>
+
+<div class="app">
+
+<!-- ═══════════ CLIENTE ═══════════ -->
+<div class="cs">
+  <div class="cs-bar">
+    <span class="cs-bar-txt">// Vista cliente · Mesa 7</span>
+    <span class="cs-dot"></span>
+  </div>
+
+  <!-- HUB -->
+  <div class="cv active" id="cv-hub">
+    <div class="hub-hero">
+      <div class="hero-lamps">
+        <div class="lamp" style="left:15%"><div class="lw" style="height:28px"></div><div class="ls"></div><div class="lg"></div></div>
+        <div class="lamp" style="left:46%"><div class="lw" style="height:18px"></div><div class="ls"></div><div class="lg"></div></div>
+        <div class="lamp" style="left:76%"><div class="lw" style="height:38px"></div><div class="ls"></div><div class="lg"></div></div>
+      </div>
+      <div class="hero-tables">
+        <div class="ht"><div class="ht-top" style="width:54px"></div><div class="ht-leg"></div></div>
+        <div class="ht"><div class="ht-top" style="width:70px;background:#6b3c1a"></div><div class="ht-leg"></div></div>
+        <div class="ht"><div class="ht-top" style="width:48px;background:#4a2a10"></div><div class="ht-leg"></div></div>
+      </div>
+      <div class="hero-ov"></div>
+    </div>
+
+    <div class="hub-logo-wrap">
+      <div class="hub-logo">LB</div>
+    </div>
+
+    <div class="hub-info">
+      <div class="hub-name">La Brasa</div>
+      <div class="hub-type">Hamburguesas artesanales · Palermo</div>
+      <div class="hub-mesa-pill"><span>●</span> Mesa Nº 7</div>
+    </div>
+
+    <!-- Estado: mesa cerrada -->
+    <div id="hub-closed" class="hub-closed" style="display:none">
+      <div class="hub-closed-icon">🔒</div>
+      <div class="hub-closed-title">Mesa no disponible</div>
+      <div class="hub-closed-sub">El mozo aún no abrió esta mesa.<br>Aguardá un momento.</div>
+    </div>
+
+    <div id="hub-open-content">
+      <div class="hub-actions">
+        <button class="hab" onclick="goTo('menu')">
+          <div class="hab-icon">🍔</div>
+          <div style="flex:1"><div class="hab-title">Ver carta</div><div class="hab-sub">Menú completo del local</div></div>
+          <div class="hab-arr">›</div>
+        </button>
+
+        <button class="hab" onclick="goTo('bill')">
+          <div class="hab-icon">💳</div>
+          <div style="flex:1">
+            <div class="hab-title">Pagar la cuenta <span class="bill-badge" id="bill-badge">!</span></div>
+            <div class="hab-sub" id="bill-sub">Sin esperar al mozo</div>
+          </div>
+          <div class="hab-arr">›</div>
+        </button>
+
+        <button class="hab" onclick="goTo('review')">
+          <div class="hab-icon">⭐</div>
+          <div style="flex:1"><div class="hab-title">Dejar reseña</div><div class="hab-sub">¿Cómo estuvo?</div></div>
+          <div class="hab-arr">›</div>
+        </button>
+      </div>
+
+      <div class="hub-footer">
+        <div class="hqr">
+          <div class="qd"></div><div class="qd e"></div><div class="qd"></div>
+          <div class="qd e"></div><div class="qd"></div><div class="qd e"></div>
+          <div class="qd"></div><div class="qd e"></div><div class="qd"></div>
+        </div>
+        <div>
+          <div class="hqr-url">labrasa.getdishub.app/mesa/7</div>
+          <div class="hqr-brand">con ♥ por <span>Dishub</span></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="admin-acc" onclick="openModal('mo-admin')">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Acceso administrador
+    </button>
+  </div>
+
+  <!-- CARTA -->
+  <div class="cv" id="cv-menu">
+    <div class="vh">
+      <button class="bk" onclick="goTo('hub')">←</button>
+      <div><div class="vh-t">Carta</div><div class="vh-s">La Brasa · Mesa 7</div></div>
+    </div>
+    <div class="vb">
+      <div class="mcat">
+        <div class="mcat-lbl">Burgers</div>
+        <div class="mi"><div class="me">🍔</div><div><div class="mn">La Clásica</div><div class="md">Doble medallón, cheddar, pickles, salsa especial</div></div><div class="mp">$4.200</div></div>
+        <div class="mi"><div class="me">🔥</div><div><div class="mn">La Brasa</div><div class="md">Wagyu, queso azul, cebolla caramelizada, rúcula</div></div><div class="mp">$6.800</div></div>
+        <div class="mi"><div class="me">🌿</div><div><div class="mn">Green Beast</div><div class="md">Plant-based, aguacate, tomate, hummus</div></div><div class="mp">$4.900</div></div>
+      </div>
+      <div class="mcat">
+        <div class="mcat-lbl">Acompañamientos</div>
+        <div class="mi"><div class="me">🍟</div><div><div class="mn">Papas fritas</div><div class="md">Con sal negra y romero</div></div><div class="mp">$1.400</div></div>
+        <div class="mi"><div class="me">🧅</div><div><div class="mn">Aros de cebolla</div><div class="md">Rebozados con panko, ranch</div></div><div class="mp">$1.800</div></div>
+      </div>
+      <div class="mcat">
+        <div class="mcat-lbl">Bebidas</div>
+        <div class="mi"><div class="me">🍺</div><div><div class="mn">Cerveza artesanal</div><div class="md">IPA o Rubia · pinta 0.5L</div></div><div class="mp">$1.600</div></div>
+        <div class="mi"><div class="me">🥤</div><div><div class="mn">Gaseosa / Agua</div><div class="md">Lata o botella sin gas</div></div><div class="mp">$700</div></div>
+      </div>
+      <div class="powered">con ♥ por <span>Dishub</span></div>
+    </div>
+  </div>
+
+  <!-- CUENTA -->
+  <div class="cv" id="cv-bill">
+    <div class="vh">
+      <button class="bk" onclick="goTo('hub')">←</button>
+      <div><div class="vh-t">Tu cuenta</div><div class="vh-s">La Brasa · Mesa 7</div></div>
+    </div>
+    <div class="vb" id="bill-view-body">
+      <!-- renderizado dinámicamente -->
+    </div>
+  </div>
+
+  <!-- PAGO -->
+  <div class="cv" id="cv-pay">
+    <div class="vh">
+      <button class="bk" onclick="goTo('bill')">←</button>
+      <div><div class="vh-t">Elegí cómo pagar</div><div class="vh-s">Pago seguro</div></div>
+    </div>
+    <div class="vb">
+      <div class="pay-card">
+        <div class="pa" id="pay-amount">$0</div>
+        <div class="ps">La Brasa · Mesa 7</div>
+      </div>
+      <div class="pmt">Método de pago</div>
+      <div class="pm sel" onclick="selPay(this)"><div class="pm-icon">💳</div><div style="flex:1"><div class="pm-name">Tarjeta débito o crédito</div><div class="pm-sub">Visa · Mastercard · Amex</div></div><div class="pm-radio"><div class="pm-dot"></div></div></div>
+      <div class="pm" onclick="selPay(this)"><div class="pm-icon">📱</div><div style="flex:1"><div class="pm-name">Mercado Pago</div><div class="pm-sub">QR o billetera virtual</div></div><div class="pm-radio"><div class="pm-dot"></div></div></div>
+      <div class="pm" onclick="selPay(this)"><div class="pm-icon">🏦</div><div style="flex:1"><div class="pm-name">Transferencia bancaria</div><div class="pm-sub">CVU / CBU instantáneo</div></div><div class="pm-radio"><div class="pm-dot"></div></div></div>
+      <br>
+      <button class="cta" id="pay-confirm-btn" onclick="processPayment()">Confirmar pago →</button>
+      <button class="cta-gh" onclick="goTo('bill')">Volver a la cuenta</button>
+      <div class="powered">con ♥ por <span>Dishub</span></div>
+    </div>
+  </div>
+
+  <!-- CONFIRM -->
+  <div class="cv" id="cv-confirm">
+    <div class="conf">
+      <div class="conf-icon">✓</div>
+      <div class="conf-h">¡Pago confirmado!</div>
+      <div class="conf-s" id="conf-time">Generando recibo...</div>
+      <div class="receipt">
+        <div class="rr"><span>Local</span><span>La Brasa</span></div>
+        <div class="rr"><span>Mesa</span><span>Nº 7</span></div>
+        <div class="rr"><span>Método</span><span>Tarjeta de crédito</span></div>
+        <div class="rr"><span>Total pagado</span><span id="conf-total" style="color:var(--green)">$0</span></div>
+      </div>
+      <button class="cta" onclick="goTo('review')" style="width:100%">Dejar una reseña →</button>
+      <button class="cta-gh" onclick="goTo('hub')" style="width:100%">Volver al inicio</button>
+      <div class="powered">con ♥ por <span>Dishub</span></div>
+    </div>
+  </div>
+
+  <!-- REVIEW -->
+  <div class="cv" id="cv-review">
+    <div class="vh">
+      <button class="bk" onclick="goTo('hub')">←</button>
+      <div><div class="vh-t">Tu opinión</div><div class="vh-s">La Brasa · Palermo</div></div>
+    </div>
+    <div class="rev-wrap">
+      <div id="rev-form">
+        <div class="rev-h">¿Cómo fue la experiencia?</div>
+        <div class="rev-s">Tu reseña nos ayuda a mejorar</div>
+        <div class="stars">
+          <span class="star" onclick="setStar(1)">⭐</span>
+          <span class="star" onclick="setStar(2)">⭐</span>
+          <span class="star" onclick="setStar(3)">⭐</span>
+          <span class="star" onclick="setStar(4)">⭐</span>
+          <span class="star" onclick="setStar(5)">⭐</span>
+        </div>
+        <div class="star-lbl" id="star-lbl">Tocá para calificar</div>
+        <textarea class="rev-ta" id="rev-comment" placeholder="Contanos qué te pareció la comida, el servicio, el ambiente..."></textarea>
+        <button class="cta" id="rev-btn" onclick="submitReview()" disabled>Enviar reseña</button>
+      </div>
+      <div class="rev-thanks" id="rev-thanks">
+        <div class="rte">🙌</div>
+        <div class="rth">¡Muchas gracias!</div>
+        <div class="rts">Tu reseña fue enviada. Nos ayuda a mejorar cada día.</div>
+        <button class="cta" onclick="goTo('hub')" style="margin-top:28px;width:100%">Volver al inicio</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /cs -->
+
+<!-- ═══════════ ADMIN ═══════════ -->
+<div class="as">
+  <div class="atb">
+    <div class="a-logo">DIS<span>HUB</span></div>
+    <div class="a-pill"><div class="a-dot"></div>La Brasa — Palermo</div>
+    <div class="a-user">admin@labrasa.com</div>
+  </div>
+
+  <div class="ab-body">
+    <aside class="a-sidebar">
+      <div class="nav-sec">General</div>
+      <div class="nav-it active">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Mesas
+      </div>
+      <div class="nav-it">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+        Carta digital
+      </div>
+      <div class="nav-it">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="8" width="6" height="13" rx="1"/><rect x="16" y="13" width="6" height="8" rx="1"/></svg>
+        Analytics
+      </div>
+      <div class="nav-sec">Config</div>
+      <div class="nav-it">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Reseñas
+      </div>
+    </aside>
+
+    <main class="a-main">
+      <div class="aph">
+        <div><div class="apt">Mesas</div><div class="aps">// estado en tiempo real</div></div>
+        <button class="abtn" onclick="openModal('mo-add')">+ Agregar mesa</button>
+      </div>
+
+      <div class="stats-row">
+        <div class="sc"><div class="sl">Total mesas</div><div class="sv" id="s-tot" style="color:var(--at)">8</div><div class="ss">configuradas</div></div>
+        <div class="sc"><div class="sl">Ocupadas</div><div class="sv" id="s-occ" style="color:#f59e0b">0</div><div class="ss"><span class="dot-y"></span>sesión activa</div></div>
+        <div class="sc"><div class="sl">Pagadas hoy</div><div class="sv" id="s-paid" style="color:#22c55e">0</div><div class="ss"><span class="dot-g"></span>cerradas</div></div>
+        <div class="sc"><div class="sl">Recaudado</div><div class="sv" id="s-rec" style="color:var(--acc)">$0</div><div class="ss">sesión actual</div></div>
+      </div>
+
+      <!-- Panel carga de ítems -->
+      <div class="add-items-panel">
+        <div class="aip-header">
+          <div class="aip-title">Cargar ítems → Mesa 7</div>
+          <div class="aip-mesa" id="aip-status">mesa cerrada</div>
+        </div>
+        <div class="aip-body">
+          <div class="aip-grid" id="aip-grid">
+            <!-- items del menú -->
+          </div>
+          <div class="aip-live">
+            <div class="aip-live-hd">
+              <div class="aip-live-dot"></div>
+              <div class="aip-live-lbl">cuenta en tiempo real · cliente ve esto ahora</div>
+              <div class="aip-live-total" id="aip-total">$0</div>
+            </div>
+            <div class="aip-rows" id="aip-rows">
+              <div class="aip-empty">Sin ítems cargados</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-hd">
+        <div class="sec-t">Estado de mesas</div>
+      </div>
+      <div class="tgrid" id="tables-grid"></div>
+
+      <div class="sec-hd">
+        <div class="sec-t">Sesiones recientes</div>
+        <button class="abtn-gh">Ver todas</button>
+      </div>
+      <div class="dt">
+        <table>
+          <thead><tr><th>Mesa</th><th>Apertura</th><th>Importe</th><th>Estado</th><th>Reseña</th></tr></thead>
+          <tbody id="sess-body"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<!-- PROCESSING -->
+<div class="proc" id="proc">
+  <div class="spinner"></div>
+  <div class="proc-txt">// procesando pago...</div>
+</div>
+
+<!-- MODAL ADMIN LOGIN -->
+<div class="mo" id="mo-admin">
+  <div class="modal">
+    <div class="modal-t">Acceso administrador</div>
+    <div class="modal-s">// ingresá tus credenciales</div>
+    <label class="fl">Email</label>
+    <input class="fi" type="email" value="admin@labrasa.com" readonly>
+    <label class="fl">Contraseña</label>
+    <input class="fi" type="password" value="••••••••" readonly>
+    <div class="ma">
+      <button class="abtn-gh" onclick="closeModal('mo-admin')">Cancelar</button>
+      <button class="abtn" onclick="closeModal('mo-admin')">Ingresar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AGREGAR MESA -->
+<div class="mo" id="mo-add">
+  <div class="modal">
+    <div class="modal-t">Nueva mesa</div>
+    <div class="modal-s">// completá los datos</div>
+    <label class="fl">Número de mesa</label>
+    <input class="fi" type="number" id="new-num" placeholder="Ej: 9" min="1" max="99">
+    <label class="fl">Capacidad</label>
+    <input class="fi" type="number" id="new-cap" placeholder="Ej: 4" min="1" max="20">
+    <div class="ma">
+      <button class="abtn-gh" onclick="closeModal('mo-add')">Cancelar</button>
+      <button class="abtn" onclick="addTable()">Agregar →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════
+// ESTADO GLOBAL COMPARTIDO
+// ══════════════════════════════
+const DS = {
+  mesa7: {
+    status: 'closed', // closed | open | paying | paid
+    items: [],
+    review: null,
+    paidAt: null
+  },
+  tables: [
+    {n:1,cap:2,st:'free'},
+    {n:2,cap:4,st:'occupied',since:'20:10',amt:8200},
+    {n:3,cap:6,st:'occupied',since:'19:45',amt:15600},
+    {n:4,cap:4,st:'free'},
+    {n:5,cap:2,st:'paid',amt:6400},
+    {n:6,cap:8,st:'free'},
+    {n:7,cap:4,st:'closed'},
+    {n:8,cap:4,st:'paid',amt:19800},
+  ],
+  sessions:[
+    {t:5,time:'20:32',amt:6400,st:'paid',stars:5},
+    {t:8,time:'19:58',amt:19800,st:'paid',stars:4},
+    {t:3,time:'19:45',amt:15600,st:'open',stars:null},
+    {t:2,time:'20:10',amt:8200,st:'open',stars:null},
+  ],
+  star: 0
+};
+
+const MENU_ITEMS = [
+  {emoji:'🍔',name:'La Clásica',price:4200},
+  {emoji:'🔥',name:'La Brasa',price:6800},
+  {emoji:'🌿',name:'Green Beast',price:4900},
+  {emoji:'🍟',name:'Papas fritas',price:1400},
+  {emoji:'🧅',name:'Aros de cebolla',price:1800},
+  {emoji:'🍺',name:'Cerveza IPA',price:1600},
+  {emoji:'🥤',name:'Gaseosa / Agua',price:700},
+  {emoji:'🧃',name:'Limonada',price:900},
+];
+
+const fmt = n => '$'+n.toLocaleString('es-AR');
+
+// ── VIEWS CLIENTE ──
+const VIEWS = ['hub','menu','bill','pay','confirm','review'];
+const SW_IDS = ['hub','menu','bill','pay','review'];
+
+function goTo(v) {
+  VIEWS.forEach(x => document.getElementById('cv-'+x).classList.toggle('active', x===v));
+  SW_IDS.forEach(x => { const el=document.getElementById('sw-'+x); if(el) el.classList.toggle('active',x===v); });
+  if(v==='bill') renderBill();
+  if(v==='pay') {
+    const total = calcTotal();
+    document.getElementById('pay-amount').textContent = fmt(total);
+    document.getElementById('pay-confirm-btn').textContent = `Confirmar pago · ${fmt(total)} →`;
+  }
+  if(v==='confirm') {
+    const now=new Date();
+    document.getElementById('conf-time').textContent='Hoy '+now.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})+' · recibo generado';
+    document.getElementById('conf-total').textContent = fmt(calcTotal());
+  }
+  if(v==='review') {
+    document.getElementById('rev-form').style.display='block';
+    document.getElementById('rev-thanks').classList.remove('show');
+    DS.star=0;
+    document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));
+    document.getElementById('star-lbl').textContent='Tocá para calificar';
+    document.getElementById('rev-btn').disabled=true;
+  }
+  window.scrollTo(0,0);
+}
+
+function setDemo(v) {
+  SW_IDS.forEach(x=>document.getElementById('sw-'+x).classList.toggle('active',x===v));
+  goTo(v);
+}
+
+function calcTotal() {
+  return DS.mesa7.items.reduce((acc,i)=>acc+i.price*i.qty,0);
+}
+
+// ── BILL RENDER ──
+function renderBill() {
+  const body = document.getElementById('bill-view-body');
+  const items = DS.mesa7.items;
+  const total = calcTotal();
+
+  if(items.length===0) {
+    body.innerHTML=`<div class="bill-empty"><div class="bill-empty-icon">🍽</div><div class="bill-empty-txt">El mozo aún no cargó ítems.<br>Aguardá un momento.</div></div><div class="powered">con ♥ por <span>Dishub</span></div>`;
+    return;
+  }
+
+  const rows = items.map(i=>`
+    <div class="bi">
+      <div class="bq">${i.qty}</div>
+      <div class="bn">${i.emoji} ${i.name}</div>
+      <div class="bp">${fmt(i.price*i.qty)}</div>
+    </div>`).join('');
+
+  body.innerHTML=`
+    <div class="bill-card">${rows}</div>
+    <div class="bill-total-card">
+      <div><div class="btl">TOTAL A PAGAR</div><div class="bta">${fmt(total)}</div></div>
+      <svg width="28" height="28" fill="none" stroke="rgba(245,240,232,.3)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    </div>
+    <p class="bill-notice">Al continuar aceptás los términos del servicio</p>
+    <button class="cta" onclick="goTo('pay')">Pagar la cuenta →</button>
+    <button class="cta-gh" onclick="goTo('hub')">Volver al inicio</button>
+    <div class="powered">con ♥ por <span>Dishub</span></div>`;
+}
+
+// ── BADGE CUENTA ──
+function updateBillBadge() {
+  const badge = document.getElementById('bill-badge');
+  const sub = document.getElementById('bill-sub');
+  const total = calcTotal();
+  if(DS.mesa7.items.length>0) {
+    badge.classList.add('show');
+    sub.textContent = fmt(total)+' · '+DS.mesa7.items.reduce((a,i)=>a+i.qty,0)+' ítems';
+  } else {
+    badge.classList.remove('show');
+    sub.textContent = 'Sin esperar al mozo';
+  }
+}
+
+// ── HUB STATE ──
+function updateHubState() {
+  const closed = document.getElementById('hub-closed');
+  const open = document.getElementById('hub-open-content');
+  const t7 = DS.mesa7;
+  if(t7.status==='closed') {
+    closed.style.display='block';
+    open.style.display='none';
+  } else {
+    closed.style.display='none';
+    open.style.display='block';
+  }
+}
+
+// ── PAY ──
+function selPay(el) {
+  document.querySelectorAll('.pm').forEach(m=>m.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function processPayment() {
+  const p=document.getElementById('proc');
+  p.classList.add('show');
+  setTimeout(()=>{
+    p.classList.remove('show');
+    DS.mesa7.status='paid';
+    DS.mesa7.paidAt=new Date();
+    // actualizar tabla de mesas
+    const t7=DS.tables.find(t=>t.n===7);
+    if(t7){ t7.st='paid'; t7.amt=calcTotal(); }
+    // agregar sesión
+    const now=new Date();
+    DS.sessions.push({t:7,time:now.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'}),amt:calcTotal(),st:'paid',stars:null});
+    renderAdmin();
+    goTo('confirm');
+  },2200);
+}
+
+// ── REVIEW ──
+const SL=['','Pésima 😤','Mala 😕','Normal 😐','Buena 👍','¡Excelente! 🔥'];
+function setStar(n){
+  DS.star=n;
+  document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));
+  document.getElementById('star-lbl').textContent=SL[n];
+  document.getElementById('rev-btn').disabled=false;
+}
+
+function submitReview(){
+  const comment=document.getElementById('rev-comment').value;
+  DS.mesa7.review={stars:DS.star,comment};
+  // actualizar sesión
+  const sess=DS.sessions.find(s=>s.t===7&&s.st==='paid');
+  if(sess) sess.stars=DS.star;
+  document.getElementById('rev-form').style.display='none';
+  document.getElementById('rev-thanks').classList.add('show');
+  renderAdmin();
+}
+
+// ══════════════════════════════
+// ADMIN
+// ══════════════════════════════
+
+// Panel carga de ítems
+function renderAipGrid() {
+  const grid=document.getElementById('aip-grid');
+  grid.innerHTML=MENU_ITEMS.map((item,i)=>`
+    <div class="aip-item">
+      <div class="aip-emoji">${item.emoji}</div>
+      <div>
+        <div class="aip-name">${item.name}</div>
+        <div class="aip-price">${fmt(item.price)}</div>
+      </div>
+      <button class="aip-add" onclick="addItem(${i})" ${DS.mesa7.status==='closed'?'disabled':''}>+</button>
+    </div>`).join('');
+}
+
+function addItem(idx) {
+  if(DS.mesa7.status==='closed') return;
+  const item=MENU_ITEMS[idx];
+  const existing=DS.mesa7.items.find(i=>i.name===item.name);
+  if(existing) existing.qty++;
+  else DS.mesa7.items.push({...item,qty:1});
+  renderAipLive();
+  updateBillBadge();
+  // si está en vista bill, actualizar
+  if(document.getElementById('cv-bill').classList.contains('active')) renderBill();
+}
+
+function renderAipLive() {
+  const rows=document.getElementById('aip-rows');
+  const totalEl=document.getElementById('aip-total');
+  const items=DS.mesa7.items;
+  const total=calcTotal();
+  totalEl.textContent=fmt(total);
+
+  if(items.length===0){
+    rows.innerHTML='<div class="aip-empty">Sin ítems cargados</div>';
+    return;
+  }
+
+  rows.innerHTML=items.map(i=>`
+    <div class="aip-row">
+      <div class="aip-row-qty">${i.qty}x</div>
+      <div class="aip-row-name">${i.emoji} ${i.name}</div>
+      <div class="aip-row-price">${fmt(i.price*i.qty)}</div>
+    </div>`).join('');
+}
+
+function renderTables() {
+  const grid=document.getElementById('tables-grid');
+  grid.innerHTML='';
+  let occ=0,paid=0,rec=0;
+
+  DS.tables.forEach(t=>{
+    if(t.st==='occupied') occ++;
+    if(t.st==='paid'){ paid++; rec+=t.amt||0; }
+
+    const stLabel={free:'Libre',occupied:'Ocupada',paid:'Pagada',closed:'Sin abrir',paying:'Pagando...'}[t.st]||t.st;
+    const c=document.createElement('div');
+    c.className='tc '+t.st;
+    c.innerHTML=`
+      <div class="t-num">${t.n}</div>
+      <div class="t-st">${stLabel} ${t.cap?'· '+t.cap+' pax':''}</div>
+      <div class="t-inf">${t.st==='occupied'?`Desde ${t.since} · ${fmt(t.amt||0)}`:t.st==='paid'?`Cobrada · ${fmt(t.amt||0)}`:t.st==='paying'?'Procesando pago...':'—'}</div>
+      <div class="t-acts">
+        ${t.st==='free'||t.st==='closed'?`<button class="tbtn" onclick="adminOpenTable(${t.n})">Abrir</button>`:''}
+        ${t.st==='occupied'?`<button class="tbtn g" onclick="adminPayTable(${t.n})">Cobrar</button>`:''}
+        ${t.st==='paid'?`<button class="tbtn" onclick="adminResetTable(${t.n})">Cerrar</button>`:''}
+        <button class="tbtn" onclick="alert('QR mesa ${t.n}')">QR</button>
+      </div>`;
+    grid.appendChild(c);
+  });
+
+  document.getElementById('s-tot').textContent=DS.tables.length;
+  document.getElementById('s-occ').textContent=occ;
+  document.getElementById('s-paid').textContent=paid;
+  document.getElementById('s-rec').textContent=fmt(rec);
+
+  // estado panel carga
+  const t7=DS.tables.find(t=>t.n===7);
+  const aipStatus=document.getElementById('aip-status');
+  aipStatus.textContent=t7?.st==='closed'?'mesa cerrada':t7?.st==='occupied'?'mesa abierta ✓':t7?.st==='paid'?'cuenta pagada':'—';
+  renderAipGrid();
+}
+
+function renderSessions() {
+  const body=document.getElementById('sess-body');
+  body.innerHTML='';
+  [...DS.sessions].reverse().forEach(s=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><strong>Mesa ${s.t}</strong></td>
+      <td style="color:#555;font-family:'Space Mono',monospace;font-size:11px">${s.time}</td>
+      <td><strong>${fmt(s.amt)}</strong></td>
+      <td>${s.st==='paid'?'<span class="badge bg">PAGADA</span>':s.st==='paying'?'<span class="badge br">PAGANDO</span>':'<span class="badge by">ABIERTA</span>'}</td>
+      <td>${s.stars?'⭐'.repeat(s.stars):'<span style="color:#333">—</span>'}</td>`;
+    body.appendChild(tr);
+  });
+}
+
+function renderAdmin() {
+  renderTables();
+  renderSessions();
+  renderAipLive();
+  updateHubState();
+  updateBillBadge();
+}
+
+// Acciones admin sobre Mesa 7
+function adminOpenTable(n) {
+  const t=DS.tables.find(x=>x.n===n);
+  if(!t) return;
+  t.st='occupied';
+  t.since=new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+  t.amt=0;
+  if(n===7) {
+    DS.mesa7.status='open';
+    DS.mesa7.items=[];
+    // agregar sesión activa
+    DS.sessions.push({t:7,time:t.since,amt:0,st:'open',stars:null});
+  }
+  renderAdmin();
+}
+
+function adminPayTable(n) {
+  const t=DS.tables.find(x=>x.n===n);
+  if(t) { t.st='paid'; t.amt=n===7?calcTotal():t.amt; }
+  if(n===7) DS.mesa7.status='paid';
+  renderAdmin();
+}
+
+function adminResetTable(n) {
+  const t=DS.tables.find(x=>x.n===n);
+  if(t){ t.st=n===7?'closed':'free'; delete t.since; delete t.amt; }
+  if(n===7){ DS.mesa7.status='closed'; DS.mesa7.items=[]; DS.mesa7.review=null; }
+  DS.sessions=DS.sessions.filter(s=>s.t!==n||s.st!=='open');
+  renderAdmin();
+}
+
+function addTable(){
+  const n=parseInt(document.getElementById('new-num').value);
+  const c=parseInt(document.getElementById('new-cap').value);
+  if(!n||!c) return;
+  if(DS.tables.find(t=>t.n===n)){alert('Ya existe esa mesa');return;}
+  DS.tables.push({n,cap:c,st:'free'});
+  DS.tables.sort((a,b)=>a.n-b.n);
+  closeModal('mo-add');
+  renderAdmin();
+}
+
+// ── MODALS ──
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.mo').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }));
+
+// ── SYNC LOOP ──
+// Sincroniza estado compartido entre admin y cliente cada 600ms
+setInterval(()=>{
+  const t7=DS.tables.find(t=>t.n===7);
+  if(t7) t7.amt=calcTotal();
+  // actualizar sesión abierta de mesa 7
+  const sess7=DS.sessions.find(s=>s.t===7&&s.st==='open');
+  if(sess7) sess7.amt=calcTotal();
+  updateHubState();
+  updateBillBadge();
+  // si está en bill view, re-render silencioso
+  if(document.getElementById('cv-bill').classList.contains('active')) renderBill();
+},600);
+
+// ── INIT ──
+renderAdmin();
+</script>
+</body>
+</html>

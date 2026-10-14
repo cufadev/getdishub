@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dishub — Phone Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  /* ── PHONE FRAME ── */
+  .phone {
+    width: 280px;
+    background: #0f0f0f;
+    border: 2px solid #f5f0e8;
+    border-radius: 36px;
+    box-shadow: 6px 6px 0 #E8743B;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Notch */
+  .phone-notch {
+    width: 90px;
+    height: 24px;
+    background: #0f0f0f;
+    border: 2px solid #f5f0e8;
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Botones laterales */
+  .phone::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 80px;
+    width: 3px;
+    height: 28px;
+    background: #f5f0e8;
+    border-radius: 2px 0 0 2px;
+    box-shadow: 0 36px 0 #f5f0e8;
+  }
+
+  .phone::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 100px;
+    width: 3px;
+    height: 48px;
+    background: #f5f0e8;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* ── SCREEN ── */
+  .screen {
+    background: #111116;
+    min-height: 520px;
+    padding: 20px 18px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .status-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #f5f0e8;
+  }
+
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .status-icons span {
+    font-size: 10px;
+    color: #f5f0e8;
+  }
+
+  /* Venue header */
+  .venue-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .venue-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #f5f0e8;
+    letter-spacing: -0.5px;
+  }
+
+  .venue-name span { color: #E8743B; }
+
+  .mesa-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: #E8743B;
+    border: 1px solid #E8743B;
+    padding: 2px 7px;
+    border-radius: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .venue-sub {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 22px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: #2a2a2a;
+    margin-bottom: 18px;
+  }
+
+  /* Hub actions */
+  .hub-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 14px;
+    border: 1.5px solid #2a2a2a;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hub-action.active {
+    border-color: #E8743B;
+    background: #E8743B;
+    box-shadow: 3px 3px 0 #b85a2b;
+  }
+
+  .hub-action.idle {
+    border-color: #2a2a2a;
+    background: #1a1a1a;
+  }
+
+  .hub-action-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  .hub-action.active .hub-action-icon {
+    background: rgba(0,0,0,0.15);
+    border-radius: 6px;
+  }
+
+  .hub-action-text { flex: 1; }
+
+  .hub-action-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .hub-action.active .hub-action-title { color: #0d0d0d; }
+  .hub-action.idle .hub-action-title { color: #f5f0e8; }
+
+  .hub-action-sub {
+    font-size: 10px;
+    margin-top: 1px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .hub-action.active .hub-action-sub { color: rgba(0,0,0,0.6); }
+  .hub-action.idle .hub-action-sub { color: #555; }
+
+  .hub-arrow {
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .hub-action.active .hub-arrow { color: #0d0d0d; }
+  .hub-action.idle .hub-arrow { color: #3a3a3a; }
+
+  /* QR footer */
+  .qr-footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #2a2a2a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qr-box {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid #2a2a2a;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    padding: 4px;
+    flex-shrink: 0;
+  }
+
+  .qr-dot {
+    background: #f5f0e8;
+    border-radius: 1px;
+  }
+
+  .qr-dot.empty { background: transparent; }
+
+  .qr-text { font-size: 9px; color: #555; font-family: 'Space Mono', monospace; line-height: 1.4; }
+  .qr-text strong { color: #E8743B; display: block; font-size: 10px; }
+
+  /* Powered by */
+  .powered {
+    text-align: center;
+    font-size: 9px;
+    color: #333;
+    font-family: 'Space Mono', monospace;
+    margin-top: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  .powered span { color: #E8743B; }
+
+  /* Carta */
+  .chips { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .chip {
+    font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700;
+    color: #888; border: 1px solid #2a2a2a; padding: 3px 8px;
+    text-transform: uppercase; letter-spacing: 0.4px;
+  }
+  .chip.on { color: #0d0d0d; background: #f5f0e8; border-color: #f5f0e8; }
+  .hub-price {
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+  .hub-action.active .hub-price { color: #0d0d0d; }
+  .hub-action.idle .hub-price { color: #E8743B; }
+  .wa-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 4px; padding: 11px 14px;
+    background: #E8743B; color: #0d0d0d; box-shadow: 3px 3px 0 #b85a2b;
+    font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── ANIMATION ── */
+  @keyframes cycleActive {
+    0%, 28%   { opacity: 1; }
+    33%, 100% { opacity: 0; }
+  }
+
+  @keyframes cycleIdle {
+    0%, 28%   { opacity: 0; }
+    33%, 100% { opacity: 1; }
+  }
+
+  .action-ver-menu    { animation: none; }
+  .action-pagar       { animation: none; }
+  .action-resena      { animation: none; }
+
+  /* JS controlado */
+
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="phone-notch"></div>
+  <div class="screen">
+
+    <div class="status-bar">
+      <div class="status-time">21:05</div>
+      <div class="status-icons">
+        <span>▪▪▪</span>
+        <span>WiFi</span>
+        <span>■</span>
+      </div>
+    </div>
+
+    <div class="venue-header">
+      <div class="venue-name">LA<span>BRASA</span></div>
+      <div class="mesa-badge">ABIERTO</div>
+    </div>
+    <div class="venue-sub">// hamburguesas artesanales</div>
+
+    <div class="chips">
+      <span class="chip on">Hamburguesas</span>
+      <span class="chip">Papas</span>
+      <span class="chip">Bebidas</span>
+    </div>
+
+    <div class="hub-action active" data-item>
+      <div class="hub-action-icon">🍔</div>
+      <div class="hub-action-text">
+        <div class="hub-action-title">BRASA CLÁSICA</div>
+        <div class="hub-action-sub">Carne, cheddar y cebolla</div>
+      </div>
+      <div class="hub-price">$9.500</div>
+    </div>
+
+    <div class="hub-action idle" data-item>
+      <div class="hub-action-icon">🥓</div>
+      <div class="hub-action-text">
+        <div class="hub-action-title">DOBLE BACON</div>
+        <div class="hub-action-sub">Doble carne y panceta</div>
+      </div>
+      <div class="hub-price">$11.800</div>
+    </div>
+
+    <div class="hub-action idle" data-item>
+      <div class="hub-action-icon">🍟</div>
+      <div class="hub-action-text">
+        <div class="hub-action-title">PAPAS RÚSTICAS</div>
+        <div class="hub-action-sub">Con salsa de la casa</div>
+      </div>
+      <div class="hub-price">$4.200</div>
+    </div>
+
+    <div class="wa-bar" id="wa-bar">
+      <span>PEDIR POR WHATSAPP</span>
+      <span id="wa-count">1 ítem →</span>
+    </div>
+
+    <div class="qr-footer">
+      <div class="qr-box">
+        <div class="qr-dot"></div>
+        <div class="qr-dot empty"></div>
+        <div class="qr-dot empty"></div>
+        <div class="qr-dot"></div>
+      </div>
+      <div class="qr-text">
+        <strong>ESCANEÁ LA CARTA</strong>
+        labrasa.getdishub.app
+      </div>
+    </div>
+
+    <div class="powered">con ♥ por <span>DISHub</span></div>
+
+  </div>
+</div>
+
+<script>
+  const actions = Array.from(document.querySelectorAll('[data-item]'));
+  const waCount = document.getElementById('wa-count');
+
+  let current = 0;
+
+  function cycle() {
+    actions.forEach((el, i) => {
+      el.classList.toggle('active', i === current);
+      el.classList.toggle('idle', i !== current);
+    });
+    const n = current + 1;
+    waCount.textContent = n + (n === 1 ? ' ítem →' : ' ítems →');
+    current = (current + 1) % actions.length;
+  }
+
+  setInterval(cycle, 2200);
+
+  document.getElementById('wa-bar').addEventListener('click', function () {
+    window.parent.postMessage({ scrollTo: '#planes' }, '*');
+  });
+
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    document.querySelector('.status-time').textContent = h + ':' + m;
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+</script>
+
+</body>
+</html>

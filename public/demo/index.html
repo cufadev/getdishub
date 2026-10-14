@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dishub — Demo interactivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#E8743B #1a1a1a}
+body{background:#0d0d0d;color:#f5f0e8;min-height:100vh;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer}
+
+/* ── header ── */
+.demo-header{position:sticky;top:0;z-index:200;background:rgba(13,13,13,.97);backdrop-filter:blur(8px);border-bottom:1px solid #2a2a2a;padding:16px 48px}
+.demo-header-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:20px}
+.demo-logo{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.03em;color:#f5f0e8;text-decoration:none}
+.demo-logo span{color:#E8743B}
+.demo-header-badge{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#E8743B;text-transform:uppercase;letter-spacing:.1em;border:1px solid #E8743B;padding:3px 9px}
+.demo-header-nav{margin-left:auto;display:flex;align-items:center;gap:24px}
+.demo-header-link{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#9a9a9a;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;transition:color .15s}
+.demo-header-link:hover{color:#E8743B}
+.demo-header-cta{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:800;color:#0d0d0d;background:#E8743B;text-decoration:none;text-transform:uppercase;letter-spacing:.03em;padding:9px 18px;box-shadow:3px 3px 0 #b85a2b;transition:transform .15s,box-shadow .15s}
+.demo-header-cta:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 #b85a2b}
+.demo-header-back{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#E8743B;text-decoration:none;text-transform:uppercase;letter-spacing:.03em;border:2px solid #E8743B;padding:7px 16px;transition:background .15s,color .15s}
+.demo-header-back:hover{background:#E8743B;color:#0d0d0d}
+
+/* ── hero ── */
+.demo-hero{background:#111;border-bottom:1px solid #2a2a2a;padding:72px 48px}
+.demo-hero-inner,.demo-section-inner{max-width:1300px;margin:0 auto}
+.demo-hero-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#E8743B;border:2px solid #E8743B;padding:4px 12px;margin-bottom:28px}
+.demo-hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(48px,7vw,92px);font-weight:800;line-height:.92;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:24px}
+.demo-hero-title span{color:#E8743B;text-shadow:4px 4px 0 #b85a2b}
+.demo-hero-sub{font-size:18px;color:#9a9a9a;max-width:600px;line-height:1.65}
+
+/* ── sections ── */
+.demo-section{border-bottom:1px solid #2a2a2a;padding:64px 48px}
+.demo-section-dark{background:#080808}
+.step-hd{display:flex;align-items:flex-start;gap:20px;margin-bottom:44px}
+.step-num{font-family:'Space Grotesk',sans-serif;font-size:80px;font-weight:800;line-height:1;letter-spacing:-.04em;color:#E8743B;opacity:.25;flex-shrink:0;margin-top:-8px}
+.step-title{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:1}
+.step-sub{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.02em;color:#8a8a8a;margin-top:10px;max-width:640px;line-height:1.6}
+
+/* ── layout carta + planilla ── */
+.live{display:flex;gap:48px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.col-label{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#E8743B;margin-bottom:14px}
+
+/* ── celular ── */
+.phone{width:320px;background:#0f0f0f;border:2px solid #f5f0e8;border-radius:36px;box-shadow:8px 8px 0 #E8743B;overflow:hidden;flex-shrink:0}
+.notch{width:96px;height:24px;border:2px solid #f5f0e8;border-top:none;border-radius:0 0 14px 14px;margin:0 auto}
+.screen{background:#111116;height:560px;padding:16px 16px 14px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.venue{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.venue-name{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.5px}
+.venue-name span{color:#E8743B}
+.venue-badge{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#E8743B;border:1px solid #E8743B;padding:2px 7px}
+.venue-sub{font-family:'Space Mono',monospace;font-size:11px;color:#8a8a8a;margin:4px 0 14px}
+.chips{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.chip{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#888;background:transparent;border:1px solid #2a2a2a;padding:5px 9px;text-transform:uppercase;letter-spacing:.4px}
+.chip.on{color:#0d0d0d;background:#f5f0e8;border-color:#f5f0e8}
+.items{flex:1;overflow-y:auto;scrollbar-width:none}
+.items::-webkit-scrollbar{display:none}
+.item{display:flex;align-items:center;gap:10px;padding:10px 11px;border:1.5px solid #2a2a2a;background:#1a1a1a;margin-bottom:8px}
+.item.off{opacity:.38}
+.item-ico{font-size:20px;width:30px;text-align:center;flex-shrink:0}
+.item-txt{flex:1;min-width:0}
+.item-name{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+.item-desc{font-size:12px;color:#9a9a9a;margin-top:1px}
+.item-price{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#E8743B;margin-top:3px}
+.item-off{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#c0504f;text-transform:uppercase;letter-spacing:.4px}
+.stepper{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.stepper button{width:24px;height:24px;border:1.5px solid #E8743B;background:transparent;color:#E8743B;font-size:14px;font-weight:800;line-height:1}
+.stepper button:hover{background:#E8743B;color:#0d0d0d}
+.stepper b{font-family:'Space Mono',monospace;font-size:11px;min-width:12px;text-align:center}
+.cart{margin-top:8px;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#E8743B;color:#0d0d0d;border:none;box-shadow:3px 3px 0 #b85a2b;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:800;letter-spacing:.3px;text-transform:uppercase;width:100%;transition:opacity .15s}
+.cart[disabled]{opacity:.35;box-shadow:none;cursor:default}
+.qr-foot{margin-top:10px;padding-top:10px;border-top:1px solid #2a2a2a;font-family:'Space Mono',monospace;font-size:11px;color:#8a8a8a;text-align:center}
+.qr-foot span{color:#E8743B}
+
+/* mensaje de WhatsApp */
+.wa-sheet{position:absolute;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-end}
+.wa-sheet.open{display:flex}
+.wa-card{width:100%;background:#161618;border-top:2px solid #E8743B;padding:16px;max-height:80%;overflow-y:auto}
+.wa-title{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#E8743B;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.wa-msg{background:#1f2c26;border:1px solid #2d4a3b;padding:12px;font-size:12px;line-height:1.55;white-space:pre-wrap;color:#e9efe9}
+.wa-note{font-size:12px;color:#8a8a8a;margin:10px 0 12px;line-height:1.5}
+.wa-close{width:100%;padding:10px;background:transparent;color:#f5f0e8;border:1.5px solid #3a3a3a;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase}
+.wa-close:hover{border-color:#E8743B;color:#E8743B}
+
+/* ── planilla ── */
+.sheet{flex:1;min-width:340px;max-width:620px;background:#f7f7f4;color:#1c1c1c;border:2px solid #f5f0e8;box-shadow:8px 8px 0 #b85a2b}
+.sheet-bar{background:#0f9d58;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;padding:9px 14px;display:flex;justify-content:space-between;gap:10px}
+.sheet-tabs{display:flex;background:#e9e9e4;border-bottom:1px solid #cfcfc8;font-size:11px}
+.sheet-tab{padding:7px 14px;color:#555;border-right:1px solid #cfcfc8}
+.sheet-tab.on{background:#f7f7f4;color:#0f9d58;font-weight:700}
+.sheet table{width:100%;border-collapse:collapse;font-size:12px}
+.sheet th{background:#ececE7;text-align:left;font-weight:600;color:#444;padding:7px 10px;border:1px solid #d6d6cf;font-size:11px}
+.sheet td{padding:0;border:1px solid #d6d6cf;background:#fff}
+.sheet td .c{padding:8px 10px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sheet input.cell{width:100%;border:none;background:#fff;font:inherit;padding:8px 10px;color:#1c1c1c}
+.sheet input.cell:focus{outline:2px solid #1a73e8;outline-offset:-2px}
+.sheet .tog{width:100%;border:none;background:#fff;font:inherit;font-weight:700;padding:8px 10px;text-align:left}
+.sheet .tog.si{color:#0f9d58}
+.sheet .tog.no{color:#c0392b}
+.sheet-hint{padding:12px 14px;font-size:12px;color:#555;line-height:1.5;border-top:1px solid #d6d6cf;background:#fbfbf8}
+.sheet-hint b{color:#1c1c1c}
+
+/* ── QR + planes ── */
+.qr-row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}
+.qr-big{width:168px;height:168px;background:#f5f0e8;padding:12px;box-shadow:6px 6px 0 #E8743B;flex-shrink:0}
+.qr-big svg{width:100%;height:100%;display:block}
+.qr-copy{flex:1;min-width:260px}
+.qr-copy h3{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:12px}
+.qr-copy p{color:#8a8a8a;font-size:16px;line-height:1.65;max-width:520px}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:760px}
+.plan{background:#1a1a1a;border:2px solid #2a2a2a;padding:24px}
+.plan.hl{border-color:#E8743B;box-shadow:6px 6px 0 #b85a2b}
+.plan h4{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:6px}
+.plan .price{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;color:#E8743B}
+.plan p{font-family:'Space Mono',monospace;font-size:12px;color:#8a8a8a;letter-spacing:.02em;margin-top:6px}
+
+/* ── cta ── */
+.demo-cta{background:#E8743B;padding:80px 48px}
+.demo-cta-inner{max-width:1300px;margin:0 auto}
+.demo-cta h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,5vw,68px);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.95;color:#0d0d0d;margin-bottom:36px}
+.demo-cta-btns{display:flex;flex-wrap:wrap;gap:16px}
+.btn-dark{display:inline-flex;align-items:center;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;color:#E8743B;background:#0d0d0d;padding:16px 32px;text-decoration:none;box-shadow:4px 4px 0 rgba(0,0,0,.3);transition:all .15s}
+.btn-dark:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(0,0,0,.3)}
+.btn-ghost{display:inline-flex;align-items:center;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;color:#0d0d0d;border:2px solid #0d0d0d;padding:14px 30px;text-decoration:none}
+.btn-ghost:hover{background:rgba(0,0,0,.12)}
+
+@media(max-width:860px){
+  .demo-header{padding:12px 24px}
+  .demo-header-badge,.demo-header-link{display:none}
+  .demo-header-nav{gap:12px}
+  .demo-header-cta,.demo-header-back{padding:7px 12px;font-size:12px}
+  .demo-hero,.demo-section,.demo-cta{padding:48px 24px}
+  .step-num{font-size:52px}
+  .step-title{font-size:24px}
+  .live{gap:36px}
+  .sheet{min-width:0;width:100%}
+}
+@media(max-width:380px){.phone{transform:scale(.9);transform-origin:top center}}
+</style>
+</head>
+<body>
+
+<header class="demo-header">
+  <div class="demo-header-inner">
+    <a href="/" class="demo-logo">DIS<span>Hub</span></a>
+    <div class="demo-header-badge">// demo interactivo</div>
+    <nav class="demo-header-nav">
+      <a href="https://wa.me/5491178212733?text=Hola!%20Vi%20la%20demo%20de%20DISHub%20y%20quiero%20mi%20carta." target="_blank" rel="noopener" class="demo-header-cta">Quiero mi carta</a>
+      <a href="/" class="demo-header-back" onclick="exitDemo(event)">← Inicio</a>
+    </nav>
+  </div>
+</header>
+
+<section class="demo-hero">
+  <div class="demo-hero-inner">
+    <div class="demo-hero-tag">Demo en vivo · datos de ejemplo</div>
+    <h1 class="demo-hero-title">ASÍ ES<br><span>TU CARTA.</span></h1>
+    <p class="demo-hero-sub">Probá la carta como la ve tu cliente y cambiá un precio en la planilla como lo harías vos. Todo funciona acá, sin registrarte.</p>
+  </div>
+</section>
+
+<section class="demo-section">
+  <div class="demo-section-inner">
+    <div class="step-hd">
+      <div class="step-num">01</div>
+      <div>
+        <div class="step-title">Tu carta, tu planilla</div>
+        <div class="step-sub">Cambiá un precio o poné un plato en NO en la planilla y mirá cómo se actualiza la carta del celular.</div>
+      </div>
+    </div>
+
+    <div class="live">
+      <div>
+        <div class="col-label">// lo que ve tu cliente</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="venue">
+              <div class="venue-name">LA<span>BRASA</span></div>
+              <div class="venue-badge">ABIERTO</div>
+            </div>
+            <div class="venue-sub">// hamburguesas artesanales</div>
+            <div class="chips" id="chips"></div>
+            <div class="items" id="items" data-lenis-prevent></div>
+            <button class="cart" id="cart" disabled><span id="cart-l">Armá tu pedido</span><span id="cart-r"></span></button>
+            <div class="qr-foot">labrasa.<span>getdishub.app</span></div>
+
+            <div class="wa-sheet" id="wa-sheet">
+              <div class="wa-card" data-lenis-prevent>
+                <div class="wa-title">// esto le llega al local por WhatsApp</div>
+                <div class="wa-msg" id="wa-msg"></div>
+                <div class="wa-note">En la demo no se envía nada. En tu carta se abre WhatsApp con el pedido listo.</div>
+                <button class="wa-close" id="wa-close">Volver a la carta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1;min-width:340px;max-width:620px">
+        <div class="col-label">// lo que editás vos</div>
+        <div class="sheet">
+          <div class="sheet-bar"><span>LaBrasa — Carta</span><span>Compartido ✓</span></div>
+          <div class="sheet-tabs">
+            <div class="sheet-tab on">Carta</div>
+            <div class="sheet-tab">Secciones</div>
+            <div class="sheet-tab">Config</div>
+          </div>
+          <table>
+            <thead><tr><th>nombre</th><th>seccion</th><th style="width:96px">precio</th><th style="width:92px">disponible</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+          <div class="sheet-hint"><b>Probá:</b> cambiá un precio o tocá SI/NO. No hay panel ni contraseñas: es una planilla de Google.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="demo-section demo-section-dark">
+  <div class="demo-section-inner">
+    <div class="step-hd">
+      <div class="step-num">02</div>
+      <div>
+        <div class="step-title">Un QR, siempre la carta actual</div>
+        <div class="step-sub">Lo pegás en las mesas, en el mostrador o en la vidriera.</div>
+      </div>
+    </div>
+    <div class="qr-row">
+      <div class="qr-big" aria-hidden="true">
+        <svg viewBox="0 0 21 21" shape-rendering="crispEdges" fill="#0d0d0d">
+          <path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2zM14 0h7v7h-7zM15 1v5h5V1zM16 2h3v3h-3zM0 14h7v7H0zM1 15v5h5v-5zM2 16h3v3H2z" fill-rule="evenodd"/>
+          <path d="M8 0h2v2H8zM11 1h2v2h-2zM8 4h1v2H8zM10 3h2v2h-2zM12 5h2v2h-2zM8 8h2v2H8zM11 8h3v2h-3zM15 9h2v2h-2zM18 8h3v2h-3zM0 8h2v2H0zM3 9h3v2H3zM7 10h2v3H7zM10 11h2v2h-2zM13 12h3v2h-3zM17 11h2v3h-2zM19 13h2v2h-2zM8 15h2v2H8zM11 14h2v3h-2zM14 16h2v2h-2zM17 16h3v2h-3zM9 18h3v3H9zM13 19h3v2h-3zM18 19h3v2h-3z"/>
+        </svg>
+      </div>
+      <div class="qr-copy">
+        <h3>Imprimís una sola vez</h3>
+        <p>El QR apunta siempre a la misma dirección. Cuando cambiás la planilla, la carta cambia sola: nunca más reimprimís menús por un cambio de precio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="demo-section">
+  <div class="demo-section-inner">
+    <div class="step-hd">
+      <div class="step-num">03</div>
+      <div>
+        <div class="step-title">Elegí cómo arrancar</div>
+        <div class="step-sub">Pago único de desarrollo. El hosting es opcional: AR$ 35.000/mes con mantenimiento incluido.</div>
+      </div>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h4>Carta Digital</h4>
+        <div class="price">AR$ 175.000</div>
+        <p>Carta + planilla + QR · pago único</p>
+      </div>
+      <div class="plan hl">
+        <h4>Carta + Pedido</h4>
+        <div class="price">AR$ 225.000</div>
+        <p>Suma carrito y pedido por WhatsApp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="demo-cta">
+  <div class="demo-cta-inner">
+    <h2>Tu carta lista<br>para ser compartida.</h2>
+    <div class="demo-cta-btns">
+      <a href="/#planes" class="btn-dark" onclick="exitDemo(event,'/#planes')">Ver planes →</a>
+      <a href="https://wa.me/5491178212733?text=Hola!%20Vi%20la%20demo%20de%20DISHub%20y%20quiero%20mi%20carta." target="_blank" rel="noopener" class="btn-ghost">Hablemos por WhatsApp →</a>
+    </div>
+  </div>
+</section>
+
+<script src="/vendor/lenis.min.js"></script>
+<script>
+// ── scroll suave (mismo que la home) ──
+if (typeof Lenis !== 'undefined' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+  const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
+  requestAnimationFrame(raf);
+}
+</script>
+<script>
+// ── datos de ejemplo (ficticios) ──
+const SECCIONES = ['Hamburguesas', 'Papas', 'Bebidas'];
+const MENU = [
+  { id: 1, nombre: 'Brasa Clásica',  desc: 'Carne, cheddar y cebolla',  seccion: 'Hamburguesas', precio: 9500,  ok: true, ico: '🍔' },
+  { id: 2, nombre: 'Doble Bacon',    desc: 'Doble carne y panceta',     seccion: 'Hamburguesas', precio: 11800, ok: true, ico: '🥓' },
+  { id: 3, nombre: 'Veggie',         desc: 'Medallón de legumbres',     seccion: 'Hamburguesas', precio: 9200,  ok: true, ico: '🥬' },
+  { id: 4, nombre: 'Papas Rústicas', desc: 'Con salsa de la casa',      seccion: 'Papas',        precio: 4200,  ok: true, ico: '🍟' },
+  { id: 5, nombre: 'Papas Cheddar',  desc: 'Cheddar y verdeo',          seccion: 'Papas',        precio: 5600,  ok: true, ico: '🧀' },
+  { id: 6, nombre: 'Limonada',       desc: 'Con menta y jengibre',      seccion: 'Bebidas',      precio: 3200,  ok: true, ico: '🍋' },
+  { id: 7, nombre: 'Cerveza tirada', desc: 'Pinta de 500 ml',           seccion: 'Bebidas',      precio: 4500,  ok: true, ico: '🍺' },
+];
+const cant = {};           // id -> cantidad
+let seccion = SECCIONES[0];
+
+const $ = (id) => document.getElementById(id);
+const money = (n) => '$' + n.toLocaleString('es-AR');
+
+function renderChips() {
+  $('chips').innerHTML = SECCIONES.map((s) =>
+    `<button class="chip ${s === seccion ? 'on' : ''}" data-s="${s}">${s}</button>`).join('');
+  $('chips').querySelectorAll('.chip').forEach((b) =>
+    b.addEventListener('click', () => { seccion = b.dataset.s; renderChips(); renderItems(); }));
+}
+
+function renderItems() {
+  $('items').innerHTML = MENU.filter((m) => m.seccion === seccion).map((m) => {
+    const c = cant[m.id] || 0;
+    const right = m.ok
+      ? `<div class="stepper"><button data-id="${m.id}" data-d="-1" aria-label="Quitar">−</button><b>${c}</b><button data-id="${m.id}" data-d="1" aria-label="Agregar">+</button></div>`
+      : `<div class="item-off">Agotado</div>`;
+    return `<div class="item ${m.ok ? '' : 'off'}">
+      <div class="item-ico">${m.ico}</div>
+      <div class="item-txt">
+        <div class="item-name">${m.nombre}</div>
+        <div class="item-desc">${m.desc}</div>
+        <div class="item-price">${money(m.precio)}</div>
+      </div>${right}</div>`;
+  }).join('');
+  $('items').querySelectorAll('.stepper button').forEach((b) =>
+    b.addEventListener('click', () => {
+      const id = +b.dataset.id;
+      cant[id] = Math.max(0, (cant[id] || 0) + +b.dataset.d);
+      renderItems(); renderCart();
+    }));
+}
+
+function resumen() {
+  const lineas = MENU.filter((m) => m.ok && cant[m.id] > 0);
+  const total = lineas.reduce((s, m) => s + m.precio * cant[m.id], 0);
+  const n = lineas.reduce((s, m) => s + cant[m.id], 0);
+  return { lineas, total, n };
+}
+
+function renderCart() {
+  const { total, n } = resumen();
+  const b = $('cart');
+  b.disabled = n === 0;
+  $('cart-l').textContent = n ? 'Pedir por WhatsApp' : 'Armá tu pedido';
+  $('cart-r').textContent = n ? `${n} · ${money(total)}` : '';
+}
+
+function renderRows() {
+  $('rows').innerHTML = MENU.map((m) => `<tr>
+    <td><span class="c">${m.nombre}</span></td>
+    <td><span class="c">${m.seccion}</span></td>
+    <td><input class="cell" inputmode="numeric" value="${m.precio}" data-id="${m.id}" aria-label="Precio de ${m.nombre}"></td>
+    <td><button class="tog ${m.ok ? 'si' : 'no'}" data-id="${m.id}">${m.ok ? 'SI' : 'NO'}</button></td>
+  </tr>`).join('');
+  $('rows').querySelectorAll('input.cell').forEach((inp) =>
+    inp.addEventListener('input', () => {
+      const v = parseInt(inp.value.replace(/\D/g, ''), 10);
+      const m = MENU.find((x) => x.id === +inp.dataset.id);
+      if (!isNaN(v)) { m.precio = v; renderItems(); renderCart(); }
+    }));
+  $('rows').querySelectorAll('.tog').forEach((b) =>
+    b.addEventListener('click', () => {
+      const m = MENU.find((x) => x.id === +b.dataset.id);
+      m.ok = !m.ok;
+      b.textContent = m.ok ? 'SI' : 'NO';
+      b.className = 'tog ' + (m.ok ? 'si' : 'no');
+      renderItems(); renderCart();
+    }));
+}
+
+$('cart').addEventListener('click', () => {
+  const { lineas, total } = resumen();
+  if (!lineas.length) return;
+  $('wa-msg').textContent =
+    'Hola LaBrasa! Quiero hacer un pedido:\n\n' +
+    lineas.map((m) => `• ${cant[m.id]} x ${m.nombre} — ${money(m.precio * cant[m.id])}`).join('\n') +
+    `\n\nTotal: ${money(total)}`;
+  $('wa-sheet').classList.add('open');
+});
+$('wa-close').addEventListener('click', () => $('wa-sheet').classList.remove('open'));
+
+renderChips(); renderItems(); renderRows(); renderCart();
+
+// ── salida con fade (la demo vive dentro de un iframe) ──
+function exitDemo(e, href) {
+  e.preventDefault();
+  const dest = href || '/';
+  document.body.style.transition = 'opacity .35s ease';
+  document.body.style.opacity = '0';
+  setTimeout(() => { window.top.location.href = dest; }, 350);
+}
+</script>
+</body>
+</html>
