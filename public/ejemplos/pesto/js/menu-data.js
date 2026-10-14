@@ -1,5 +1,5 @@
 /* ===== CONFIG (editar acá) ===== */
-const WHATSAPP = "5491178212733";       // número del local
+const WHATSAPP = "";       // número del local
 const PRECIOS_DEMO = true;
 const DIRECCION = "Suipacha 111, Chivilcoy";   // se puede pisar desde Config (direccion / mapa)
 const SHEET_ID = "";                    // ID de la planilla de Google (lo que va entre /d/ y /edit). Vacío = usa el respaldo de abajo.
