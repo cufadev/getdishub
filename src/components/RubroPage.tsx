@@ -25,11 +25,6 @@ export function rubroHead(r: Rubro) {
     description: r.description,
     provider: { "@type": "Organization", name: "DISHub", url: SITE },
     areaServed: { "@type": "Country", name: "Argentina" },
-    offers: {
-      "@type": "Offer",
-      price: r.plan.precio.replace(/[^\d]/g, ""),
-      priceCurrency: "ARS",
-    },
   };
   const breadcrumb = {
     "@context": "https://schema.org",

@@ -60,12 +60,7 @@ const schemaService = {
   "serviceType": "Desarrollo de carta digital con QR y pedido por WhatsApp",
   "provider": { "@id": `${SITE}/#organization` },
   "areaServed": { "@type": "Country", "name": "Argentina" },
-  "description": "Carta digital con la marca del local, editable desde una planilla de Google, con QR y pedido por WhatsApp opcional.",
-  "offers": [
-    { "@type": "Offer", "name": "Carta Digital", "price": "175000", "priceCurrency": "ARS", "description": "Desarrollo en pago único, sin hosting." },
-    { "@type": "Offer", "name": "Carta + Pedido por WhatsApp", "price": "225000", "priceCurrency": "ARS", "description": "Desarrollo en pago único, sin hosting." },
-    { "@type": "Offer", "name": "Hosting y mantenimiento", "price": "35000", "priceCurrency": "ARS", "description": "Mensual: hosting, subdominio y mantenimiento." },
-  ],
+  "description": "Carta digital con la marca del local, editable desde una planilla de Google, con QR y pedido por WhatsApp opcional. Desarrollo en pago único desde AR$ 175.000; hosting y mantenimiento AR$ 35.000 por mes.",
 };
 
 const schemaFAQ = {
