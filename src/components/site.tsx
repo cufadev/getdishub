@@ -594,7 +594,7 @@ export function Footer({ home = true }: { home?: boolean }) {
           <p className="font-mono-tech text-xs uppercase text-[var(--color-muted)]">
             © {new Date().getFullYear()} Dishub. Hecho x{" "}
               <a
-                href="https://www.cufagon.xyz/"
+                href="https://cufadev.xyz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-(--color-accent) hover:underline"
