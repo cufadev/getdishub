@@ -1,0 +1,513 @@
+:root {
+  --ink: #0c0a09;
+  --shoyu: #171310;
+  --paper: #f5efe6;
+  --ember: #fe4e03;
+  --nori: #a39c8e;
+  --header-h: 108px;
+  --cta-h: 68px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+  height: 100dvh;
+}
+
+/* ── Header ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  padding: 14px 16px 10px;
+  background: linear-gradient(to bottom, rgba(12,10,9,.92) 40%, rgba(12,10,9,0));
+  backdrop-filter: blur(2px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.brand-name {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.brand-name h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 26px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.brand-name .kana {
+  font-size: 11px;
+  color: var(--ember);
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 6px;
+}
+
+.view-toggle button {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(245,239,230,.15);
+  background: rgba(245,239,230,.06);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.view-toggle button.active {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: #fff;
+}
+
+.view-toggle svg { width: 17px; height: 17px; }
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.chips::-webkit-scrollbar { display: none; }
+
+.chip {
+  flex: 0 0 auto;
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid rgba(245,239,230,.18);
+  background: rgba(23,19,16,.7);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+}
+
+.chip.active {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+  font-weight: 600;
+}
+
+/* ── Feed vertical ── */
+#feed {
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+#feed::-webkit-scrollbar { display: none; }
+
+.card {
+  position: relative;
+  height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+  background: var(--shoyu);
+}
+
+.card.hidden { display: none; }
+
+.card img.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: radial-gradient(ellipse at 50% 30%, #2a211b, var(--ink));
+}
+
+.card .fallback span {
+  font-family: 'Anton', sans-serif;
+  font-size: 64px;
+  color: rgba(254,78,3,.25);
+  letter-spacing: 8px;
+}
+
+.card.no-img .fallback { display: grid; }
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(12,10,9,.55) 0%,
+    rgba(12,10,9,0) 26%,
+    rgba(12,10,9,0) 48%,
+    rgba(12,10,9,.88) 86%,
+    var(--ink) 100%);
+  pointer-events: none;
+}
+
+/* Katakana lateral — firma visual */
+.card .kana-side {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-80%);
+  writing-mode: vertical-rl;
+  font-size: 13px;
+  letter-spacing: 10px;
+  color: rgba(245,239,230,.45);
+  z-index: 2;
+  font-weight: 600;
+  text-shadow: 0 1px 8px rgba(0,0,0,.6);
+}
+
+.card-info {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(var(--cta-h) + 18px);
+  padding: 0 20px;
+  z-index: 3;
+}
+
+.price-badge {
+  display: inline-block;
+  background: var(--ember);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 7px 16px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 18px rgba(254,78,3,.45);
+}
+
+.card-info h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(30px, 8.5vw, 44px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.5);
+}
+
+.card-info p {
+  font-size: 14.5px;
+  color: rgba(245,239,230,.85);
+  max-width: 78%;
+  line-height: 1.45;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tag {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 100px;
+  background: rgba(245,239,230,.12);
+  border: 1px solid rgba(245,239,230,.15);
+  backdrop-filter: blur(4px);
+}
+
+/* Acciones flotantes */
+.actions {
+  position: absolute;
+  right: 14px;
+  bottom: calc(var(--cta-h) + 130px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 4;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  color: var(--paper);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.5));
+}
+
+.action-btn svg {
+  width: 30px; height: 30px;
+  transition: transform .15s;
+}
+
+.action-btn:active svg { transform: scale(1.25); }
+.action-btn.liked svg { fill: var(--ember); stroke: var(--ember); }
+
+/* ── CTA WhatsApp ── */
+.cta-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: var(--cta-h);
+  z-index: 60;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, var(--ink) 60%, rgba(12,10,9,0));
+  display: flex;
+  gap: 10px;
+}
+
+.cta-bar a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25d366;
+  color: #06210f;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 14px;
+}
+
+.cta-bar a svg { width: 20px; height: 20px; }
+
+.cta-bar a .cart-summary {
+  display: none;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: .85;
+}
+
+.cta-bar a.has-items .cart-summary { display: inline; }
+
+/* ── Agregar / stepper ── */
+.add-row {
+  margin-top: 14px;
+}
+
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: transform .12s;
+}
+
+.add-btn:active { transform: scale(.96); }
+
+.stepper {
+  display: none;
+  align-items: center;
+  gap: 0;
+  background: var(--paper);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.add-row.in-cart .add-btn { display: none; }
+.add-row.in-cart .stepper { display: inline-flex; }
+
+.stepper button {
+  width: 44px; height: 44px;
+  border: none;
+  background: none;
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.stepper .qty {
+  min-width: 28px;
+  text-align: center;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.g-add {
+  position: absolute;
+  right: 10px; top: 10px;
+  z-index: 3;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,.4);
+}
+
+.g-add.added { background: var(--ember); color: #fff; }
+
+/* ── Vista grid ── */
+#grid {
+  display: none;
+  height: 100dvh;
+  overflow-y: auto;
+  padding: calc(var(--header-h) + 8px) 14px calc(var(--cta-h) + 20px);
+}
+
+body.grid-mode #feed { display: none; }
+body.grid-mode #grid { display: block; }
+
+.grid-inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.g-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--shoyu);
+  position: relative;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+}
+
+.g-card.hidden { display: none; }
+
+.g-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.g-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 45%, rgba(12,10,9,.92));
+}
+
+.g-info {
+  position: absolute;
+  left: 12px; right: 12px; bottom: 12px;
+  z-index: 2;
+}
+
+.g-info .g-price {
+  display: inline-block;
+  background: var(--ember);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+
+.g-info h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 16px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.grid-footer {
+  text-align: center;
+  padding: 34px 0 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .5px;
+}
+
+/* ── Última card (cierre) ── */
+.card.outro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  background: radial-gradient(ellipse at 50% 35%, #241b15, var(--ink));
+}
+
+.card.outro .hanko {
+  width: 92px; height: 92px;
+  border: 3px solid var(--ember);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: 'Anton', sans-serif;
+  color: var(--ember);
+  font-size: 20px;
+  letter-spacing: 1px;
+  animation: spin 14s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .card.outro .hanko { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+.card.outro h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.card.outro p {
+  color: var(--nori);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+a.cufa-name {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #fe4e03;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.dev-credit {
+  font-size: 11px;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .5px;
+  margin-top: 20px;
+}

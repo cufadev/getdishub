@@ -11,6 +11,14 @@ Cómo agregar una versión nueva:
 
 ## [Sin publicar]
 
+## [0.5.0] - 2026-10-16
+### Agregado
+- Página `/cartas` con las cartas de ejemplo por rubro (sumada al sitemap).
+- Página `/hub` y componente `HubPropio`.
+- Cartas de ejemplo Ardente y Ronnin en `public/ejemplos/`.
+### Cambiado
+- Ajustes en `CartasEjemplo`, rubros y navegación compartida.
+
 ## [0.4.2] - 2026-10-15
 ### Cambiado
 - SEO: se quitó `offers` del schema `Service`; Search Console lo interpretaba como un producto.

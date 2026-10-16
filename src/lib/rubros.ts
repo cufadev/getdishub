@@ -1,10 +1,11 @@
 import type { PlanKey } from "@/lib/whatsapp";
 
-export type EjemploKey = "olazabal" | "pesto" | "lugo";
+export type EjemploKey = "olazabal" | "pesto" | "lugo" | "ronnin";
 
 export const EJEMPLOS: Record<EjemploKey, { nombre: string; tipo: string; nota: string; url: string }> = {
   olazabal: { nombre: "Olazábal", tipo: "Café", nota: "Carta con la marca del local", url: "/ejemplos/olazabal/index.html" },
   lugo: { nombre: "LUGO", tipo: "Panadería y repostería congelada", nota: "Listos para hornear en casa", url: "/ejemplos/lugo/index.html" },
+  ronnin: { nombre: "Ronnin Pizza", tipo: "Pizzería", nota: "Carta de ejemplo con pedido por WhatsApp", url: "/ejemplos/ronnin/index.html" },
   pesto: { nombre: "PESTO", tipo: "Empanadas artesanales y pizzas napolitanas", nota: "Chivilcoy · Top 10 Mundial de la Empanada 2026", url: "/ejemplos/pesto/index.html" },
 };
 

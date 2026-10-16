@@ -180,6 +180,8 @@ export function Nav({ home = true }: { home?: boolean }) {
         <nav className="hidden items-center gap-8 md:flex">
           {[
             ["Qué es", "#hub"],
+            ["Cartas", "/cartas"],
+            ["Link en bio", "/hub"],
             ["Planes", "#planes"],
             ["Demo", "/demo"],
             ["Contacto", "#cta"],
@@ -232,6 +234,8 @@ export function Nav({ home = true }: { home?: boolean }) {
             <nav className="flex flex-col">
               {[
                 ["Qué es", "#hub"],
+                ["Cartas", "/cartas"],
+                ["Link en bio", "/hub"],
                 ["Planes", "#planes"],
                 ["Demo", "/demo"],
                 ["Contacto", "#cta"],

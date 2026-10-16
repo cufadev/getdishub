@@ -7,6 +7,7 @@ import { Nav, Footer, BrutalBtn, WhatsAppFloatButton, useReveal, Preloader } fro
 // import { CasosReales } from "@/components/CasosReales";
 import { FaqHome, FAQ_HOME_ITEMS } from "@/components/FaqHome";
 import { CartasHechas } from "@/components/CartasEjemplo";
+import { HubPropioResumen } from "@/components/HubPropio";
 import { track } from "@/lib/analytics";
 import { waLink, type PlanKey } from "@/lib/whatsapp";
 
@@ -312,6 +313,7 @@ const HUB_MODULES: Array<[string, string, HubEstado]> = [
   ["QR por mesa y mostrador", "Un QR que siempre lleva a la carta actualizada.", "hoy"],
   ["Pedido por WhatsApp", "El cliente arma el pedido y te llega ordenado, sin comisiones.", "hoy"],
   ["Tarjeta de fidelización", "Una tarjeta en el Wallet del celular para que tus clientes vuelvan, con campañas solo a quienes aceptan.", "desarrollo"],
+  ["Link en bio de tu local", "Un solo link para Instagram y WhatsApp con tu carta, pedido, ubicación y horarios. No es una lista de links genérica: está hecho para tu local y se conecta con todo lo demás.", "desarrollo"],
   ["Mesa Conectada (NFC + QR)", "Apoyan el teléfono en la mesa y tienen carta, WiFi y reseñas del local.", "proximo"],
   ["Llamar al mozo y pedir la cuenta", "Desde la mesa, sin levantar la mano.", "proximo"],
   ["Reservas online", "Confirmación automática, sin perderlas en el hilo de WhatsApp.", "proximo"],
@@ -1316,6 +1318,7 @@ function Index() {
       <Nav />
       <Hero />
       <Hub />
+      <HubPropioResumen />
       <CartasHechas />
       <PainSection />
       <Como />

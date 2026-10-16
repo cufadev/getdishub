@@ -16,8 +16,10 @@ import { Route as BienvenidaRouteImport } from './routes/bienvenida'
 import { Route as CartaDigitalParaCafesRouteImport } from './routes/carta-digital-para-cafes'
 import { Route as CartaDigitalParaFoodTrucksRouteImport } from './routes/carta-digital-para-food-trucks'
 import { Route as CartaDigitalParaPizzeriasRouteImport } from './routes/carta-digital-para-pizzerias'
+import { Route as CartasRouteImport } from './routes/cartas'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DemoRouteImport } from './routes/demo'
+import { Route as HubRouteImport } from './routes/hub'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MenuQrParaRestaurantesRouteImport } from './routes/menu-qr-para-restaurantes'
 import { Route as MesaConectadaRouteImport } from './routes/mesa-conectada'
@@ -61,6 +63,11 @@ const CartaDigitalParaPizzeriasRoute =
     path: '/carta-digital-para-pizzerias',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CartasRoute = CartasRouteImport.update({
+  id: '/cartas',
+  path: '/cartas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -69,6 +76,11 @@ const DashboardRoute = DashboardRouteImport.update({
 const DemoRoute = DemoRouteImport.update({
   id: '/demo',
   path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HubRoute = HubRouteImport.update({
+  id: '/hub',
+  path: '/hub',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -105,8 +117,10 @@ export interface FileRoutesByFullPath {
   '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
   '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
   '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
+  '/cartas': typeof CartasRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
+  '/hub': typeof HubRoute
   '/login': typeof LoginRoute
   '/menu-qr-para-restaurantes': typeof MenuQrParaRestaurantesRoute
   '/mesa-conectada': typeof MesaConectadaRoute
@@ -121,8 +135,10 @@ export interface FileRoutesByTo {
   '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
   '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
   '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
+  '/cartas': typeof CartasRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
+  '/hub': typeof HubRoute
   '/login': typeof LoginRoute
   '/menu-qr-para-restaurantes': typeof MenuQrParaRestaurantesRoute
   '/mesa-conectada': typeof MesaConectadaRoute
@@ -138,8 +154,10 @@ export interface FileRoutesById {
   '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
   '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
   '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
+  '/cartas': typeof CartasRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
+  '/hub': typeof HubRoute
   '/login': typeof LoginRoute
   '/menu-qr-para-restaurantes': typeof MenuQrParaRestaurantesRoute
   '/mesa-conectada': typeof MesaConectadaRoute
@@ -156,8 +174,10 @@ export interface FileRouteTypes {
     | '/carta-digital-para-cafes'
     | '/carta-digital-para-food-trucks'
     | '/carta-digital-para-pizzerias'
+    | '/cartas'
     | '/dashboard'
     | '/demo'
+    | '/hub'
     | '/login'
     | '/menu-qr-para-restaurantes'
     | '/mesa-conectada'
@@ -172,8 +192,10 @@ export interface FileRouteTypes {
     | '/carta-digital-para-cafes'
     | '/carta-digital-para-food-trucks'
     | '/carta-digital-para-pizzerias'
+    | '/cartas'
     | '/dashboard'
     | '/demo'
+    | '/hub'
     | '/login'
     | '/menu-qr-para-restaurantes'
     | '/mesa-conectada'
@@ -188,8 +210,10 @@ export interface FileRouteTypes {
     | '/carta-digital-para-cafes'
     | '/carta-digital-para-food-trucks'
     | '/carta-digital-para-pizzerias'
+    | '/cartas'
     | '/dashboard'
     | '/demo'
+    | '/hub'
     | '/login'
     | '/menu-qr-para-restaurantes'
     | '/mesa-conectada'
@@ -205,8 +229,10 @@ export interface RootRouteChildren {
   CartaDigitalParaCafesRoute: typeof CartaDigitalParaCafesRoute
   CartaDigitalParaFoodTrucksRoute: typeof CartaDigitalParaFoodTrucksRoute
   CartaDigitalParaPizzeriasRoute: typeof CartaDigitalParaPizzeriasRoute
+  CartasRoute: typeof CartasRoute
   DashboardRoute: typeof DashboardRoute
   DemoRoute: typeof DemoRoute
+  HubRoute: typeof HubRoute
   LoginRoute: typeof LoginRoute
   MenuQrParaRestaurantesRoute: typeof MenuQrParaRestaurantesRoute
   MesaConectadaRoute: typeof MesaConectadaRoute
@@ -265,6 +291,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartaDigitalParaPizzeriasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cartas': {
+      id: '/cartas'
+      path: '/cartas'
+      fullPath: '/cartas'
+      preLoaderRoute: typeof CartasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -277,6 +310,13 @@ declare module '@tanstack/react-router' {
       path: '/demo'
       fullPath: '/demo'
       preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hub': {
+      id: '/hub'
+      path: '/hub'
+      fullPath: '/hub'
+      preLoaderRoute: typeof HubRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -325,8 +365,10 @@ const rootRouteChildren: RootRouteChildren = {
   CartaDigitalParaCafesRoute: CartaDigitalParaCafesRoute,
   CartaDigitalParaFoodTrucksRoute: CartaDigitalParaFoodTrucksRoute,
   CartaDigitalParaPizzeriasRoute: CartaDigitalParaPizzeriasRoute,
+  CartasRoute: CartasRoute,
   DashboardRoute: DashboardRoute,
   DemoRoute: DemoRoute,
+  HubRoute: HubRoute,
   LoginRoute: LoginRoute,
   MenuQrParaRestaurantesRoute: MenuQrParaRestaurantesRoute,
   MesaConectadaRoute: MesaConectadaRoute,
