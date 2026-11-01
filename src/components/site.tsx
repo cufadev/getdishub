@@ -577,6 +577,9 @@ export function Footer({ home = true }: { home?: boolean }) {
             <li><a href="/carta-digital-para-pizzerias" className="hover:text-[var(--color-accent)] transition-colors">Para pizzerías</a></li>
             <li><a href="/menu-qr-para-restaurantes" className="hover:text-[var(--color-accent)] transition-colors">Para restaurantes</a></li>
             <li><a href="/carta-digital-para-food-trucks" className="hover:text-[var(--color-accent)] transition-colors">Para food trucks</a></li>
+            <li><a href="/carta-digital-para-bares" className="hover:text-[var(--color-accent)] transition-colors">Para bares</a></li>
+            <li><a href="/carta-digital-con-qr" className="hover:text-[var(--color-accent)] transition-colors">Carta digital con QR</a></li>
+            <li><a href="/como-hacer-una-carta-digital" className="hover:text-[var(--color-accent)] transition-colors">Cómo hacer tu carta digital</a></li>
           </ul>
         </div>
         <div>

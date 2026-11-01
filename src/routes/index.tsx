@@ -63,7 +63,7 @@ const schemaService = {
   "serviceType": "Desarrollo de carta digital con QR y pedido por WhatsApp",
   "provider": { "@id": `${SITE}/#organization` },
   "areaServed": { "@type": "Country", "name": "Argentina" },
-  "description": "Carta digital con la marca del local, editable desde una planilla de Google, con QR y pedido por WhatsApp opcional. Desarrollo en pago único desde AR$ 175.000; hosting y mantenimiento AR$ 35.000 por mes.",
+  "description": "Carta digital con la marca del local, editable desde una planilla de Google, con QR y pedido por WhatsApp opcional. Desarrollo en pago único desde AR$ 175.000; hosting y mantenimiento AR$ 25.000 por mes.",
 };
 
 const schemaFAQ = {
@@ -1079,7 +1079,7 @@ function Planes() {
               style={{ background: "var(--color-surface)", border: "2px solid #E8743B", boxShadow: "6px 6px 0 #b85a2b" }}
             >
               <div className="font-display text-xl font-extrabold uppercase text-[var(--color-text)] mb-1">Con nosotros</div>
-              <div className="font-display text-3xl font-extrabold text-[var(--color-accent)] mb-1">AR$ 35.000 / mes</div>
+              <div className="font-display text-3xl font-extrabold text-[var(--color-accent)] mb-1">AR$ 25.000 / mes</div>
               <div className="font-mono-tech text-xs text-[var(--color-muted)] mb-5">hosting + subdominio + mantenimiento</div>
               <ul className="space-y-3 mb-6">
                 {mantenimiento.map((t) => (

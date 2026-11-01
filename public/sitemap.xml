@@ -49,9 +49,21 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getdishub.app/hub</loc>
+    <loc>https://getdishub.app/carta-digital-con-qr</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getdishub.app/como-hacer-una-carta-digital</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getdishub.app/carta-digital-para-bares</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

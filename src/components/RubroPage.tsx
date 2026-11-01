@@ -102,6 +102,53 @@ export function RubroPage({ r }: { r: Rubro }) {
         </div>
       </section>
 
+      {r.vs && (
+        <section className="border-b border-(--color-border)">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <h2 className="reveal font-display text-3xl sm:text-4xl font-extrabold text-center mb-12">{r.vs.titulo}</h2>
+            <div className="reveal overflow-x-auto">
+              <table className="w-full text-left text-sm" style={{ borderCollapse: "collapse" }}>
+                <thead>
+                  <tr className="font-mono-tech text-[11px] uppercase tracking-widest">
+                    <th className="p-3 text-(--color-muted)"></th>
+                    <th className="p-3 text-(--color-muted)">{r.vs.alternativa}</th>
+                    <th className="p-3 text-(--color-accent)">Carta DISHub</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {r.vs.filas.map(([a, b, c]) => (
+                    <tr key={a} style={{ borderTop: "1px solid var(--color-border)" }}>
+                      <th className="p-3 font-display font-bold uppercase tracking-wide align-top">{a}</th>
+                      <td className="p-3 text-(--color-muted) align-top">{b}</td>
+                      <td className="p-3 align-top">{c}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {r.pasos && (
+        <section className="border-b border-(--color-border)">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <h2 className="reveal font-display text-3xl sm:text-4xl font-extrabold text-center mb-12">CÓMO LO HACEMOS</h2>
+            <ol className="grid md:grid-cols-2 gap-6">
+              {r.pasos.map(([t, d], i) => (
+                <li key={t} className="reveal p-6 flex gap-5" style={{ background: "var(--color-surface)", borderLeft: "4px solid var(--color-accent)" }}>
+                  <span className="font-display text-4xl font-extrabold text-(--color-accent) leading-none">{i + 1}</span>
+                  <div>
+                    <h3 className="font-display font-bold uppercase tracking-wide mb-2">{t}</h3>
+                    <p className="font-sans text-sm leading-relaxed text-(--color-muted)">{d}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
+
       <section className="border-b border-(--color-border)">
         <div className="mx-auto max-w-5xl px-6 py-24 grid md:grid-cols-2 gap-12 items-start">
           <div className="reveal">

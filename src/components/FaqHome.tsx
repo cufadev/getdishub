@@ -5,7 +5,7 @@ export const FAQ_HOME_ITEMS: Array<[string, string]> = [
   ["¿Cómo cambio precios o platos?", "Desde una planilla de Google, como editar un Excel. Sin paneles ni contraseñas."],
   ["¿Necesito saber de tecnología?", "No. Te entregamos todo funcionando y la planilla lista para que cargues tu carta."],
   ["¿Hay comisiones por venta?", "Cero. Lo que vendés es todo tuyo."],
-  ["¿Qué incluye el hosting de AR$ 35.000 por mes?", "Hosting, subdominio, mantenimiento, soporte por WhatsApp, corrección de errores y los cambios de contenido que no puedas hacer vos desde la planilla."],
+  ["¿Qué incluye el hosting de AR$ 25.000 por mes?", "Hosting, subdominio, mantenimiento, soporte por WhatsApp, corrección de errores y los cambios de contenido que no puedas hacer vos desde la planilla."],
   ["¿Puedo alojar la carta por mi cuenta?", "Sí. Te la entregamos lista para publicar y no pagás mensual con nosotros."],
   ["¿Las fotos están incluidas?", "No, la sesión de fotografía gastronómica profesional se contrata por separado."],
 ];

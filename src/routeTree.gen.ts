@@ -13,10 +13,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AgendarRouteImport } from './routes/agendar'
 import { Route as BienvenidaRouteImport } from './routes/bienvenida'
+import { Route as CartaDigitalConQrRouteImport } from './routes/carta-digital-con-qr'
+import { Route as CartaDigitalParaBaresRouteImport } from './routes/carta-digital-para-bares'
 import { Route as CartaDigitalParaCafesRouteImport } from './routes/carta-digital-para-cafes'
 import { Route as CartaDigitalParaFoodTrucksRouteImport } from './routes/carta-digital-para-food-trucks'
 import { Route as CartaDigitalParaPizzeriasRouteImport } from './routes/carta-digital-para-pizzerias'
 import { Route as CartasRouteImport } from './routes/cartas'
+import { Route as ComoHacerUnaCartaDigitalRouteImport } from './routes/como-hacer-una-carta-digital'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as HubRouteImport } from './routes/hub'
@@ -46,6 +49,16 @@ const BienvenidaRoute = BienvenidaRouteImport.update({
   path: '/bienvenida',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CartaDigitalConQrRoute = CartaDigitalConQrRouteImport.update({
+  id: '/carta-digital-con-qr',
+  path: '/carta-digital-con-qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartaDigitalParaBaresRoute = CartaDigitalParaBaresRouteImport.update({
+  id: '/carta-digital-para-bares',
+  path: '/carta-digital-para-bares',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CartaDigitalParaCafesRoute = CartaDigitalParaCafesRouteImport.update({
   id: '/carta-digital-para-cafes',
   path: '/carta-digital-para-cafes',
@@ -68,6 +81,12 @@ const CartasRoute = CartasRouteImport.update({
   path: '/cartas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComoHacerUnaCartaDigitalRoute =
+  ComoHacerUnaCartaDigitalRouteImport.update({
+    id: '/como-hacer-una-carta-digital',
+    path: '/como-hacer-una-carta-digital',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -114,10 +133,13 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/agendar': typeof AgendarRoute
   '/bienvenida': typeof BienvenidaRoute
+  '/carta-digital-con-qr': typeof CartaDigitalConQrRoute
+  '/carta-digital-para-bares': typeof CartaDigitalParaBaresRoute
   '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
   '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
   '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
   '/cartas': typeof CartasRoute
+  '/como-hacer-una-carta-digital': typeof ComoHacerUnaCartaDigitalRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
   '/hub': typeof HubRoute
@@ -132,10 +154,13 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/agendar': typeof AgendarRoute
   '/bienvenida': typeof BienvenidaRoute
+  '/carta-digital-con-qr': typeof CartaDigitalConQrRoute
+  '/carta-digital-para-bares': typeof CartaDigitalParaBaresRoute
   '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
   '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
   '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
   '/cartas': typeof CartasRoute
+  '/como-hacer-una-carta-digital': typeof ComoHacerUnaCartaDigitalRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
   '/hub': typeof HubRoute
@@ -151,10 +176,13 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/agendar': typeof AgendarRoute
   '/bienvenida': typeof BienvenidaRoute
+  '/carta-digital-con-qr': typeof CartaDigitalConQrRoute
+  '/carta-digital-para-bares': typeof CartaDigitalParaBaresRoute
   '/carta-digital-para-cafes': typeof CartaDigitalParaCafesRoute
   '/carta-digital-para-food-trucks': typeof CartaDigitalParaFoodTrucksRoute
   '/carta-digital-para-pizzerias': typeof CartaDigitalParaPizzeriasRoute
   '/cartas': typeof CartasRoute
+  '/como-hacer-una-carta-digital': typeof ComoHacerUnaCartaDigitalRoute
   '/dashboard': typeof DashboardRoute
   '/demo': typeof DemoRoute
   '/hub': typeof HubRoute
@@ -171,10 +199,13 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agendar'
     | '/bienvenida'
+    | '/carta-digital-con-qr'
+    | '/carta-digital-para-bares'
     | '/carta-digital-para-cafes'
     | '/carta-digital-para-food-trucks'
     | '/carta-digital-para-pizzerias'
     | '/cartas'
+    | '/como-hacer-una-carta-digital'
     | '/dashboard'
     | '/demo'
     | '/hub'
@@ -189,10 +220,13 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agendar'
     | '/bienvenida'
+    | '/carta-digital-con-qr'
+    | '/carta-digital-para-bares'
     | '/carta-digital-para-cafes'
     | '/carta-digital-para-food-trucks'
     | '/carta-digital-para-pizzerias'
     | '/cartas'
+    | '/como-hacer-una-carta-digital'
     | '/dashboard'
     | '/demo'
     | '/hub'
@@ -207,10 +241,13 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agendar'
     | '/bienvenida'
+    | '/carta-digital-con-qr'
+    | '/carta-digital-para-bares'
     | '/carta-digital-para-cafes'
     | '/carta-digital-para-food-trucks'
     | '/carta-digital-para-pizzerias'
     | '/cartas'
+    | '/como-hacer-una-carta-digital'
     | '/dashboard'
     | '/demo'
     | '/hub'
@@ -226,10 +263,13 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AgendarRoute: typeof AgendarRoute
   BienvenidaRoute: typeof BienvenidaRoute
+  CartaDigitalConQrRoute: typeof CartaDigitalConQrRoute
+  CartaDigitalParaBaresRoute: typeof CartaDigitalParaBaresRoute
   CartaDigitalParaCafesRoute: typeof CartaDigitalParaCafesRoute
   CartaDigitalParaFoodTrucksRoute: typeof CartaDigitalParaFoodTrucksRoute
   CartaDigitalParaPizzeriasRoute: typeof CartaDigitalParaPizzeriasRoute
   CartasRoute: typeof CartasRoute
+  ComoHacerUnaCartaDigitalRoute: typeof ComoHacerUnaCartaDigitalRoute
   DashboardRoute: typeof DashboardRoute
   DemoRoute: typeof DemoRoute
   HubRoute: typeof HubRoute
@@ -270,6 +310,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BienvenidaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/carta-digital-con-qr': {
+      id: '/carta-digital-con-qr'
+      path: '/carta-digital-con-qr'
+      fullPath: '/carta-digital-con-qr'
+      preLoaderRoute: typeof CartaDigitalConQrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carta-digital-para-bares': {
+      id: '/carta-digital-para-bares'
+      path: '/carta-digital-para-bares'
+      fullPath: '/carta-digital-para-bares'
+      preLoaderRoute: typeof CartaDigitalParaBaresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/carta-digital-para-cafes': {
       id: '/carta-digital-para-cafes'
       path: '/carta-digital-para-cafes'
@@ -296,6 +350,13 @@ declare module '@tanstack/react-router' {
       path: '/cartas'
       fullPath: '/cartas'
       preLoaderRoute: typeof CartasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-hacer-una-carta-digital': {
+      id: '/como-hacer-una-carta-digital'
+      path: '/como-hacer-una-carta-digital'
+      fullPath: '/como-hacer-una-carta-digital'
+      preLoaderRoute: typeof ComoHacerUnaCartaDigitalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -362,10 +423,13 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AgendarRoute: AgendarRoute,
   BienvenidaRoute: BienvenidaRoute,
+  CartaDigitalConQrRoute: CartaDigitalConQrRoute,
+  CartaDigitalParaBaresRoute: CartaDigitalParaBaresRoute,
   CartaDigitalParaCafesRoute: CartaDigitalParaCafesRoute,
   CartaDigitalParaFoodTrucksRoute: CartaDigitalParaFoodTrucksRoute,
   CartaDigitalParaPizzeriasRoute: CartaDigitalParaPizzeriasRoute,
   CartasRoute: CartasRoute,
+  ComoHacerUnaCartaDigitalRoute: ComoHacerUnaCartaDigitalRoute,
   DashboardRoute: DashboardRoute,
   DemoRoute: DemoRoute,
   HubRoute: HubRoute,
