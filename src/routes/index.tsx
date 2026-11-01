@@ -36,10 +36,11 @@ const schemaOrganization = {
   "@type": "Organization",
   "@id": `${SITE}/#organization`,
   "name": "DISHub",
+  "alternateName": ["Dishub", "DishHub", "Dish Hub", "getdishub"],
   "url": SITE,
   "logo": `${SITE}/favicon.ico`,
   "description": "Hub digital para locales gastronómicos: carta digital, QR, pedidos por WhatsApp y mesas conectadas.",
-  "areaServed": { "@type": "Country", "name": "Argentina" },
+  "areaServed": ["Argentina", "México", "Colombia", "Chile", "Perú", "España"].map((name) => ({ "@type": "Country", name })),
   "email": "hola@getdishub.app",
   "sameAs": ["https://www.instagram.com/dishubapp/"],
 };
@@ -50,6 +51,7 @@ const schemaWebSite = {
   "@id": `${SITE}/#website`,
   "url": SITE,
   "name": "DISHub",
+  "alternateName": ["Dishub", "DishHub", "Dish Hub"],
   "inLanguage": "es-AR",
   "publisher": { "@id": `${SITE}/#organization` },
 };
@@ -77,7 +79,7 @@ const schemaFAQ = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DISHub — Carta digital con QR y pedidos por WhatsApp para tu local" },
+      { title: "DISHub — Carta digital con QR para restaurantes, bares y cafés | Menú digital sin app" },
       { name: "description", content: "DISHub es el hub digital de tu local: carta digital con tu marca que editás desde una planilla de Google, QR para las mesas y pedido por WhatsApp. Sin comisiones. Desarrollo en pago único." },
       { name: "keywords", content: "carta digital restaurante, menú digital QR, carta QR para bar, pedido por WhatsApp restaurante, menú digital sin app, carta digital Argentina, menú digital para café" },
       { name: "robots", content: "index, follow, max-image-preview:large" },

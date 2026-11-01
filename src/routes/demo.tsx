@@ -5,7 +5,7 @@ import gsap from "gsap";
 export const Route = createFileRoute("/demo")({
   head: () => ({
     meta: [
-      { title: "Demo interactivo | DISHub" },
+      { title: "Demo de carta digital con QR para restaurantes | DISHub" },
       { name: "description", content: "Probá en vivo la carta digital de DISHub: la vista del cliente y la planilla de Google que edita el dueño. Sin registro." },
       { property: "og:title", content: "Demo interactivo | DISHub" },
       { property: "og:description", content: "Probá la carta digital y la planilla que la actualiza en tiempo real." },
