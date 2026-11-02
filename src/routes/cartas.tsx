@@ -29,6 +29,13 @@ const CASOS: Array<{ k: EjemploKey; estado: string; problema: string; solucion: 
       "Cada producto muestra peso, temperatura y tiempo de horneado junto al precio, para que el cliente lo vea antes de pedir.",
   },
   {
+    k: "bastards",
+    estado: "Carta de ejemplo",
+    problema: "El menú de delivery es una foto o un PDF largo donde las promos se pierden, los precios cuestan encontrarlos y armar el pedido es escribir un mensaje a mano.",
+    solucion:
+      "Promos a la vista arriba, el menú por categorías con foto y precio, y una comanda que suma cantidades y total mientras el cliente elige. En esta demo el pedido es simulado.",
+  },
+  {
     k: "ronnin",
     estado: "Carta de ejemplo",
     problema: "Los pedidos llegan por WhatsApp desordenados: mensajes sueltos, sin cantidades claras y con precios que hay que reconfirmar.",
@@ -41,9 +48,9 @@ export const Route = createFileRoute("/cartas")({
   head: () => ({
     meta: [
       { title: "Cartas digitales hechas con DISHub | Café, pizzería, panadería — DISHub" },
-      { name: "description", content: "Cuatro cartas digitales con la marca de cada local: café, empanadas y pizzas, panadería congelada y pizzería con pedido por WhatsApp. Probalas en vivo." },
+      { name: "description", content: "Cinco cartas digitales con la marca de cada local: café, empanadas y pizzas, panadería congelada, hamburguesería y pizzería con pedido por WhatsApp. Probalas en vivo." },
       { property: "og:title", content: "Cartas digitales hechas con DISHub" },
-      { property: "og:description", content: "Cuatro cartas con la marca de cada local. El problema de cada rubro y cómo lo resuelve la carta." },
+      { property: "og:description", content: "Cinco cartas con la marca de cada local. El problema de cada rubro y cómo lo resuelve la carta." },
       { property: "og:url", content: "https://getdishub.app/cartas" },
       { property: "og:image", content: "https://getdishub.app/og-image.png" },
     ],
@@ -62,7 +69,7 @@ function CartasPage() {
 
       <section className="border-b border-(--color-border)">
         <div className="mx-auto max-w-4xl px-6 pt-20 pb-12 text-center">
-          <h1 className="reveal font-display text-4xl sm:text-6xl font-extrabold">CUATRO CARTAS. CUATRO PROBLEMAS.</h1>
+          <h1 className="reveal font-display text-4xl sm:text-6xl font-extrabold">CINCO CARTAS. CINCO PROBLEMAS.</h1>
           <p className="reveal font-sans text-lg text-(--color-muted) leading-relaxed mt-5">
             Cada local tiene su problema y su marca. Mirá la carta en vivo y cómo se resolvió. Tocá y navegá: es lo que ve un cliente al escanear el QR.
           </p>

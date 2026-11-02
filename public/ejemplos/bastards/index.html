@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>bastard´s · Delivery</title>
+  <meta name="description" content="Menú de delivery de bastard´s, best burger in town. Carta de ejemplo hecha con DISHub: el pedido es simulado.">
+  <meta name="theme-color" content="#e4472b">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#menu">Ir al menú</a>
+
+  <header class="hero">
+    <div class="hero__top">
+      <span class="open-badge">Delivery desde las 19</span>
+      <span class="demo-note">Carta de ejemplo · pedido simulado</span>
+    </div>
+    <div class="hero__main">
+      <img class="hero__logo" src="img/w/logo.webp" width="400" height="400" alt="bastard´s, best burger in town">
+      <h1 class="hero__title">Pedí la<br>burga.<br><span>Que llegue<br>caliente.</span></h1>
+    </div>
+    <ul class="promos" aria-label="Promos">
+      <li class="promo">
+        <b class="promo__big">2×1</b>
+        <span class="promo__txt"><strong>Compartí una buena burga</strong>Miércoles y jueves · happy hour de 19 a 20:30</span>
+      </li>
+      <li class="promo promo--alt">
+        <b class="promo__big">30%</b>
+        <span class="promo__txt"><strong>Arranca el finde</strong>Viernes, descuento en birras</span>
+      </li>
+    </ul>
+  </header>
+
+  <div class="layout">
+    <main id="menu" class="menu">
+      <nav class="rail" aria-label="Categorías">
+        <ul id="rail"></ul>
+      </nav>
+      <div id="sections"></div>
+    </main>
+
+    <aside class="comanda-col" id="comandaCol" aria-label="Tu comanda">
+      <section class="comanda" id="comanda" aria-live="polite">
+        <button class="comanda__close" id="close" type="button" aria-label="Cerrar comanda">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <div class="comanda__head">
+          <h2>Comanda</h2>
+          <span class="comanda__no" id="comandaNo">N.º 0001</span>
+        </div>
+        <ol class="comanda__lines" id="lines"></ol>
+        <p class="comanda__empty" id="empty">Todavía no anotaste nada. Sumá una burga y la ves acá.</p>
+        <dl class="comanda__total">
+          <dt>Total</dt><dd id="total">$ 0</dd>
+        </dl>
+        <button class="btn" id="send" type="button" disabled>Mandar comanda</button>
+        <p class="comanda__fine">Demo: no se envía ningún pedido.</p>
+        <div class="stamp" id="stamp" aria-hidden="true">Enviado</div>
+      </section>
+    </aside>
+  </div>
+
+  <button class="bar" id="bar" type="button" aria-controls="comandaCol" aria-expanded="false">
+    <span class="bar__count" id="barCount">0</span>
+    <span class="bar__label">Ver mi comanda</span>
+    <span class="bar__total" id="barTotal">$ 0</span>
+  </button>
+  <div class="scrim" id="scrim"></div>
+
+  <footer class="foot">
+    <p class="foot__brand">bastard´s · best burger in town</p>
+    <p>Carta de ejemplo hecha con DISHub, <span id="year"></span>. Fotos y precios de ejemplo.</p>
+    <a class="firma" href="https://cufadev.xyz" rel="noopener">cufa</a>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/menu.js"></script>
+</body>
+</html>

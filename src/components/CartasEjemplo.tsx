@@ -58,7 +58,7 @@ export function CartasHechas() {
             Con la marca de cada local. Probá esta: es la misma que ve un cliente al escanear el QR. Tenemos más, de otros rubros.
           </p>
           <BrutalBtn variant="primary" href="/cartas">
-            Ver las 4 cartas <ArrowRight size={16} />
+            Ver las 5 cartas <ArrowRight size={16} />
           </BrutalBtn>
         </div>
         <div className="reveal flex justify-center">

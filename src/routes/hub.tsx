@@ -16,7 +16,7 @@ export const Route = createFileRoute("/hub")({
     ],
     links: [
       { rel: "canonical", href: "https://getdishub.app/hub" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Playfair+Display:wght@900&family=Special+Elite&display=swap" },
     ],
   }),
   component: HubPage,
