@@ -1,4 +1,4 @@
-export const WHATSAPP_NUMBER = "5491178212733";
+export const WHATSAPP_NUMBER = "5491168980563";
 
 export function whatsappHref(text: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
