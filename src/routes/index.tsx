@@ -42,7 +42,7 @@ const schemaOrganization = {
   "description": "Hub digital para locales gastronómicos: carta digital, QR, pedidos por WhatsApp y mesas conectadas.",
   "areaServed": ["Argentina", "México", "Colombia", "Chile", "Perú", "España"].map((name) => ({ "@type": "Country", name })),
   "email": "hola@getdishub.app",
-  "sameAs": ["https://www.instagram.com/dishubapp/"],
+  "sameAs": ["https://www.instagram.com/dishub.app/"],
 };
 
 const schemaWebSite = {
@@ -1079,7 +1079,13 @@ function Planes() {
               style={{ background: "var(--color-surface)", border: "2px solid #E8743B", boxShadow: "6px 6px 0 #b85a2b" }}
             >
               <div className="font-display text-xl font-extrabold uppercase text-[var(--color-text)] mb-1">Con nosotros</div>
-              <div className="font-display text-3xl font-extrabold text-[var(--color-accent)] mb-1">AR$ 25.000 / mes</div>
+              <div className="font-mono-tech text-xs uppercase tracking-widest text-[var(--color-accent)] mb-1">Promo</div>
+              <div className="font-display text-3xl font-extrabold text-[var(--color-accent)] mb-1">
+                <s className="mr-3 text-xl font-bold text-[var(--color-muted)]">
+                  <span className="sr-only">Precio anterior </span>AR$ 35.000
+                </s>
+                AR$ 25.000 / mes
+              </div>
               <div className="font-mono-tech text-xs text-[var(--color-muted)] mb-5">hosting + subdominio + mantenimiento</div>
               <ul className="space-y-3 mb-6">
                 {mantenimiento.map((t) => (

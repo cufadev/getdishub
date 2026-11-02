@@ -558,12 +558,12 @@ export function Footer({ home = true }: { home?: boolean }) {
           </p>
           <p className="font-mono-tech text-xs uppercase mt-3">
             <a
-              href="https://www.instagram.com/dishubapp/"
+              href="https://www.instagram.com/dishub.app/"
               target="_blank"
               rel="noopener me"
               className="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors"
             >
-              Instagram @dishubapp
+              Instagram @dishub.app
             </a>
           </p>
         </div>
